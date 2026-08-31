@@ -7,39 +7,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #050505;
-            --box-bg: rgba(15, 15, 15, 0.85);
-            --box-border: #2a2a2a;
+            --bg-dark: #030303;
+            --box-bg: rgba(12, 12, 12, 0.75);
+            --box-border: rgba(255, 255, 255, 0.1);
             --text-main: #f8f8f8;
             --text-muted: #999999;
             --accent: #e11d48;
-            --accent-glow: rgba(225, 29, 72, 0.4);
+            --accent-glow: rgba(225, 29, 72, 0.5);
             --transition-smooth: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* ЖИВИЙ ФОН */
+        /* БАГАТОШАРОВИЙ ЖИВИЙ ФОН */
         .live-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%);
+            background-color: var(--bg-dark);
             overflow: hidden;
         }
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15;
-            animation: float 20s infinite alternate ease-in-out;
+
+        /* Анімована інженерна сітка */
+        .grid-overlay {
+            position: absolute; top: -50px; left: -50px; width: calc(100vw + 100px); height: calc(100vh + 100px);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 2;
+            animation: moveGrid 15s linear infinite;
         }
-        .orb-1 { width: 50vw; height: 50vw; background: var(--accent); top: -10%; left: -10%; }
-        .orb-2 { width: 40vw; height: 40vw; background: #be123c; bottom: -10%; right: -10%; animation-delay: -5s; }
-        .orb-3 { width: 30vw; height: 30vw; background: #fb7185; top: 40%; left: 40%; animation-delay: -10s; opacity: 0.08; }
+
+        @keyframes moveGrid {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+
+        /* Плаваючі градієнтні сфери */
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15;
+            animation: float 25s infinite alternate ease-in-out;
+            z-index: 1;
+        }
+        .orb-1 { width: 60vw; height: 60vw; background: var(--accent); top: -20%; left: -20%; }
+        .orb-2 { width: 45vw; height: 45vw; background: #be123c; bottom: -10%; right: -10%; animation-delay: -5s; }
+        .orb-3 { width: 50vw; height: 50vw; background: #9f1239; top: 30%; left: 30%; animation-delay: -10s; opacity: 0.1; }
+        .orb-4 { width: 35vw; height: 35vw; background: #fb7185; top: 10%; right: 20%; animation-delay: -15s; }
+        .orb-5 { width: 40vw; height: 40vw; background: var(--accent); bottom: 10%; left: 10%; animation-delay: -7s; }
 
         @keyframes float {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(10%, 15%) scale(1.1); }
+            33% { transform: translate(5%, 10%) scale(1.1); }
+            66% { transform: translate(-5%, 5%) scale(0.9); }
+            100% { transform: translate(10%, -5%) scale(1.15); }
         }
 
-        .container { max-width: 1300px; margin: 0 auto; padding: 80px 20px; position: relative; }
+        /* Затемнення фону під контент */
+        .vignette {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 40%, #000000 120%);
+            z-index: 3;
+        }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 80px 20px; position: relative; z-index: 10; }
 
         /* HEADER */
         .header { text-align: center; margin-bottom: 120px; opacity: 0; transform: translateY(30px); animation: fadeUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -71,7 +101,7 @@
         }
         .timeline-step.active .timeline-marker { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
 
-        /* Горизонтальні лінії-конектори (Зигзаг) */
+        /* Горизонтальні лінії-конектори */
         .timeline-connector {
             position: absolute; top: 50%; width: calc(5% + 20px); height: 2px; background: var(--box-border);
             z-index: 1; transition: 0.5s ease;
@@ -84,17 +114,17 @@
         .timeline-content {
             width: 42%; background: var(--box-bg); padding: 40px; border: 1px solid var(--box-border);
             border-radius: 16px; transition: var(--transition-smooth); position: relative;
-            backdrop-filter: blur(10px); z-index: 3;
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 3;
         }
-        .timeline-step:hover .timeline-content { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px var(--accent-glow); transform: translateY(-10px); }
+        .timeline-step:hover .timeline-content { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px var(--accent-glow); transform: translateY(-10px); }
 
         /* Зображення блоку */
         .timeline-image {
             width: 48%; border-radius: 16px; overflow: hidden; border: 1px solid var(--box-border);
             transition: var(--transition-smooth); position: relative; z-index: 3; height: 350px;
         }
-        .timeline-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.5); transition: var(--transition-smooth); }
-        .timeline-step:hover .timeline-image { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.6); transform: translateY(-10px) scale(1.02); }
+        .timeline-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.6); transition: var(--transition-smooth); }
+        .timeline-step:hover .timeline-image { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.8); transform: translateY(-10px) scale(1.02); }
         .timeline-step:hover .timeline-image img { filter: grayscale(0%) brightness(1); }
 
         /* Типографіка */
@@ -103,8 +133,8 @@
         .timeline-content h3 { font-size: 1.8rem; margin-bottom: 25px; color: var(--text-main); font-weight: 800; }
         
         .tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-        .tech-tags span { background: rgba(0,0,0,0.5); border: 1px solid var(--box-border); padding: 6px 12px; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; border-radius: 6px; color: var(--text-muted); transition: 0.3s; }
-        .timeline-step:hover .tech-tags span { border-color: var(--accent); color: var(--text-main); background: rgba(225, 29, 72, 0.1); }
+        .tech-tags span { background: rgba(0,0,0,0.6); border: 1px solid var(--box-border); padding: 6px 12px; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; border-radius: 6px; color: var(--text-muted); transition: 0.3s; }
+        .timeline-step:hover .tech-tags span { border-color: var(--accent); color: var(--text-main); background: rgba(225, 29, 72, 0.15); }
 
         .timeline-content ul { list-style: none; margin-left: 0; }
         .timeline-content li { margin-bottom: 15px; position: relative; padding-left: 25px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; transition: 0.3s; }
@@ -127,9 +157,13 @@
 <body>
 
     <div class="live-bg">
+        <div class="grid-overlay"></div>
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+        <div class="vignette"></div>
     </div>
 
     <div class="container">
@@ -299,7 +333,6 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Налаштування для максимальної плавності появи
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
