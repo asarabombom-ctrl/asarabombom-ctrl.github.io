@@ -3,201 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сергій Балакан | IT Infrastructure</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Сергій Балакан | IT Roadmap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #050505;
-            --bg-card: #121212;
-            --text-main: #ffffff;
+            /* Чорно-біла гама з червоно-рожевим акцентом */
+            --bg-dark: #0a0a0a;
+            --box-bg: #141414;
+            --text-main: #f5f5f5;
             --text-muted: #888888;
-            --accent: #e11d48; /* Червоно-рожевий */
-            --accent-glow: rgba(225, 29, 72, 0.3);
-            --border: #222222;
+            --line-color: #333333;
+            
+            --color-done: #ffffff; /* Засвоєно - Білий */
+            --color-progress: #e11d48; /* В процесі - Червоно-рожевий */
+            --color-future: #404040; /* В планах - Темно-сірий */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background-color: var(--bg-dark); 
-            color: var(--text-main); 
-            font-family: 'Inter', sans-serif; 
-            overflow-x: hidden;
-            position: relative;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); padding: 40px 20px; }
 
-        /* Живой фон (Анімована сітка + пульсація) */
-        .live-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-            background: 
-                radial-gradient(circle at 50% -20%, var(--accent-glow), transparent 60%),
-                linear-gradient(to bottom, transparent, var(--bg-dark) 90%),
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-            animation: scrollGrid 20s linear infinite;
-        }
-
-        @keyframes scrollGrid {
-            0% { background-position: 0 0, 0 0, 0 0, 0 0; }
-            100% { background-position: 0 0, 0 0, 0 40px, 40px 0; }
-        }
-
-        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
-
-        /* Заголовок з ефектом друку */
         .header { text-align: center; margin-bottom: 50px; }
-        .typing-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 800;
-            display: inline-block;
-            border-right: 3px solid var(--accent);
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typing 3s steps(30, end), blink 0.75s step-end infinite;
-        }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--accent) } }
+        .header h1 { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
+        .header p { color: var(--text-muted); font-size: 1.1rem; }
+        .accent-text { color: var(--color-progress); }
 
-        .header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 15px; max-width: 700px; margin-inline: auto; line-height: 1.6; }
-        .highlight { color: var(--accent); font-weight: 800; }
+        .legend { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; font-size: 0.9rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+        .legend-item { display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
+        .legend-box { width: 16px; height: 16px; border-radius: 4px; border: 2px solid; }
+        .legend-done { border-color: var(--color-done); background: rgba(255,255,255,0.1); }
+        .legend-progress { border-color: var(--color-progress); background: rgba(225, 29, 72, 0.1); box-shadow: 0 0 10px rgba(225, 29, 72, 0.4); }
+        .legend-future { border-color: var(--color-future); border-style: dashed; }
 
-        /* Інтерактивні бейджі стеку */
-        .tech-stack { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 50px; }
-        .badge {
-            background: var(--bg-card); border: 1px solid var(--border); padding: 8px 16px;
-            border-radius: 20px; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;
-            transition: all 0.3s ease; cursor: default;
-        }
-        .badge:hover {
-            border-color: var(--accent); color: var(--accent);
-            box-shadow: 0 0 15px var(--accent-glow); transform: translateY(-3px);
-        }
-
-        /* Roadmap */
-        .roadmap { position: relative; padding-left: 30px; }
-        .roadmap::before {
-            content: ''; position: absolute; left: 0; top: 0; width: 2px; height: 100%;
-            background: linear-gradient(to bottom, var(--accent), var(--border) 80%);
-        }
-
-        .node {
-            position: relative; background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 12px; padding: 25px; margin-bottom: 30px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer; overflow: hidden;
-        }
-        .node::before {
-            content: ''; position: absolute; left: -36px; top: 30px; width: 12px; height: 12px;
-            background: var(--bg-dark); border: 2px solid var(--accent); border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-glow); transition: 0.3s;
-        }
+        /* Roadmap Structure */
+        .roadmap { display: flex; flex-direction: column; align-items: center; position: relative; max-width: 800px; margin: 0 auto; padding-bottom: 100px; }
         
-        .node:hover {
-            border-color: var(--accent); transform: translateX(10px);
-            box-shadow: -10px 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(225, 29, 72, 0.05);
+        .connector { width: 2px; height: 50px; background-color: var(--line-color); transition: 0.3s; }
+        .connector.done { background-color: var(--color-done); }
+        .connector.progress { background: linear-gradient(to bottom, var(--color-done), var(--color-progress)); }
+        
+        .node {
+            background-color: var(--box-bg);
+            border: 2px solid var(--line-color);
+            border-radius: 8px;
+            padding: 20px 30px;
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .node:hover::before { background: var(--accent); transform: scale(1.3); }
 
-        .node h3 { font-size: 1.4rem; margin-bottom: 5px; }
-        .node .status { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-bottom: 15px; display: inline-block; }
+        .node.done { border-color: var(--color-done); }
+        .node.progress { border-color: var(--color-progress); box-shadow: 0 0 20px rgba(225, 29, 72, 0.15); }
+        .node.future { border-color: var(--color-future); border-style: dashed; background-color: transparent; }
 
-        /* Контент всередині вузлів */
-        .details { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
-        .details ul { list-style: none; margin-top: 15px; }
-        .details li { position: relative; padding-left: 20px; margin-bottom: 10px; }
-        .details li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
-        .details code { background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: #fff; }
+        .node:hover { transform: translateY(-5px); z-index: 10; }
+        .node.done:hover { box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
+        .node.progress:hover { box-shadow: 0 10px 30px rgba(225, 29, 72, 0.3); border-color: #f43f5e; }
+        .node.future:hover { border-color: var(--text-muted); }
 
-        .hidden-info {
-            max-height: 0; opacity: 0; overflow: hidden;
-            transition: max-height 0.5s ease, opacity 0.5s ease;
+        .node h3 { font-size: 1.3rem; margin-bottom: 5px; color: var(--text-main); }
+        .node span { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px; }
+        .node.progress span { color: var(--color-progress); }
+
+        /* Прихований контент */
+        .node-details {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+            text-align: left;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
-        .node.active .hidden-info { max-height: 500px; opacity: 1; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border); }
+
+        .node:hover .node-details {
+            max-height: 800px;
+            opacity: 1;
+            margin-top: 15px;
+            border-top: 1px solid var(--line-color);
+            padding-top: 15px;
+        }
+
+        .node-details ul { list-style: none; margin-left: 10px; }
+        .node-details li { margin-bottom: 10px; position: relative; padding-left: 18px; }
+        .node-details li::before { content: '>'; position: absolute; left: 0; color: inherit; font-family: 'JetBrains Mono', monospace; font-weight: bold; }
+        .node-details code { background: #222; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: #ccc; font-size: 0.85rem; }
+        .highlight { color: #fff; font-weight: 600; }
+        .highlight-accent { color: var(--color-progress); font-weight: 600; }
 
     </style>
 </head>
 <body>
 
-    <div class="live-bg"></div>
+    <div class="header">
+        <h1>IT INFRASTRUCTURE PROGRESSION</h1>
+        <p>Сергій Балакан | Поточний рівень: <span class="accent-text">Helpdesk / Junior Sysadmin</span></p>
+    </div>
 
-    <div class="container">
-        <header class="header">
-            <h1 class="typing-title">Сергій Балакан</h1>
-            <p>IT Support Specialist | Assistant SysAdmin<br>
-            Студент спеціальності <span class="highlight">Cybersecurity</span>. Проектування, діагностика та автоматизація IT-інфраструктури. Від компонентного обслуговування до розгортання принт-серверів на базі Linux.</p>
-        </header>
+    <div class="legend">
+        <div class="legend-item"><div class="legend-box legend-done"></div> ЗАСВОЄНО (ДОСВІД Є)</div>
+        <div class="legend-item"><div class="legend-box legend-progress"></div> ПОТОЧНИЙ ФОКУС (В ПРОЦЕСІ)</div>
+        <div class="legend-item"><div class="legend-box legend-future"></div> ПЛАН РОЗВИТКУ</div>
+    </div>
 
-        <div class="tech-stack">
-            <div class="badge">Hardware Diagnostics</div>
-            <div class="badge">WinPE / AIDA64</div>
-            <div class="badge">Linux (CachyOS/Arch)</div>
-            <div class="badge">Bash / PowerShell</div>
-            <div class="badge">OpenWrt / CUPS</div>
-            <div class="badge">SSH / Nmap</div>
-            <div class="badge">Helpdesk / AnyDesk</div>
+    <div class="roadmap">
+        
+        <!-- Stage 1 -->
+        <div class="node done">
+            <span>Етап 1 | 0–6 міс.</span>
+            <h3>IT Technician</h3>
+            <div class="node-details">
+                <ul>
+                    <li><span class="highlight">ПК та ноутбуки:</span> ПК, ноутбуки, кабелі, периферія. Фізичне обслуговування, заміна SSD/RAM/БП, кабель-менеджмент, заміна термопасти[cite: 1].</li>
+                    <li><span class="highlight">Діагностика:</span> WinPE (Sergei Strelec), тестування RAM (MemTest86), стрес-тести (AIDA64/OCCT)[cite: 1].</li>
+                    <li><span class="highlight">BIOS/UEFI:</span> Вимкнення Secure Boot, налаштування TPM 2.0 (BitLocker), виділення VRAM, синхронізація частот ОЗП.</li>
+                    <li><span class="highlight">Оргтехніка:</span> Принтери, картриджі, МФУ. Заміна тонерів, усунення застрягань паперу[cite: 1].</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="roadmap">
-            
-            <div class="node" onclick="this.classList.toggle('active')">
-                <h3>🖥 Апаратне забезпечення та Діагностика</h3>
-                <span class="status">[ ДОСВІД ЗДОБУТО - Клікни для деталей ]</span>
-                <div class="details">
-                    Базове та компонентне обслуговування системних блоків і ноутбуків.
-                    <div class="hidden-info">
-                        <ul>
-                            <li><strong>Діагностика:</strong> Використання середовища <code>WinPE (Sergei Strelec)</code>. Перевірка цілісності оперативної пам'яті через <code>MemTest86</code>, стрес-тестування процесорів та моніторинг температур у <code>AIDA64 / OCCT</code>.</li>
-                            <li><strong>BIOS/UEFI:</strong> Ручна синхронізація частот RAM за стандартами JEDEC. Активація <code>TPM 2.0</code> для подальшого шифрування дисків. Ручне виділення VRAM.</li>
-                            <li><strong>Апгрейд:</strong> Заміна HDD на SSD, встановлення ОЗП, заміна блоків живлення, нанесення термоінтерфейсів та кабель-менеджмент.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="connector done"></div>
 
-            <div class="node" onclick="this.classList.toggle('active')">
-                <h3>🐧 Автоматизація ОС та Скриптинг</h3>
-                <span class="status">[ ДОСВІД ЗДОБУТО - Клікни для деталей ]</span>
-                <div class="details">
-                    Розгортання Windows та Linux-дистрибутивів, написання Bash/PowerShell скриптів.
-                    <div class="hidden-info">
-                        <ul>
-                            <li><strong>Розгортання:</strong> Встановлення Windows з WIM-образів, налаштування локалізації та драйверів. Досвід роботи з дистрибутивами CachyOS, Linux Mint, KDE Neon.</li>
-                            <li><strong>User Provisioning:</strong> Написання скриптів для автоматичної генерації безпечних паролів та створення локальних користувачів із суворим обмеженням прав (PoLP - видалення з групи Адміністраторів).</li>
-                            <li><strong>Hardware Inventory:</strong> CLI-скрипти для автоматичного збору WMI-метрик (RAM, CPU, накопичувачі) та парсинг EDID-даних моніторів з експортом у <code>.txt</code> звіти.</li>
-                        </ul>
-                    </div>
-                </div>
+        <!-- Stage 2 -->
+        <div class="node progress">
+            <span>Етап 2 | 6–12 міс. | ПОТОЧНИЙ РІВЕНЬ</span>
+            <h3>Helpdesk / IT Support</h3>
+            <div class="node-details">
+                <ul>
+                    <li><span class="highlight-accent">Робота з користувачами:</span> Обробка заявок, віддалена допомога через AnyDesk/RDP, встановлення ПО[cite: 1].</li>
+                    <li><span class="highlight-accent">ОС Windows/Linux:</span> Розгортання ОС (Windows WIM, CachyOS, Linux Mint), встановлення драйверів[cite: 1].</li>
+                    <li><span class="highlight-accent">Скриптинг (Bash/PowerShell):</span> Автоматичне створення користувачів без прав адміна. Скрипти інвентаризації (збір даних CPU/RAM через WMI та парсинг EDID моніторів)[cite: 1].</li>
+                    <li><span class="highlight-accent">Мережева печать (OpenWrt):</span> Перепрошивка роутерів (TP-Link) по SSH. Встановлення пакетів <code>p910nd/CUPS</code> для створення бездротових принт-серверів для USB-принтерів.</li>
+                    <li><span class="highlight-accent">Мережі:</span> Nmap, діагностика пінгів, маршрутизаторів, розуміння DNS/DHCP.</li>
+                </ul>
             </div>
-
-            <div class="node" onclick="this.classList.toggle('active')">
-                <h3>🖨 Мережі, Helpdesk та Принт-сервери</h3>
-                <span class="status">[ ПОТОЧНА РОБОТА - Клікни для деталей ]</span>
-                <div class="details">
-                    Підтримка користувачів, робота з SSH та нестандартні рішення для оргтехніки.
-                    <div class="hidden-info">
-                        <ul>
-                            <li><strong>OpenWrt Інженерія:</strong> Перепрошивка маршрутизаторів TP-Link по SSH. Налаштування пакетів <code>p910nd / CUPS</code> для створення бездротових принт-серверів для старих USB-принтерів та принтерів етикеток.</li>
-                            <li><strong>Мережі:</strong> Розуміння роботи DNS та DHCP. Діагностика мережевих проблем за допомогою <code>Nmap / Zenmap</code>, конфігурація статичних IP-адрес.</li>
-                            <li><strong>Helpdesk:</strong> Віддалене вирішення інцидентів через AnyDesk/RDP. Траблшутинг відсутності інтернету (роутери, драйвери, кабелі).</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="node" style="border-color: var(--border);">
-                <h3 style="color: var(--text-muted);">🛡 Infrastructure & Security (Roadmap)</h3>
-                <span class="status" style="color: var(--text-muted);">[ НАСТУПНИЙ ЕТАП НАВЧАННЯ ]</span>
-                <div class="details">
-                    <ul>
-                        <li><strong>Windows Server:</strong> Active Directory (AD DS), Group Policy (GPO), корпоративні DNS/DHCP.</li>
-                        <li><strong>Віртуалізація:</strong> Proxmox, VMware, базовий Docker.</li>
-                        <li><strong>Безпека:</strong> VPN, VLAN, фаєрволи (MikroTik).</li>
-                    </ul>
-                </div>
-            </div>
-
         </div>
+
+        <div class="connector progress"></div>
+
+        <!-- Stage 3 -->
+        <div class="node future">
+            <span>Етап 3 | 1–2 роки | НАСТУПНИЙ КРОК</span>
+            <h3>Junior Sysadmin</h3>
+            <div class="node-details">
+                <ul>
+                    <li><span class="highlight">Серверні ОС:</span> Поглиблене адміністрування Linux / Windows Server[cite: 1].</li>
+                    <li><span class="highlight">Інфраструктура:</span> Active Directory, налаштування ролей DNS/DHCP[cite: 1].</li>
+                    <li><span class="highlight">Дані:</span> Робота з файловими серверами, налаштування систем резервного копіювання (backup)[cite: 1].</li>
+                    <li><span class="highlight">Мережі:</span> Базові мережі, маршрутизація, управління правами доступу[cite: 1].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="connector"></div>
+
+        <!-- Stage 4 -->
+        <div class="node future">
+            <span>Етап 4 | 2–3 роки</span>
+            <h3>System Administrator</h3>
+            <div class="node-details">
+                <ul>
+                    <li>Сервери, налаштування обладнання MikroTik[cite: 1].</li>
+                    <li>Розгортання та адміністрування VPN та VLAN[cite: 1].</li>
+                    <li>Віртуалізація: Proxmox, VMware[cite: 1].</li>
+                    <li>Контейнеризація (Docker) та системи моніторингу[cite: 1].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="connector"></div>
+
+        <!-- Stage 5 -->
+        <div class="node future">
+            <span>Етап 5 | 3–4 роки</span>
+            <h3>Infrastructure Engineer</h3>
+            <div class="node-details">
+                <ul>
+                    <li>HA clustering (High Availability), Storage (Ceph/ZFS)[cite: 1].</li>
+                    <li>Автоматизація (Bash/Python/Ansible), CI/CD пайплайни[cite: 1].</li>
+                    <li>Kubernetes, observability, cloud-технології[cite: 1].</li>
+                    <li>Інформаційна безпека (security) та Infrastructure as Code[cite: 1].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="connector"></div>
+
+        <!-- Stage 6 -->
+        <div class="node future">
+            <span>Етап 6 | 4–5.5 років</span>
+            <h3>Solution / Infrastructure Architect</h3>
+            <div class="node-details">
+                <ul>
+                    <li>Збір вимог, архітектурні схеми, вибір технологій, інтеграції[cite: 1].</li>
+                    <li>Проектування систем, trade-offs, розрахунок SLA/SLO, RTO/RPO[cite: 1].</li>
+                    <li>Security architecture, capacity planning, TCO (вартість)[cite: 1].</li>
+                    <li>Disaster recovery (DR), технічна документація, ADR[cite: 1].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="connector"></div>
+
+        <!-- Stage 7 -->
+        <div class="node future">
+            <span>Етап 7 | 5.5–7+ років</span>
+            <h3>Enterprise Architect</h3>
+            <div class="node-details">
+                <ul>
+                    <li>Архітектура всієї організації, бізнес-процеси[cite: 1].</li>
+                    <li>Application architecture, data architecture, integration[cite: 1].</li>
+                    <li>Security, IT strategy, governance, бюджети[cite: 1].</li>
+                    <li>Technology roadmap для всієї IT-середи[cite: 1].</li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 
 </body>
