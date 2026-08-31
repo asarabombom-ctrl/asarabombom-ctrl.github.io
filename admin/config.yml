@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: asarabombom-ctrl/название-вашего-репозитория
+  repo: asarabombom-ctrl/asarabombom-ctrl.github.io
   branch: main # Ветка, в которую будут идти коммиты
 
 media_folder: "images"
