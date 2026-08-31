@@ -7,86 +7,130 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #070707;
-            --box-bg: #111111;
-            --box-border: #222222;
-            --text-main: #f0f0f0;
-            --text-muted: #888888;
-            --accent: #e11d48; /* Червоно-рожевий */
-            --accent-hover: #f43f5e;
-            --accent-glow: rgba(225, 29, 72, 0.2);
+            --bg-dark: #050505;
+            --box-bg: rgba(15, 15, 15, 0.85);
+            --box-border: #2a2a2a;
+            --text-main: #f8f8f8;
+            --text-muted: #999999;
+            --accent: #e11d48;
+            --accent-glow: rgba(225, 29, 72, 0.4);
+            --transition-smooth: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+        /* ЖИВИЙ ФОН */
+        .live-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%);
+            overflow: hidden;
+        }
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+        .orb-1 { width: 50vw; height: 50vw; background: var(--accent); top: -10%; left: -10%; }
+        .orb-2 { width: 40vw; height: 40vw; background: #be123c; bottom: -10%; right: -10%; animation-delay: -5s; }
+        .orb-3 { width: 30vw; height: 30vw; background: #fb7185; top: 40%; left: 40%; animation-delay: -10s; opacity: 0.08; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 15%) scale(1.1); }
+        }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 80px 20px; position: relative; }
 
         /* HEADER */
-        .header { text-align: center; margin-bottom: 80px; padding-bottom: 40px; border-bottom: 1px solid var(--box-border); }
-        .header h1 { font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -2px; }
-        .header p { color: var(--text-muted); font-size: 1.1rem; max-width: 800px; margin: 0 auto; }
-        .header .accent { color: var(--accent); }
+        .header { text-align: center; margin-bottom: 120px; opacity: 0; transform: translateY(30px); animation: fadeUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .header h1 { font-family: 'JetBrains Mono', monospace; font-size: 4rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -2px; text-shadow: 0 0 30px rgba(255,255,255,0.1); }
+        .header p { color: var(--text-muted); font-size: 1.15rem; max-width: 800px; margin: 0 auto; }
+        .header .accent { color: var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
         /* ZIGZAG ROADMAP */
         .roadmap-container { position: relative; padding: 40px 0; }
         
-        /* Центральна лінія */
+        /* Вертикальна вісь */
         .roadmap-container::before {
             content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
             background: linear-gradient(to bottom, var(--accent) 0%, var(--accent) 30%, var(--box-border) 60%);
-            transform: translateX(-50%);
+            transform: translateX(-50%); z-index: 0;
         }
 
-        .timeline-step { display: flex; justify-content: space-between; align-items: center; margin-bottom: 100px; width: 100%; position: relative; opacity: 0; transform: translateY(40px); transition: 0.8s ease; }
+        .timeline-step { display: flex; justify-content: space-between; align-items: center; margin-bottom: 150px; width: 100%; position: relative; opacity: 0; transform: translateY(60px); transition: var(--transition-smooth); }
         .timeline-step.visible { opacity: 1; transform: translateY(0); }
         .timeline-step:nth-child(even) { flex-direction: row-reverse; }
 
-        /* Центральна точка */
+        /* Маркер на осі */
         .timeline-marker {
             position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-            width: 20px; height: 20px; border-radius: 50%; background: var(--bg-dark);
-            border: 3px solid var(--box-border); z-index: 2; transition: 0.3s;
+            width: 24px; height: 24px; border-radius: 50%; background: var(--bg-dark);
+            border: 4px solid var(--box-border); z-index: 2; transition: 0.5s ease;
         }
-        .timeline-step.active .timeline-marker { border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); background: var(--accent); }
+        .timeline-step.active .timeline-marker { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
+
+        /* Горизонтальні лінії-конектори (Зигзаг) */
+        .timeline-connector {
+            position: absolute; top: 50%; width: calc(5% + 20px); height: 2px; background: var(--box-border);
+            z-index: 1; transition: 0.5s ease;
+        }
+        .timeline-step:nth-child(odd) .timeline-connector { left: 45%; }
+        .timeline-step:nth-child(even) .timeline-connector { right: 45%; }
+        .timeline-step.active .timeline-connector { background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
 
         /* Контент блоку */
-        .timeline-content { width: 45%; background: var(--box-bg); padding: 30px; border: 1px solid var(--box-border); border-radius: 12px; transition: 0.4s; position: relative; }
-        .timeline-step:hover .timeline-content { border-color: var(--accent); box-shadow: 0 10px 30px var(--accent-glow); transform: translateY(-5px); }
-        .timeline-step.active .timeline-content { border-top: 3px solid var(--accent); }
+        .timeline-content {
+            width: 42%; background: var(--box-bg); padding: 40px; border: 1px solid var(--box-border);
+            border-radius: 16px; transition: var(--transition-smooth); position: relative;
+            backdrop-filter: blur(10px); z-index: 3;
+        }
+        .timeline-step:hover .timeline-content { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px var(--accent-glow); transform: translateY(-10px); }
 
         /* Зображення блоку */
-        .timeline-image { width: 45%; border-radius: 12px; overflow: hidden; border: 1px solid var(--box-border); transition: 0.4s; position: relative; }
-        .timeline-image img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(100%) brightness(0.6); transition: 0.5s ease; aspect-ratio: 16/9; }
-        .timeline-step:hover .timeline-image { border-color: var(--accent); box-shadow: 0 10px 30px var(--accent-glow); transform: translateY(-5px); }
+        .timeline-image {
+            width: 48%; border-radius: 16px; overflow: hidden; border: 1px solid var(--box-border);
+            transition: var(--transition-smooth); position: relative; z-index: 3; height: 350px;
+        }
+        .timeline-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.5); transition: var(--transition-smooth); }
+        .timeline-step:hover .timeline-image { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.6); transform: translateY(-10px) scale(1.02); }
         .timeline-step:hover .timeline-image img { filter: grayscale(0%) brightness(1); }
 
-        /* Типографіка всередині карток */
-        .step-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        /* Типографіка */
+        .step-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; }
         .timeline-step.active .step-meta { color: var(--accent); font-weight: 700; }
-        .timeline-content h3 { font-size: 1.6rem; margin-bottom: 20px; color: var(--text-main); }
+        .timeline-content h3 { font-size: 1.8rem; margin-bottom: 25px; color: var(--text-main); font-weight: 800; }
         
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        .tech-tags span { background: #000; border: 1px solid var(--box-border); padding: 4px 10px; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; border-radius: 4px; color: var(--text-muted); }
-        .timeline-step:hover .tech-tags span { border-color: var(--accent); color: var(--text-main); }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
+        .tech-tags span { background: rgba(0,0,0,0.5); border: 1px solid var(--box-border); padding: 6px 12px; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; border-radius: 6px; color: var(--text-muted); transition: 0.3s; }
+        .timeline-step:hover .tech-tags span { border-color: var(--accent); color: var(--text-main); background: rgba(225, 29, 72, 0.1); }
 
         .timeline-content ul { list-style: none; margin-left: 0; }
-        .timeline-content li { margin-bottom: 12px; position: relative; padding-left: 20px; font-size: 0.95rem; color: var(--text-muted); }
+        .timeline-content li { margin-bottom: 15px; position: relative; padding-left: 25px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; transition: 0.3s; }
         .timeline-content li::before { content: '>'; position: absolute; left: 0; font-family: 'JetBrains Mono', monospace; font-weight: bold; color: var(--box-border); transition: 0.3s; }
-        .timeline-step:hover li::before { color: var(--accent); }
+        .timeline-step:hover li { color: #d0d0d0; }
+        .timeline-step:hover li::before { color: var(--accent); transform: translateX(5px); }
         .timeline-content strong { color: var(--text-main); font-weight: 600; }
 
         /* Адаптивність */
-        @media (max-width: 900px) {
-            .roadmap-container::before { left: 20px; }
-            .timeline-step, .timeline-step:nth-child(even) { flex-direction: column; align-items: flex-end; }
-            .timeline-marker { left: 20px; top: 30px; transform: translateX(-50%); }
-            .timeline-content { width: calc(100% - 60px); margin-bottom: 20px; }
-            .timeline-image { width: calc(100% - 60px); }
+        @media (max-width: 1024px) {
+            .roadmap-container::before { left: 30px; }
+            .timeline-connector { display: none; }
+            .timeline-step, .timeline-step:nth-child(even) { flex-direction: column; align-items: flex-end; margin-bottom: 80px; }
+            .timeline-marker { left: 30px; top: 40px; transform: translateX(-50%); }
+            .timeline-content { width: calc(100% - 80px); margin-bottom: 20px; }
+            .timeline-image { width: calc(100% - 80px); height: 250px; }
         }
     </style>
 </head>
 <body>
+
+    <div class="live-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
 
     <div class="container">
         <header class="header">
@@ -99,6 +143,7 @@
 
             <!-- STAGE 1 -->
             <div class="timeline-step active scroll-anim">
+                <div class="timeline-connector"></div>
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="step-meta">Етап 1 | 0–6 міс. | Засвоєно</span>
@@ -107,40 +152,42 @@
                         <span>WinPE</span><span>AIDA64</span><span>MemTest86</span><span>UEFI/BIOS</span>
                     </div>
                     <ul>
-                        <li><strong>Апаратна діагностика:</strong> Повне фізичне обслуговування, заміна SSD/RAM/БП, компонентний траблшутинг. Використання середовищ завантаження <code>WinPE (Sergei Strelec)</code>.</li>
-                        <li><strong>Конфігурація BIOS/UEFI:</strong> Ручне виділення відеопам'яті (VRAM) для APU. Синхронізація частот RAM (JEDEC/XMP). Активація модуля <code>TPM 2.0</code> для апаратного шифрування дисків (BitLocker).</li>
-                        <li><strong>Стрес-тестування:</strong> Перевірка стабільності ланцюгів живлення (VRM) та троттлінгу процесорів за допомогою <code>AIDA64 / OCCT</code>.</li>
-                        <li><strong>Оргтехніка:</strong> Заміна тонерів, усунення механічних застрягань паперу, базова профілактика механізмів захвату.</li>
+                        <li><strong>Апаратна діагностика:</strong> Фізичне обслуговування, заміна комплектуючих. Використання середовищ <code>WinPE (Sergei Strelec)</code>.</li>
+                        <li><strong>Конфігурація BIOS/UEFI:</strong> Ручне виділення VRAM для APU. Синхронізація частот RAM (JEDEC/XMP). Активація <code>TPM 2.0</code> для BitLocker.</li>
+                        <li><strong>Стрес-тестування:</strong> Перевірка VRM та процесорів за допомогою <code>AIDA64 / OCCT</code>.</li>
+                        <li><strong>Оргтехніка:</strong> Заміна тонерів, усунення застрягань паперу, профілактика механізмів.</li>
                     </ul>
                 </div>
                 <div class="timeline-image">
-                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80" alt="Hardware">
+                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80" alt="Hardware">
                 </div>
             </div>
 
             <!-- STAGE 2 -->
             <div class="timeline-step active scroll-anim">
+                <div class="timeline-connector"></div>
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="step-meta">Етап 2 | 6–12 міс. | Поточний фокус</span>
                     <h3>Helpdesk & Automation</h3>
                     <div class="tech-tags">
-                        <span>Bash/PowerShell</span><span>OpenWrt</span><span>CachyOS</span><span>Nmap</span>
+                        <span>Bash/PowerShell</span><span>OpenWrt</span><span>Linux</span><span>Nmap</span>
                     </div>
                     <ul>
-                        <li><strong>Інженерія принт-серверів (OpenWrt):</strong> Перепрошивка маршрутизаторів TP-Link по <code>SSH</code>. Розгортання пакетів <code>kmod-usb-printer, p910nd, CUPS</code> для створення бездротових принт-серверів для інтеграції USB-принтерів етикеток у локальну мережу.</li>
-                        <li><strong>Скриптинг та Інвентаризація:</strong> Написання CLI-скриптів на PowerShell/Bash для автоматичного збору WMI-метрик (моделі CPU, RAM, накопичувачі). Парсинг <code>EDID-даних</code> моніторів з автоматичним експортом у текстові звіти.</li>
-                        <li><strong>Розгортання ОС:</strong> Встановлення Windows із <code>WIM/ESD</code> образів. Базове адміністрування Linux (CachyOS, Mint, Lubuntu), робота з пакетними менеджерами та <code>systemd</code>.</li>
-                        <li><strong>Віддалена підтримка:</strong> Траблшутинг інцидентів (L1/L2) через AnyDesk/RDP. Сканування мереж та портів утилітами <code>Nmap / Zenmap</code>.</li>
+                        <li><strong>Принт-сервери (OpenWrt):</strong> Прошивка TP-Link по <code>SSH</code>. Розгортання <code>kmod-usb-printer, p910nd</code> для інтеграції принтерів етикеток у мережу.</li>
+                        <li><strong>Автоматизація:</strong> CLI-скрипти для збору WMI-метрик. Парсинг <code>EDID-даних</code> моніторів з експортом у звіти. Скрипти генерації користувачів без прав адміна (PoLP).</li>
+                        <li><strong>Розгортання ОС:</strong> Встановлення Windows із <code>WIM/ESD</code>. Адміністрування Linux (CachyOS, Mint, Lubuntu), робота з <code>systemd</code>.</li>
+                        <li><strong>Мережі та Підтримка:</strong> Віддалене управління (AnyDesk/RDP). Сканування портів <code>Nmap / Zenmap</code>.</li>
                     </ul>
                 </div>
                 <div class="timeline-image">
-                    <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80" alt="Networking">
+                    <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1000&q=80" alt="Networking">
                 </div>
             </div>
 
             <!-- STAGE 3 -->
             <div class="timeline-step scroll-anim">
+                <div class="timeline-connector"></div>
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="step-meta">Етап 3 | 1–2 роки | План розвитку</span>
@@ -149,19 +196,20 @@
                         <span>Windows Server</span><span>Active Directory</span><span>GPO</span><span>Backup</span>
                     </div>
                     <ul>
-                        <li><strong>Корпоративна інфраструктура:</strong> Розгортання та супровід контролерів домену <code>Active Directory (AD DS)</code>. Централізоване управління комп'ютерами та користувачами через групові політики <code>(GPO)</code>.</li>
-                        <li><strong>Мережеві сервіси:</strong> Налаштування та управління <code>DNS</code> (зони, записи) та <code>DHCP</code> (скоупи, резервації) на базі Windows Server / Linux.</li>
-                        <li><strong>Файлові сервери:</strong> Організація загальних мережевих ресурсів, налаштування квот, глибоке управління правами доступу <code>NTFS / Share permissions</code> (DFS).</li>
-                        <li><strong>Disaster Recovery:</strong> Впровадження систем резервного копіювання за правилом 3-2-1. Відновлення систем після збоїв.</li>
+                        <li><strong>Інфраструктура:</strong> Розгортання контролерів домену <code>Active Directory (AD DS)</code>. Управління комп'ютерами через <code>GPO</code>.</li>
+                        <li><strong>Мережеві сервіси:</strong> Налаштування та управління корпоративними <code>DNS</code> та <code>DHCP</code> серверами.</li>
+                        <li><strong>Файлові сервери:</strong> Організація ресурсів, управління правами <code>NTFS / Share permissions</code>.</li>
+                        <li><strong>Disaster Recovery:</strong> Системи резервного копіювання (правило 3-2-1).</li>
                     </ul>
                 </div>
                 <div class="timeline-image">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Servers">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" alt="Servers">
                 </div>
             </div>
 
             <!-- STAGE 4 -->
             <div class="timeline-step scroll-anim">
+                <div class="timeline-connector"></div>
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="step-meta">Етап 4 | 2–3 роки | План розвитку</span>
@@ -170,40 +218,42 @@
                         <span>MikroTik</span><span>Proxmox VE</span><span>VLAN / VPN</span><span>Docker</span>
                     </div>
                     <ul>
-                        <li><strong>Мережеве обладнання:</strong> Просунуте адміністрування <code>MikroTik RouterOS</code>. Налаштування Firewall (Filter, NAT, Mangle), базова динамічна маршрутизація (OSPF).</li>
-                        <li><strong>Сегментація та Безпека:</strong> Ізоляція трафіку за допомогою <code>VLAN (802.1Q)</code>. Побудова захищених корпоративних тунелів: <code>IPsec, WireGuard, OpenVPN</code>.</li>
-                        <li><strong>Віртуалізація:</strong> Робота з гіпервізорами 1-го типу. Створення кластерів на <code>Proxmox VE</code> (KVM, LXC контейнери) та <code>VMware ESXi</code>.</li>
-                        <li><strong>Контейнеризація:</strong> Пакування додатків у контейнери, написання файлів конфігурації <code>Docker Compose</code>, управління томами та мережами Docker.</li>
+                        <li><strong>Мережеве обладнання:</strong> Адміністрування <code>MikroTik RouterOS</code> (Firewall, NAT, Mangle, OSPF).</li>
+                        <li><strong>Безпека:</strong> Ізоляція трафіку <code>VLAN</code>. Побудова захищених тунелів: <code>IPsec, WireGuard, OpenVPN</code>.</li>
+                        <li><strong>Віртуалізація:</strong> Створення кластерів на <code>Proxmox VE</code> (KVM, LXC) та <code>VMware ESXi</code>.</li>
+                        <li><strong>Контейнеризація:</strong> Пакування додатків, файли конфігурації <code>Docker Compose</code>.</li>
                     </ul>
                 </div>
                 <div class="timeline-image">
-                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80" alt="Data Center">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80" alt="Data Center">
                 </div>
             </div>
 
             <!-- STAGE 5 -->
             <div class="timeline-step scroll-anim">
+                <div class="timeline-connector"></div>
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="step-meta">Етап 5 | 3–4 роки | План розвитку</span>
                     <h3>Infrastructure Engineer / DevOps</h3>
                     <div class="tech-tags">
-                        <span>Kubernetes</span><span>Ansible</span><span>CI/CD</span><span>Ceph / ZFS</span>
+                        <span>Kubernetes</span><span>Ansible</span><span>CI/CD</span><span>Ceph</span>
                     </div>
                     <ul>
-                        <li><strong>High Availability (HA):</strong> Побудова відмовостійких кластерів балансування навантаження. Робота з програмно-визначеними сховищами (Software-Defined Storage) — <code>Ceph</code> та <code>ZFS</code>.</li>
-                        <li><strong>Оркестрація:</strong> Адміністрування <code>Kubernetes</code> (K8s). Управління подами, деплойментами, сервісами та інгресами (Ingress controllers).</li>
-                        <li><strong>IaC та Автоматизація:</strong> Опис інфраструктури як коду за допомогою <code>Terraform</code>. Написання <code>Ansible Playbooks</code> для масової конфігурації серверів.</li>
-                        <li><strong>CI/CD:</strong> Побудова конвеєрів безперервної інтеграції та доставки (GitLab CI/CD, GitHub Actions).</li>
+                        <li><strong>High Availability (HA):</strong> Відмовостійкі кластери. Програмно-визначені сховища (<code>Ceph, ZFS</code>).</li>
+                        <li><strong>Оркестрація:</strong> Адміністрування <code>Kubernetes</code> (K8s). Управління подами, сервісами та інгресами.</li>
+                        <li><strong>IaC та Автоматизація:</strong> Опис інфраструктури через <code>Terraform</code>. Написання <code>Ansible Playbooks</code>.</li>
+                        <li><strong>CI/CD:</strong> Побудова конвеєрів безперервної інтеграції (GitLab CI/CD, GitHub Actions).</li>
                     </ul>
                 </div>
                 <div class="timeline-image">
-                    <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80" alt="Code">
+                    <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1000&q=80" alt="Code">
                 </div>
             </div>
 
             <!-- STAGE 6 -->
             <div class="timeline-step scroll-anim">
+                <div class="timeline-connector"></div>
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="step-meta">Етап 6 | 4–5.5 років | План розвитку</span>
@@ -212,19 +262,20 @@
                         <span>System Design</span><span>SLA/SLO</span><span>Security Arch</span>
                     </div>
                     <ul>
-                        <li><strong>Проектування систем (System Design):</strong> Збір бізнес-вимог, побудова багаторівневих архітектурних схем (C4 model), вибір оптимального технологічного стеку.</li>
-                        <li><strong>Аналіз ризиків (Trade-offs):</strong> Розрахунок показників доступності <code>SLA / SLO</code>. Планування потужностей (Capacity planning) та оцінка вартості володіння (Total Cost of Ownership - TCO).</li>
-                        <li><strong>Disaster Recovery:</strong> Розробка глобальних планів аварійного відновлення із жорсткими показниками <code>RTO</code> (Recovery Time Objective) та <code>RPO</code> (Recovery Point Objective).</li>
-                        <li><strong>Документація:</strong> Ведення Architecture Decision Records (ADR). Побудова Security Architecture (Zero Trust).</li>
+                        <li><strong>Проектування (System Design):</strong> Архітектурні схеми (C4 model), вибір технологічного стеку.</li>
+                        <li><strong>Аналіз ризиків:</strong> Розрахунок показників доступності <code>SLA / SLO</code> та оцінка <code>TCO</code>.</li>
+                        <li><strong>Аварійне відновлення:</strong> Плани відновлення із жорсткими показниками <code>RTO / RPO</code>.</li>
+                        <li><strong>Документація:</strong> Architecture Decision Records (ADR), Security Architecture (Zero Trust).</li>
                     </ul>
                 </div>
                 <div class="timeline-image">
-                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Architecture">
+                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80" alt="Architecture">
                 </div>
             </div>
 
             <!-- STAGE 7 -->
             <div class="timeline-step scroll-anim">
+                <div class="timeline-connector"></div>
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="step-meta">Етап 7 | 5.5–7+ років | План розвитку</span>
@@ -233,29 +284,32 @@
                         <span>TOGAF</span><span>IT Strategy</span><span>Governance</span>
                     </div>
                     <ul>
-                        <li><strong>Глобальна IT-Стратегія:</strong> Синхронізація технологічного розвитку з глобальними цілями бізнесу (Business-IT alignment). Застосування методологій рівня <code>TOGAF</code>.</li>
-                        <li><strong>Data & Application Architecture:</strong> Проектування обміну даними між сотнями мікросервісів та legacy-систем. Побудова Enterprise Integration Patterns (EIP).</li>
-                        <li><strong>IT Governance:</strong> Управління стандартами підприємства, аудит IT-бюджетів, контроль виконання глобального Technology Roadmap для всієї IT-середи організації.</li>
+                        <li><strong>IT-Стратегія:</strong> Синхронізація технологій з цілями бізнесу. Застосування <code>TOGAF</code>.</li>
+                        <li><strong>Data & Application Architecture:</strong> Проектування мікросервісів та <code>Enterprise Integration Patterns (EIP)</code>.</li>
+                        <li><strong>IT Governance:</strong> Управління стандартами, аудит IT-бюджетів, контроль Technology Roadmap.</li>
                     </ul>
                 </div>
                 <div class="timeline-image">
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Enterprise">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80" alt="Enterprise">
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- Скрипт для плавних анімацій при прокрутці -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Налаштування для максимальної плавності появи
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
                     }
                 });
-            }, { threshold: 0.15 });
+            }, { 
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            });
 
             document.querySelectorAll('.scroll-anim').forEach(el => observer.observe(el));
         });
