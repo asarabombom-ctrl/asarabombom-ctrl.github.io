@@ -3,224 +3,416 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сергій Балакан | IT Roadmap</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Сергій Балакан | IT Infrastructure & Engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Чорно-біла гама з червоно-рожевим акцентом */
             --bg-dark: #0a0a0a;
             --box-bg: #141414;
+            --box-bg-hover: #1a1a1a;
             --text-main: #f5f5f5;
             --text-muted: #888888;
             --line-color: #333333;
             
-            --color-done: #ffffff; /* Засвоєно - Білий */
-            --color-progress: #e11d48; /* В процесі - Червоно-рожевий */
-            --color-future: #404040; /* В планах - Темно-сірий */
+            --color-done: #ffffff;
+            --color-progress: #e11d48;
+            --color-future: #404040;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-main); padding: 40px 20px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; }
 
-        .header { text-align: center; margin-bottom: 50px; }
-        .header h1 { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
-        .header p { color: var(--text-muted); font-size: 1.1rem; }
-        .accent-text { color: var(--color-progress); }
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
 
-        .legend { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; font-size: 0.9rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+        /* HEADER */
+        .header { text-align: center; margin-bottom: 60px; border-bottom: 1px solid var(--line-color); padding-bottom: 40px; }
+        .header h1 { font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 800; margin-bottom: 15px; color: var(--text-main); letter-spacing: -1px; }
+        .header p { color: var(--text-muted); font-size: 1.15rem; max-width: 700px; margin: 0 auto; }
+        .accent-text { color: var(--color-progress); font-weight: 600; }
+
+        /* SECTION TITLES */
+        .section-title { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; margin-bottom: 30px; text-align: center; color: var(--text-main); text-transform: uppercase; letter-spacing: 2px; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--color-progress); margin: 15px auto 0; }
+
+        /* ABOUT & STACK GRID */
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 80px; }
+        @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } }
+        
+        .info-card { background: var(--box-bg); border: 1px solid var(--line-color); padding: 30px; border-radius: 8px; }
+        .info-card h3 { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; margin-bottom: 15px; color: var(--color-done); }
+        .tech-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tech-tag { background: #000; border: 1px solid var(--line-color); padding: 5px 12px; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; border-radius: 4px; color: var(--text-muted); transition: 0.3s; }
+        .tech-tag:hover { border-color: var(--color-progress); color: var(--color-progress); }
+
+        /* SOP / CASE STUDIES */
+        .sop-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 80px; }
+        .sop-card { background: var(--box-bg); border: 1px solid var(--line-color); padding: 25px; border-radius: 8px; transition: 0.3s; border-left: 3px solid var(--color-progress); }
+        .sop-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(225, 29, 72, 0.1); background: var(--box-bg-hover); }
+        .sop-card h4 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-main); }
+        .sop-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; }
+        .sop-card code { background: #000; padding: 2px 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--color-progress); }
+
+        /* ROADMAP LEGEND */
+        .legend { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-bottom: 40px; font-size: 0.9rem; font-family: 'JetBrains Mono', monospace; }
         .legend-item { display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
-        .legend-box { width: 16px; height: 16px; border-radius: 4px; border: 2px solid; }
+        .legend-box { width: 14px; height: 14px; border-radius: 2px; border: 2px solid; }
         .legend-done { border-color: var(--color-done); background: rgba(255,255,255,0.1); }
         .legend-progress { border-color: var(--color-progress); background: rgba(225, 29, 72, 0.1); box-shadow: 0 0 10px rgba(225, 29, 72, 0.4); }
         .legend-future { border-color: var(--color-future); border-style: dashed; }
 
-        /* Roadmap Structure */
-        .roadmap { display: flex; flex-direction: column; align-items: center; position: relative; max-width: 800px; margin: 0 auto; padding-bottom: 100px; }
-        
-        .connector { width: 2px; height: 50px; background-color: var(--line-color); transition: 0.3s; }
+        /* ROADMAP TREE */
+        .roadmap { display: flex; flex-direction: column; align-items: center; position: relative; max-width: 800px; margin: 0 auto; padding-bottom: 80px; }
+        .connector { width: 2px; height: 40px; background-color: var(--line-color); transition: 0.3s; }
         .connector.done { background-color: var(--color-done); }
         .connector.progress { background: linear-gradient(to bottom, var(--color-done), var(--color-progress)); }
         
-        .node {
-            background-color: var(--box-bg);
-            border: 2px solid var(--line-color);
-            border-radius: 8px;
-            padding: 20px 30px;
-            width: 100%;
-            max-width: 550px;
-            text-align: center;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
+        .node { background-color: var(--box-bg); border: 2px solid var(--line-color); border-radius: 8px; padding: 25px 30px; width: 100%; max-width: 650px; text-align: left; position: relative; cursor: pointer; transition: all 0.3s ease; }
         .node.done { border-color: var(--color-done); }
         .node.progress { border-color: var(--color-progress); box-shadow: 0 0 20px rgba(225, 29, 72, 0.15); }
         .node.future { border-color: var(--color-future); border-style: dashed; background-color: transparent; }
 
-        .node:hover { transform: translateY(-5px); z-index: 10; }
-        .node.done:hover { box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
-        .node.progress:hover { box-shadow: 0 10px 30px rgba(225, 29, 72, 0.3); border-color: #f43f5e; }
+        .node:hover { transform: translateX(10px); z-index: 10; background: var(--box-bg-hover); }
+        .node.done:hover { box-shadow: -10px 10px 20px rgba(255,255,255,0.05); }
+        .node.progress:hover { box-shadow: -10px 10px 30px rgba(225, 29, 72, 0.2); border-color: #f43f5e; }
         .node.future:hover { border-color: var(--text-muted); }
 
-        .node h3 { font-size: 1.3rem; margin-bottom: 5px; color: var(--text-main); }
-        .node span { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px; }
-        .node.progress span { color: var(--color-progress); }
+        .node-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; border-bottom: 1px solid var(--line-color); padding-bottom: 15px; }
+        .node-title-group h3 { font-size: 1.4rem; color: var(--text-main); margin-bottom: 5px; }
+        .node-title-group span { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .node.progress span { color: var(--color-progress); font-weight: bold; }
+        .expand-icon { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: var(--text-muted); transition: 0.3s; }
+        .node:hover .expand-icon { color: var(--color-progress); transform: rotate(90deg); }
 
-        /* Прихований контент */
-        .node-details {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
-            text-align: left;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
+        /* EXPANDABLE DETAILS */
+        .node-details { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+        .node:hover .node-details { max-height: 1200px; opacity: 1; margin-top: 20px; }
+        
+        .details-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .details-group h4 { color: var(--text-main); font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .details-group h4::before { content: '■'; color: var(--color-progress); font-size: 0.8rem; }
+        .details-group ul { list-style: none; margin-left: 20px; }
+        .details-group li { position: relative; margin-bottom: 6px; padding-left: 15px; }
+        .details-group li::before { content: '>'; position: absolute; left: 0; font-family: 'JetBrains Mono', monospace; font-weight: bold; font-size: 0.9rem; color: var(--line-color); }
+        .node:hover .details-group li::before { color: var(--text-muted); }
+        .node.progress .details-group li::before { color: var(--color-progress); }
 
-        .node:hover .node-details {
-            max-height: 800px;
-            opacity: 1;
-            margin-top: 15px;
-            border-top: 1px solid var(--line-color);
-            padding-top: 15px;
-        }
+        .details-group code { background: #000; padding: 2px 5px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: #ccc; font-size: 0.85rem; border: 1px solid var(--line-color); }
 
-        .node-details ul { list-style: none; margin-left: 10px; }
-        .node-details li { margin-bottom: 10px; position: relative; padding-left: 18px; }
-        .node-details li::before { content: '>'; position: absolute; left: 0; color: inherit; font-family: 'JetBrains Mono', monospace; font-weight: bold; }
-        .node-details code { background: #222; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: #ccc; font-size: 0.85rem; }
-        .highlight { color: #fff; font-weight: 600; }
-        .highlight-accent { color: var(--color-progress); font-weight: 600; }
-
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--line-color); color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>IT INFRASTRUCTURE PROGRESSION</h1>
-        <p>Сергій Балакан | Поточний рівень: <span class="accent-text">Helpdesk / Junior Sysadmin</span></p>
-    </div>
-
-    <div class="legend">
-        <div class="legend-item"><div class="legend-box legend-done"></div> ЗАСВОЄНО (ДОСВІД Є)</div>
-        <div class="legend-item"><div class="legend-box legend-progress"></div> ПОТОЧНИЙ ФОКУС (В ПРОЦЕСІ)</div>
-        <div class="legend-item"><div class="legend-box legend-future"></div> ПЛАН РОЗВИТКУ</div>
-    </div>
-
-    <div class="roadmap">
+    <div class="container">
         
-        <!-- Stage 1 -->
-        <div class="node done">
-            <span>Етап 1 | 0–6 міс.</span>
-            <h3>IT Technician</h3>
-            <div class="node-details">
-                <ul>
-                    <li><span class="highlight">ПК та ноутбуки:</span> ПК, ноутбуки, кабелі, периферія. Фізичне обслуговування, заміна SSD/RAM/БП, кабель-менеджмент, заміна термопасти[cite: 1].</li>
-                    <li><span class="highlight">Діагностика:</span> WinPE (Sergei Strelec), тестування RAM (MemTest86), стрес-тести (AIDA64/OCCT)[cite: 1].</li>
-                    <li><span class="highlight">BIOS/UEFI:</span> Вимкнення Secure Boot, налаштування TPM 2.0 (BitLocker), виділення VRAM, синхронізація частот ОЗП.</li>
-                    <li><span class="highlight">Оргтехніка:</span> Принтери, картриджі, МФУ. Заміна тонерів, усунення застрягань паперу[cite: 1].</li>
-                </ul>
+        <header class="header">
+            <h1>IT INFRASTRUCTURE & OPERATIONS</h1>
+            <p>Сергій Балакан | <span class="accent-text">Helpdesk / Junior Sysadmin</span><br>
+            Студент спеціальності <strong>Кібербезпека (ЛДУБЖД)</strong>. Спеціалізуюся на автоматизації рутини, апаратній діагностиці та підтримці мережевої інфраструктури.</p>
+        </header>
+
+        <section>
+            <h2 class="section-title">Профіль & Стек технологій</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>> Профіль компетенцій</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px;">Маю практичний досвід вирішення інцидентів (L1/L2), роботи з користувачами та глибокої діагностики апаратних несправностей. Активно застосовую скриптові мови для автоматизації процесів та написання ботів, модифікую вбудовані системи (роутери) під задачі бізнесу.</p>
+                </div>
+                <div class="info-card">
+                    <h3>> Tech Stack</h3>
+                    <div class="tech-list">
+                        <span class="tech-tag">Windows Server / WIM</span>
+                        <span class="tech-tag">Linux (CachyOS, Arch, Mint)</span>
+                        <span class="tech-tag">PowerShell / Bash</span>
+                        <span class="tech-tag">Python (aiogram, MongoDB)</span>
+                        <span class="tech-tag">OpenWrt / CUPS</span>
+                        <span class="tech-tag">Nmap / Zenmap / SSH</span>
+                        <span class="tech-tag">WinPE (Sergei Strelec)</span>
+                        <span class="tech-tag">AnyDesk / RDP</span>
+                        <span class="tech-tag">AIDA64 / MemTest86</span>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="connector done"></div>
-
-        <!-- Stage 2 -->
-        <div class="node progress">
-            <span>Етап 2 | 6–12 міс. | ПОТОЧНИЙ РІВЕНЬ</span>
-            <h3>Helpdesk / IT Support</h3>
-            <div class="node-details">
-                <ul>
-                    <li><span class="highlight-accent">Робота з користувачами:</span> Обробка заявок, віддалена допомога через AnyDesk/RDP, встановлення ПО[cite: 1].</li>
-                    <li><span class="highlight-accent">ОС Windows/Linux:</span> Розгортання ОС (Windows WIM, CachyOS, Linux Mint), встановлення драйверів[cite: 1].</li>
-                    <li><span class="highlight-accent">Скриптинг (Bash/PowerShell):</span> Автоматичне створення користувачів без прав адміна. Скрипти інвентаризації (збір даних CPU/RAM через WMI та парсинг EDID моніторів)[cite: 1].</li>
-                    <li><span class="highlight-accent">Мережева печать (OpenWrt):</span> Перепрошивка роутерів (TP-Link) по SSH. Встановлення пакетів <code>p910nd/CUPS</code> для створення бездротових принт-серверів для USB-принтерів.</li>
-                    <li><span class="highlight-accent">Мережі:</span> Nmap, діагностика пінгів, маршрутизаторів, розуміння DNS/DHCP.</li>
-                </ul>
+        <section>
+            <h2 class="section-title">Практичні рішення (SOP)</h2>
+            <div class="sop-container">
+                <div class="sop-card">
+                    <h4>Автоматизація інвентаризації (CLI)</h4>
+                    <p>Розробка скрипта для збору телеметрії ПК. Скрипт через <code>WMI</code> збирає дані про процесор, диски та оперативну пам'ять, а також парсить <code>EDID</code> для точної ідентифікації моніторів. Експорт звітів у .txt за ПІБ користувача.</p>
+                </div>
+                <div class="sop-card">
+                    <h4>OpenWrt Принт-сервери</h4>
+                    <p>Інтеграція USB-принтерів та принтерів етикеток у бездротову мережу. Прошивка роутерів (TP-Link) по <code>SSH (root@192.168.1.1)</code>, конфігурація статики та розгортання пакетів <code>p910nd</code> для друку по порту 9100.</p>
+                </div>
+                <div class="sop-card">
+                    <h4>User Provisioning</h4>
+                    <p>Скрипти генерації робочих місць: автоматичне створення профілю, генерація надійного пароля та жорстке обмеження прав (виключення з групи Адміністраторів для дотримання політики PoLP).</p>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="connector progress"></div>
-
-        <!-- Stage 3 -->
-        <div class="node future">
-            <span>Етап 3 | 1–2 роки | НАСТУПНИЙ КРОК</span>
-            <h3>Junior Sysadmin</h3>
-            <div class="node-details">
-                <ul>
-                    <li><span class="highlight">Серверні ОС:</span> Поглиблене адміністрування Linux / Windows Server[cite: 1].</li>
-                    <li><span class="highlight">Інфраструктура:</span> Active Directory, налаштування ролей DNS/DHCP[cite: 1].</li>
-                    <li><span class="highlight">Дані:</span> Робота з файловими серверами, налаштування систем резервного копіювання (backup)[cite: 1].</li>
-                    <li><span class="highlight">Мережі:</span> Базові мережі, маршрутизація, управління правами доступу[cite: 1].</li>
-                </ul>
+        <section>
+            <h2 class="section-title">Дорожня карта розвитку (Roadmap)</h2>
+            <div class="legend">
+                <div class="legend-item"><div class="legend-box legend-done"></div> ЗАСВОЄНО (Є ДОСВІД)</div>
+                <div class="legend-item"><div class="legend-box legend-progress"></div> ПОТОЧНИЙ ФОКУС (В ПРОЦЕСІ)</div>
+                <div class="legend-item"><div class="legend-box legend-future"></div> ПЛАН РОЗВИТКУ</div>
             </div>
-        </div>
 
-        <div class="connector"></div>
+            <div class="roadmap">
+                
+                <!-- Stage 1 -->
+                <div class="node done">
+                    <div class="node-header">
+                        <div class="node-title-group">
+                            <span>Етап 1 | 0–6 міс.</span>
+                            <h3>IT Technician</h3>
+                        </div>
+                        <div class="expand-icon">></div>
+                    </div>
+                    <div class="node-details">
+                        <div class="details-grid">
+                            <div class="details-group">
+                                <h4>Апаратне забезпечення (Hardware)</h4>
+                                <ul>
+                                    <li>Обслуговування ПК, заміна SSD/RAM/БП, кабель-менеджмент[cite: 1].</li>
+                                    <li>Глибока чистка систем охолодження, заміна термоінтерфейсів, діагностика ланцюгів живлення.</li>
+                                </ul>
+                            </div>
+                            <div class="details-group">
+                                <h4>Діагностика & Тестування</h4>
+                                <ul>
+                                    <li>Використання <code>WinPE (Sergei Strelec)</code> для роботи з мертвими ОС.</li>
+                                    <li>Пошук помилок пам'яті через <code>MemTest86</code>.</li>
+                                    <li>Стрес-тестування процесорів та моніторинг температур у <code>AIDA64 / OCCT</code>.</li>
+                                </ul>
+                            </div>
+                            <div class="details-group">
+                                <h4>BIOS / UEFI Конфігурація</h4>
+                                <ul>
+                                    <li>Вимкнення <code>Secure Boot</code> для Linux та застарілого ПО.</li>
+                                    <li>Синхронізація частот RAM за стандартами <code>JEDEC</code> або увімкнення <code>XMP</code>.</li>
+                                    <li>Увімкнення <code>TPM 2.0</code> (підготовка до шифрування BitLocker).</li>
+                                    <li>Ручне виділення відеопам'яті (VRAM) для інтегрованої графіки.</li>
+                                </ul>
+                            </div>
+                            <div class="details-group">
+                                <h4>Оргтехніка (Периферія)</h4>
+                                <ul>
+                                    <li>Базове обслуговування принтерів та МФУ[cite: 1].</li>
+                                    <li>Заміна картриджів, тонерів, безпечне усунення механічних застрягань паперу[cite: 1].</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Stage 4 -->
-        <div class="node future">
-            <span>Етап 4 | 2–3 роки</span>
-            <h3>System Administrator</h3>
-            <div class="node-details">
-                <ul>
-                    <li>Сервери, налаштування обладнання MikroTik[cite: 1].</li>
-                    <li>Розгортання та адміністрування VPN та VLAN[cite: 1].</li>
-                    <li>Віртуалізація: Proxmox, VMware[cite: 1].</li>
-                    <li>Контейнеризація (Docker) та системи моніторингу[cite: 1].</li>
-                </ul>
+                <div class="connector done"></div>
+
+                <!-- Stage 2 -->
+                <div class="node progress">
+                    <div class="node-header">
+                        <div class="node-title-group">
+                            <span>Етап 2 | 6–12 міс. | ПОТОЧНИЙ РІВЕНЬ</span>
+                            <h3>Helpdesk / IT Support</h3>
+                        </div>
+                        <div class="expand-icon">></div>
+                    </div>
+                    <div class="node-details">
+                        <div class="details-grid">
+                            <div class="details-group">
+                                <h4>Підтримка користувачів (L1/L2)</h4>
+                                <ul>
+                                    <li>Обробка інцидентів та заявок, віддалене управління через <code>AnyDesk / RDP</code>[cite: 1].</li>
+                                    <li>Траблшутинг ПЗ, діагностика відсутності мережі (перевірка кабелів, пінг, перезавантаження роутерів).</li>
+                                </ul>
+                            </div>
+                            <div class="details-group">
+                                <h4>Мережі & Інфраструктура</h4>
+                                <ul>
+                                    <li>Розуміння принципів роботи <code>DNS</code> (імена) та <code>DHCP</code> (автоматичний IP).</li>
+                                    <li>Сканування локальних мереж, перевірка портів утилітами <code>Nmap</code> та <code>Zenmap</code>.</li>
+                                    <li>Налаштування мережевого друку, створення принт-серверів на <code>OpenWrt</code>.</li>
+                                </ul>
+                            </div>
+                            <div class="details-group">
+                                <h4>Операційні системи</h4>
+                                <ul>
+                                    <li>Чисте встановлення Windows з підготовлених <code>WIM/ESD</code> образів, розгортання драйверів.</li>
+                                    <li>Встановлення та адміністрування Linux (CachyOS, Mint, Lubuntu, Arch). Робота з терміналом.</li>
+                                </ul>
+                            </div>
+                            <div class="details-group">
+                                <h4>Скриптинг & Інвентаризація</h4>
+                                <ul>
+                                    <li>Автоматизація рутини через <code>Bash</code> та <code>PowerShell</code> (створення користувачів, збір метрик апаратного забезпечення)[cite: 1].</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="connector progress"></div>
+
+                <!-- Stage 3 -->
+                <div class="node future">
+                    <div class="node-header">
+                        <div class="node-title-group">
+                            <span>Етап 3 | 1–2 роки | НАСТУПНИЙ КРОК</span>
+                            <h3>Junior Sysadmin</h3>
+                        </div>
+                        <div class="expand-icon">></div>
+                    </div>
+                    <div class="node-details">
+                        <div class="details-grid">
+                            <div class="details-group">
+                                <h4>Windows Server & AD</h4>
+                                <ul>
+                                    <li>Розгортання та супровід <code>Active Directory (AD DS)</code>[cite: 1].</li>
+                                    <li>Централізоване управління через <code>Group Policy (GPO)</code>[cite: 1].</li>
+                                </ul>
+                            </div>
+                            <div class="details-group">
+                                <h4>Мережеві сервіси & Дані</h4>
+                                <ul>
+                                    <li>Налаштування корпоративних <code>DNS / DHCP</code> серверів[cite: 1].</li>
+                                    <li>Організація файлових серверів, управління правами доступу (NTFS/Share)[cite: 1].</li>
+                                    <li>Впровадження політик резервного копіювання (Backup 3-2-1)[cite: 1].</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="connector"></div>
+
+                <!-- Stage 4 -->
+                <div class="node future">
+                    <div class="node-header">
+                        <div class="node-title-group">
+                            <span>Етап 4 | 2–3 роки</span>
+                            <h3>System Administrator</h3>
+                        </div>
+                        <div class="expand-icon">></div>
+                    </div>
+                    <div class="node-details">
+                        <div class="details-grid">
+                            <div class="details-group">
+                                <h4>Мережі та Обладнання</h4>
+                                <ul>
+                                    <li>Адміністрування апаратних маршрутизаторів <code>MikroTik (RouterOS)</code>[cite: 1].</li>
+                                    <li>Налаштування <code>VLAN</code>, розгортання захищених <code>VPN</code>-тунелів (WireGuard, OpenVPN)[cite: 1].</li>
+                                </ul>
+                            </div>
+                            <div class="details-group">
+                                <h4>Віртуалізація & Моніторинг</h4>
+                                <ul>
+                                    <li>Робота з гіпервізорами <code>Proxmox VE</code> та <code>VMware ESXi</code>[cite: 1].</li>
+                                    <li>Базова контейнеризація додатків (<code>Docker</code> / Compose)[cite: 1].</li>
+                                    <li>Впровадження систем моніторингу (Zabbix/Prometheus/Grafana)[cite: 1].</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="connector"></div>
+
+                <!-- Stage 5 -->
+                <div class="node future">
+                    <div class="node-header">
+                        <div class="node-title-group">
+                            <span>Етап 5 | 3–4 роки</span>
+                            <h3>Infrastructure Engineer</h3>
+                        </div>
+                        <div class="expand-icon">></div>
+                    </div>
+                    <div class="node-details">
+                        <div class="details-grid">
+                            <div class="details-group">
+                                <h4>High Availability & Storage</h4>
+                                <ul>
+                                    <li>Побудова відмовостійких кластерів (<code>HA clustering</code>)[cite: 1].</li>
+                                    <li>Робота з програмно-визначеними сховищами (<code>Ceph, ZFS</code>)[cite: 1].</li>
+                                </ul>
+                            </div>
+                            <div class="details-group">
+                                <h4>Automation & DevOps</h4>
+                                <ul>
+                                    <li>Глибока автоматизація: <code>Python, Bash, Ansible</code>[cite: 1].</li>
+                                    <li>Оркестрація контейнерів (<code>Kubernetes</code>), впровадження <code>CI/CD</code> пайплайнів[cite: 1].</li>
+                                    <li>Робота за концепцією <code>Infrastructure as Code (IaC)</code>[cite: 1].</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="connector"></div>
+
+                <!-- Stage 6 -->
+                <div class="node future">
+                    <div class="node-header">
+                        <div class="node-title-group">
+                            <span>Етап 6 | 4–5.5 років</span>
+                            <h3>Solution / Infrastructure Architect</h3>
+                        </div>
+                        <div class="expand-icon">></div>
+                    </div>
+                    <div class="node-details">
+                        <div class="details-grid">
+                            <div class="details-group">
+                                <h4>Проектування систем</h4>
+                                <ul>
+                                    <li>Збір бізнес-вимог, побудова архітектурних схем, вибір технологічного стеку[cite: 1].</li>
+                                    <li>Аналіз trade-offs, проектування Security architecture та інтеграцій[cite: 1].</li>
+                                </ul>
+                            </div>
+                            <div class="details-group">
+                                <h4>Бізнес-метрики & Документація</h4>
+                                <ul>
+                                    <li>Розрахунок доступності (SLA/SLO), планування потужностей (Capacity planning)[cite: 1].</li>
+                                    <li>Оцінка вартості володіння (TCO), Disaster Recovery (RTO/RPO)[cite: 1].</li>
+                                    <li>Складання технічної документації та Architecture Decision Records (ADR)[cite: 1].</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="connector"></div>
+
+                <!-- Stage 7 -->
+                <div class="node future">
+                    <div class="node-header">
+                        <div class="node-title-group">
+                            <span>Етап 7 | 5.5–7+ років</span>
+                            <h3>Enterprise Architect</h3>
+                        </div>
+                        <div class="expand-icon">></div>
+                    </div>
+                    <div class="node-details">
+                        <div class="details-grid">
+                            <div class="details-group">
+                                <h4>Глобальна IT-Стратегія</h4>
+                                <ul>
+                                    <li>Проектування архітектури всієї організації, синхронізація IT з бізнес-процесами[cite: 1].</li>
+                                    <li>Application architecture, data architecture, та складні enterprise-інтеграції[cite: 1].</li>
+                                    <li>IT strategy, governance, управління бюджетами та складання глобального Technology Roadmap[cite: 1].</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
-
-        <div class="connector"></div>
-
-        <!-- Stage 5 -->
-        <div class="node future">
-            <span>Етап 5 | 3–4 роки</span>
-            <h3>Infrastructure Engineer</h3>
-            <div class="node-details">
-                <ul>
-                    <li>HA clustering (High Availability), Storage (Ceph/ZFS)[cite: 1].</li>
-                    <li>Автоматизація (Bash/Python/Ansible), CI/CD пайплайни[cite: 1].</li>
-                    <li>Kubernetes, observability, cloud-технології[cite: 1].</li>
-                    <li>Інформаційна безпека (security) та Infrastructure as Code[cite: 1].</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="connector"></div>
-
-        <!-- Stage 6 -->
-        <div class="node future">
-            <span>Етап 6 | 4–5.5 років</span>
-            <h3>Solution / Infrastructure Architect</h3>
-            <div class="node-details">
-                <ul>
-                    <li>Збір вимог, архітектурні схеми, вибір технологій, інтеграції[cite: 1].</li>
-                    <li>Проектування систем, trade-offs, розрахунок SLA/SLO, RTO/RPO[cite: 1].</li>
-                    <li>Security architecture, capacity planning, TCO (вартість)[cite: 1].</li>
-                    <li>Disaster recovery (DR), технічна документація, ADR[cite: 1].</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="connector"></div>
-
-        <!-- Stage 7 -->
-        <div class="node future">
-            <span>Етап 7 | 5.5–7+ років</span>
-            <h3>Enterprise Architect</h3>
-            <div class="node-details">
-                <ul>
-                    <li>Архітектура всієї організації, бізнес-процеси[cite: 1].</li>
-                    <li>Application architecture, data architecture, integration[cite: 1].</li>
-                    <li>Security, IT strategy, governance, бюджети[cite: 1].</li>
-                    <li>Technology roadmap для всієї IT-середи[cite: 1].</li>
-                </ul>
-            </div>
-        </div>
+        </section>
+        
+        <footer>
+            <p>Designed and documented for GitHub Pages. &copy; 2026 Сергій Балакан.</p>
+        </footer>
 
     </div>
 
