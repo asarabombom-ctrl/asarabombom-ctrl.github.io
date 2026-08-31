@@ -3,184 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сергій Балакан | IT Support & SysAdmin</title>
+    <title>Сергій Балакан | IT Infrastructure Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
+            --bg-color: #0b1120;
+            --card-bg: rgba(30, 41, 59, 0.7);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent: #38bdf8;
-            --accent-hover: #0284c7;
+            --accent: #0ea5e9;
+            --accent-glow: rgba(14, 165, 233, 0.4);
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+
+        /* Фоновые эффекты */
+        .glow-bg {
+            position: fixed; top: -20%; left: -10%; width: 50vw; height: 50vw;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            filter: blur(100px); z-index: -1; animation: float 10s infinite alternate;
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 20px;
-        }
+        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(5%, 10%); } }
 
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(180deg, rgba(30,41,59,1) 0%, rgba(15,23,42,0) 100%);
-            border-radius: 20px;
-            margin-bottom: 40px;
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
 
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
+        /* Hero Секция */
+        header { text-align: center; padding: 100px 20px; animation: fadeInDown 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        header h1 { font-size: 3.5rem; font-weight: 800; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; }
+        header p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
-        header p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-        }
+        /* Анимации при скролле */
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+        .section-title { font-size: 2rem; margin: 60px 0 30px; text-align: center; font-weight: 800; color: #fff; }
 
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--card-bg);
-            padding-bottom: 10px;
-        }
-
+        /* Карточки процессов (SOP) */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        
         .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-left: 4px solid var(--accent);
+            background: var(--card-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
         }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 15px var(--accent-glow); border-color: rgba(14, 165, 233, 0.5); }
+        
+        .card-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .card-content { padding: 25px; }
+        .card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--accent); }
+        .card ul { list-style: none; color: var(--text-muted); }
+        .card ul li { position: relative; padding-left: 25px; margin-bottom: 12px; font-size: 0.95rem; }
+        .card ul li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        /* Дорожная карта (Roadmap) */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 20px 0; }
+        .timeline::before { content: ''; position: absolute; left: 50%; width: 2px; height: 100%; background: rgba(255,255,255,0.1); transform: translateX(-50%); }
+        
+        .timeline-item { width: 50%; padding: 20px 40px; position: relative; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        
+        .timeline-dot {
+            position: absolute; top: 30px; width: 16px; height: 16px; background: var(--accent);
+            border-radius: 50%; box-shadow: 0 0 10px var(--accent); z-index: 2;
         }
+        .timeline-item:nth-child(odd) .timeline-dot { right: -8px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -8px; }
+        
+        .timeline-content { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .timeline-content h4 { color: #fff; margin-bottom: 5px; font-size: 1.1rem; }
+        .timeline-content span { color: var(--accent); font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 10px; }
 
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
-        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
 
-        .step-list {
-            list-style: none;
-        }
-
-        .step-list li {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 15px;
-            color: var(--text-muted);
-        }
-
-        .step-list li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--accent);
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .highlight {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        /* Адаптивность для Roadmap */
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; left: 0 !important; padding: 20px 20px 20px 50px; text-align: left !important; }
+            .timeline-dot { left: 12px !important; right: auto !important; }
         }
     </style>
 </head>
 <body>
 
+    <div class="glow-bg"></div>
+
     <div class="container">
         <header>
             <h1>Сергій Балакан</h1>
-            <p>IT Support Specialist & Junior System Administrator | Odesa, Ukraine</p>
+            <p>IT Support Specialist & Junior System Administrator | Повна автоматизація та стабільність інфраструктури.</p>
         </header>
 
-        <h2 class="section-title">Standard Operating Procedures (Технічні інструкції)</h2>
+        <h2 class="section-title fade-in">⚙️ Standard Operating Procedures (SOP)</h2>
+        
+        <div class="grid">
+            <!-- Процесс 1 -->
+            <div class="card fade-in">
+                <!-- Замени ссылку в src на свое фото (например из Imgur или GitHub) -->
+                <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=600&q=80" alt="Hardware" class="card-img">
+                <div class="card-content">
+                    <h3>Апаратна підготовка (Hardware)</h3>
+                    <ul>
+                        <li><strong>Обслуговування:</strong> Повне очищення, перевірка ланцюгів живлення, заміна термопасти.</li>
+                        <li><strong>BIOS/UEFI:</strong> Вимкнення Secure Boot, ручне виділення VRAM, увімкнення TPM 2.0 для BitLocker.</li>
+                        <li><strong>Тестування:</strong> WinPE (Sergei Strelec), MemTest86, стрес-тести AIDA64.</li>
+                    </ul>
+                </div>
+            </div>
 
-        <!-- SOP 1 -->
-        <div class="card">
-            <h3>🖥 1. Апаратна діагностика та підготовка ПК (Hardware Provisioning)</h3>
-            <p style="margin-bottom: 15px; color: #94a3b8;"><strong>Мета:</strong> Стандартизоване тестування, ремонт та підготовка робочих станцій до видачі користувачу.</p>
-            <ul class="step-list">
-                <li><strong>Фізичне обслуговування:</strong> Повне очищення від пилу, перевірка підключення шлейфів. Заміна термопасти. Тестування контактів дискретної відеокарти та оперативної пам'яті.</li>
-                <li><strong>Конфігурація BIOS/UEFI:</strong> 
-                    Вимкнення <span class="highlight">Secure Boot</span> (для сумісності з Linux/застарілим ПЗ). 
-                    Синхронізація частот оперативної пам'яті за стандартами JEDEC при використанні різних плашок. 
-                    Ручне виділення VRAM для інтегрованої графіки. 
-                    Увімкнення <span class="highlight">TPM 2.0</span> для шифрування дисків.
-                </li>
-                <li><strong>Стрес-тест та діагностика:</strong> Завантаження з WinPE (Sergei Strelec). Використання <span class="highlight">MemTest86</span> для пошуку битих секторів пам'яті. Запуск <span class="highlight">AIDA64 / OCCT</span> для стрес-тесту процесора та моніторингу троттлінгу температур.</li>
-                <li><strong>Розгортання ОС:</strong> На актуальне залізо — встановлення Windows із підготовленого образу. Для старих ПК — легковісні дистрибутиви Linux (Lubuntu, Linux Mint) для офісних задач. Оновлення драйверів, створення профілю користувача.</li>
-            </ul>
+            <!-- Процесс 2 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Servers" class="card-img">
+                <div class="card-content">
+                    <h3>Бездротові принт-сервери (OpenWrt)</h3>
+                    <ul>
+                        <li><strong>Прошивка:</strong> Встановлення OpenWrt на роутери (TP-Link) через SSH.</li>
+                        <li><strong>Конфігурація:</strong> Призначення статичної IP-адреси та пакетів <code>p910nd / CUPS</code>.</li>
+                        <li><strong>Мережа:</strong> Інтеграція USB-принтерів етикеток у Wi-Fi мережу підприємства.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Процесс 3 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" alt="Code" class="card-img">
+                <div class="card-content">
+                    <h3>Автоматизація (Bash / PowerShell)</h3>
+                    <ul>
+                        <li><strong>Користувачі:</strong> Скрипти генерації профілів без прав адміністратора.</li>
+                        <li><strong>Інвентаризація:</strong> CLI-утиліта для збору WMI-метрик (RAM, CPU, диски).</li>
+                        <li><strong>Периферія:</strong> Зчитування EDID-даних моніторів з експортом у `.txt`.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <!-- SOP 2 -->
-        <div class="card">
-            <h3>🖨 2. Створення бездротових принт-серверів (OpenWrt)</h3>
-            <p style="margin-bottom: 15px; color: #94a3b8;"><strong>Мета:</strong> Інтеграція звичайних USB-принтерів та принтерів етикеток у локальну мережу без використання виділеного ПК.</p>
-            <ul class="step-list">
-                <li><strong>Підготовка маршрутизатора:</strong> Скидання роутера (наприклад, TP-Link) до заводських налаштувань. Підключення по SSH за стандартною адресою <span class="highlight">root@192.168.1.1</span>.</li>
-                <li><strong>Прошивка:</strong> Встановлення альтернативної ОС <span class="highlight">OpenWrt</span> на маршрутизатор.</li>
-                <li><strong>Налаштування мережі:</strong> Задання статичної IP-адреси роутеру (наприклад, 192.168.1.2) та підключення його до основної Wi-Fi мережі у режимі клієнта.</li>
-                <li><strong>Конфігурація принт-сервера:</strong> Встановлення пакетів для підтримки USB-друку (<span class="highlight">kmod-usb-printer, p910nd</span>). Прокидання TCP порту 9100.</li>
-                <li><strong>Підключення клієнтів:</strong> На робочих ПК додавання принтера через "Standard TCP/IP Port", вказавши статичний IP роутера. Встановлення драйверів.</li>
-            </ul>
-        </div>
+        <h2 class="section-title fade-in">🚀 Дорожня карта розвитку (IT Roadmap)</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>IT Technician</h4>
+                    <span>0–6 місяців</span>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">ПК, ноутбуки, принтери, картриджі, МФУ, кабелі, периферія. Базова діагностика та ремонт апаратного забезпечення.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>Helpdesk / IT Support (Поточний)</h4>
+                    <span>6–12 місяців</span>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">Робота з користувачами, розгортання Windows/Linux, віддалена допомога (AnyDesk/RDP), обробка заявок та скриптова інвентаризація.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>Junior System Administrator</h4>
+                    <span>1–2 роки (Наступний крок)</span>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">Windows Server, Active Directory, DNS, DHCP, системи резервного копіювання, маршрутизація та базові мережі.</p>
+                </div>
+            </div>
 
-        <!-- SOP 3 -->
-        <div class="card">
-            <h3>📜 3. Автоматизація рутини (Bash / PowerShell Скриптинг)</h3>
-            <p style="margin-bottom: 15px; color: #94a3b8;"><strong>Мета:</strong> Мінімізація людського фактора при обліку обладнання та налаштуванні прав доступу.</p>
-            <ul class="step-list">
-                <li><strong>Скрипт створення користувачів:</strong> Автоматично генерує безпечний пароль, створює локальний профіль. <span class="highlight">Критичний крок:</span> скрипт примусово видаляє користувача з групи Адміністраторів для запобігання несанкціонованим змінам у системі.</li>
-                <li><strong>Інтерактивний скрипт інвентаризації (Hardware Inventory):</strong> При запуску запитує ПІБ співробітника. Звертається до <span class="highlight">WMI</span> для збору точних даних (серійні номери, обсяг RAM, процесор).</li>
-                <li><strong>Облік периферії:</strong> Скрипт зчитує <span class="highlight">EDID-дані</span> моніторів, щоб визначити їх точну модель та діагональ. Всі дані експортуються у персоналізований `.txt` файл для бази даних IT-відділу.</li>
-            </ul>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h4>System Administrator</h4>
+                    <span>2–3 роки</span>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">Сервери, налаштування MikroTik, VPN, VLAN, віртуалізація (Proxmox), Docker, налаштування систем моніторингу.</p>
+                </div>
+            </div>
         </div>
-
-        <!-- SOP 4 -->
-        <div class="card">
-            <h3>🌐 4. Мережева інфраструктура та Віддалена підтримка</h3>
-            <p style="margin-bottom: 15px; color: #94a3b8;"><strong>Мета:</strong> Забезпечення безперебійної роботи мережі та швидке вирішення інцидентів (L1/L2 Helpdesk).</p>
-            <ul class="step-list">
-                <li><strong>Віддалена підтримка:</strong> Підключення через <span class="highlight">AnyDesk</span>. Траблшутинг при відсутності інтернету: перевірка фізичного кабелю, перезавантаження роутера, перевірка доступності вузлів через `ping`, діагностика цілісності мережевих драйверів.</li>
-                <li><strong>Мережева діагностика:</strong> Використання <span class="highlight">Nmap / Zenmap</span> для сканування топології мережі та пошуку відкритих портів. Розуміння та діагностика протоколів <span class="highlight">DNS</span> (роздільна здатність імен) та <span class="highlight">DHCP</span> (розподіл IP).</li>
-                <li><strong>Linux / SSH:</strong> Підключення до серверів та ноутбуків на базі Linux (CachyOS) через SSH. Використання скриптів для тонкої оптимізації системи під конкретне залізо. Безпечна передача файлів.</li>
-            </ul>
-        </div>
-
-        <footer>
-            <p>Designed for GitHub Pages. &copy; 2026 Сергій Балакан.</p>
-        </footer>
     </div>
 
+    <script>
+        // Скрипт для плавного появления элементов при прокрутке (Scroll Animation)
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Анимация проигрывается 1 раз
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 </html>
