@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: asarabombom-ctrl/название-вашего-репозитория
+  branch: main # Ветка, в которую будут идти коммиты
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "content"
+    label: "Контент сайта"
+    files:
+      - label: "Настройки Roadmap"
+        name: "roadmap"
+        file: "data.json"
+        fields:
+          - {label: "Заголовок Етапа 0", name: "stage0_title", widget: "string"}
+          - {label: "Текст Етапа 0", name: "stage0_desc", widget: "text"}
+          - {label: "Фото Етапа 0", name: "stage0_image", widget: "image"}
