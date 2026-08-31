@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сергій Балакан | IT Support & SysAdmin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0284c7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, rgba(30,41,59,1) 0%, rgba(15,23,42,0) 100%);
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--card-bg);
+            padding-bottom: 10px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .step-list {
+            list-style: none;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        .step-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Сергій Балакан</h1>
+            <p>IT Support Specialist & Junior System Administrator | Odesa, Ukraine</p>
+        </header>
+
+        <h2 class="section-title">Standard Operating Procedures (Технічні інструкції)</h2>
+
+        <!-- SOP 1 -->
+        <div class="card">
+            <h3>🖥 1. Апаратна діагностика та підготовка ПК (Hardware Provisioning)</h3>
+            <p style="margin-bottom: 15px; color: #94a3b8;"><strong>Мета:</strong> Стандартизоване тестування, ремонт та підготовка робочих станцій до видачі користувачу.</p>
+            <ul class="step-list">
+                <li><strong>Фізичне обслуговування:</strong> Повне очищення від пилу, перевірка підключення шлейфів. Заміна термопасти. Тестування контактів дискретної відеокарти та оперативної пам'яті.</li>
+                <li><strong>Конфігурація BIOS/UEFI:</strong> 
+                    Вимкнення <span class="highlight">Secure Boot</span> (для сумісності з Linux/застарілим ПЗ). 
+                    Синхронізація частот оперативної пам'яті за стандартами JEDEC при використанні різних плашок. 
+                    Ручне виділення VRAM для інтегрованої графіки. 
+                    Увімкнення <span class="highlight">TPM 2.0</span> для шифрування дисків.
+                </li>
+                <li><strong>Стрес-тест та діагностика:</strong> Завантаження з WinPE (Sergei Strelec). Використання <span class="highlight">MemTest86</span> для пошуку битих секторів пам'яті. Запуск <span class="highlight">AIDA64 / OCCT</span> для стрес-тесту процесора та моніторингу троттлінгу температур.</li>
+                <li><strong>Розгортання ОС:</strong> На актуальне залізо — встановлення Windows із підготовленого образу. Для старих ПК — легковісні дистрибутиви Linux (Lubuntu, Linux Mint) для офісних задач. Оновлення драйверів, створення профілю користувача.</li>
+            </ul>
+        </div>
+
+        <!-- SOP 2 -->
+        <div class="card">
+            <h3>🖨 2. Створення бездротових принт-серверів (OpenWrt)</h3>
+            <p style="margin-bottom: 15px; color: #94a3b8;"><strong>Мета:</strong> Інтеграція звичайних USB-принтерів та принтерів етикеток у локальну мережу без використання виділеного ПК.</p>
+            <ul class="step-list">
+                <li><strong>Підготовка маршрутизатора:</strong> Скидання роутера (наприклад, TP-Link) до заводських налаштувань. Підключення по SSH за стандартною адресою <span class="highlight">root@192.168.1.1</span>.</li>
+                <li><strong>Прошивка:</strong> Встановлення альтернативної ОС <span class="highlight">OpenWrt</span> на маршрутизатор.</li>
+                <li><strong>Налаштування мережі:</strong> Задання статичної IP-адреси роутеру (наприклад, 192.168.1.2) та підключення його до основної Wi-Fi мережі у режимі клієнта.</li>
+                <li><strong>Конфігурація принт-сервера:</strong> Встановлення пакетів для підтримки USB-друку (<span class="highlight">kmod-usb-printer, p910nd</span>). Прокидання TCP порту 9100.</li>
+                <li><strong>Підключення клієнтів:</strong> На робочих ПК додавання принтера через "Standard TCP/IP Port", вказавши статичний IP роутера. Встановлення драйверів.</li>
+            </ul>
+        </div>
+
+        <!-- SOP 3 -->
+        <div class="card">
+            <h3>📜 3. Автоматизація рутини (Bash / PowerShell Скриптинг)</h3>
+            <p style="margin-bottom: 15px; color: #94a3b8;"><strong>Мета:</strong> Мінімізація людського фактора при обліку обладнання та налаштуванні прав доступу.</p>
+            <ul class="step-list">
+                <li><strong>Скрипт створення користувачів:</strong> Автоматично генерує безпечний пароль, створює локальний профіль. <span class="highlight">Критичний крок:</span> скрипт примусово видаляє користувача з групи Адміністраторів для запобігання несанкціонованим змінам у системі.</li>
+                <li><strong>Інтерактивний скрипт інвентаризації (Hardware Inventory):</strong> При запуску запитує ПІБ співробітника. Звертається до <span class="highlight">WMI</span> для збору точних даних (серійні номери, обсяг RAM, процесор).</li>
+                <li><strong>Облік периферії:</strong> Скрипт зчитує <span class="highlight">EDID-дані</span> моніторів, щоб визначити їх точну модель та діагональ. Всі дані експортуються у персоналізований `.txt` файл для бази даних IT-відділу.</li>
+            </ul>
+        </div>
+
+        <!-- SOP 4 -->
+        <div class="card">
+            <h3>🌐 4. Мережева інфраструктура та Віддалена підтримка</h3>
+            <p style="margin-bottom: 15px; color: #94a3b8;"><strong>Мета:</strong> Забезпечення безперебійної роботи мережі та швидке вирішення інцидентів (L1/L2 Helpdesk).</p>
+            <ul class="step-list">
+                <li><strong>Віддалена підтримка:</strong> Підключення через <span class="highlight">AnyDesk</span>. Траблшутинг при відсутності інтернету: перевірка фізичного кабелю, перезавантаження роутера, перевірка доступності вузлів через `ping`, діагностика цілісності мережевих драйверів.</li>
+                <li><strong>Мережева діагностика:</strong> Використання <span class="highlight">Nmap / Zenmap</span> для сканування топології мережі та пошуку відкритих портів. Розуміння та діагностика протоколів <span class="highlight">DNS</span> (роздільна здатність імен) та <span class="highlight">DHCP</span> (розподіл IP).</li>
+                <li><strong>Linux / SSH:</strong> Підключення до серверів та ноутбуків на базі Linux (CachyOS) через SSH. Використання скриптів для тонкої оптимізації системи під конкретне залізо. Безпечна передача файлів.</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Designed for GitHub Pages. &copy; 2026 Сергій Балакан.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
