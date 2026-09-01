@@ -118,7 +118,7 @@
         .timeline-content { 
             width: 42%; background: var(--box-bg); border: 1px solid var(--box-border); border-radius: 16px; 
             transition: var(--transition-smooth); position: relative; backdrop-filter: blur(12px); z-index: 3;
-            overflow: hidden; 
+            overflow: hidden; cursor: pointer;
         }
         
         /* Асиметрія карток */
@@ -233,84 +233,78 @@
 
             <div class="roadmap-container">
                 
-                <!-- STAGE 0: Hardware -->
+                <!-- STAGE 0 -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content" onclick="openDoc('doc-stage0')">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 0 | Апаратне забезпечення | Hardware</span>
-                                <span class="eng">Stage 0 | Hardware & Diagnostics</span>
+                                <span class="ukr">L0 | IT Support / Helper</span>
+                                <span class="eng">L0 | IT Support / Helper</span>
                             </span>
                             <h3>
-                                <span class="ukr">Діагностика та Ремонт ПК</span>
-                                <span class="eng">PC Diagnostics & Repair</span>
+                                <span class="ukr">Hardware & Diagnostics</span>
+                                <span class="eng">Hardware & Diagnostics</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>UEFI/BIOS</span><span>MemTest86</span><span>SMART</span><span>Multimeter</span><span>Thermal Paste</span>
+                                <span>SMART</span><span>UEFI</span><span>RAM</span><span>PCIe</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Архітектура:</strong> Глибоке розуміння CPU (ядра, кеш L1/L2/L3), RAM (таймінги, dual/quad channel), шини PCIe.</span><span class="eng"><strong>Architecture:</strong> Deep understanding of CPU, RAM timings, and PCIe lanes.</span></li>
-                                <li><span class="ukr"><strong>Пам'ять та Сховище:</strong> Відновлення даних, SMART атрибути, відмінності NVMe від SATA, таблиці розділів GPT/MBR.</span><span class="eng"><strong>Storage:</strong> Data recovery, SMART attributes, NVMe vs SATA, GPT/MBR.</span></li>
-                                <li><span class="ukr"><strong>Діагностика:</strong> Робота з мультиметром (продзвінка ланцюгів живлення), стрес-тести (AIDA64, OCCT, FurMark), перевірка ОЗП через MemTest86.</span><span class="eng"><strong>Diagnostics:</strong> Multimeter usage, stress tests (AIDA64, OCCT), RAM checks via MemTest86.</span></li>
-                                <li><span class="ukr"><strong>Обслуговування:</strong> Заміна термоінтерфейсів, прошивка BIOS/UEFI через програматор або флешку, скидання CMOS.</span><span class="eng"><strong>Maintenance:</strong> Thermal interfaces, BIOS/UEFI flashing, CMOS reset.</span></li>
+                                <li><span class="ukr"><strong>Архітектура ПК:</strong> Розуміння CPU, RAM, шин PCIe.</span><span class="eng"><strong>PC Architecture:</strong> CPU, RAM, PCIe lanes.</span></li>
+                                <li><span class="ukr"><strong>Діагностика:</strong> Мультиметр, MemTest86, стрес-тести.</span><span class="eng"><strong>Diagnostics:</strong> Multimeter, MemTest86, stress tests.</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-image"><img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80" alt="Hardware"></div>
                 </div>
 
-                <!-- STAGE 1: Windows & AD -->
+                <!-- STAGE 1 -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content" onclick="openDoc('doc-stage1')">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 1 | Windows OS | Enterprise</span>
-                                <span class="eng">Stage 1 | Windows OS & Enterprise</span>
+                                <span class="ukr">L1 | Junior SysAdmin</span>
+                                <span class="eng">L1 | Junior SysAdmin</span>
                             </span>
                             <h3>
-                                <span class="ukr">Windows Server & PowerShell</span>
-                                <span class="eng">Windows Server & PowerShell</span>
+                                <span class="ukr">Windows Server & AD</span>
+                                <span class="eng">Windows Server & AD</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Active Directory</span><span>GPO</span><span>PowerShell</span><span>NTFS</span><span>WSUS</span>
+                                <span>Active Directory</span><span>GPO</span><span>PowerShell</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Основи ОС:</strong> Реєстр (Regedit), Event Viewer (фільтрація логів), Служби (Services.msc), Task Scheduler.</span><span class="eng"><strong>OS Basics:</strong> Registry, Event Viewer, Services, Task Scheduler.</span></li>
-                                <li><span class="ukr"><strong>Active Directory (AD DS):</strong> Створення домену, управління користувачами (Users & Computers), OU, делегування прав.</span><span class="eng"><strong>Active Directory:</strong> Domain creation, Users & Computers, OU, delegation.</span></li>
-                                <li><span class="ukr"><strong>Групові політики (GPO):</strong> Налаштування політик безпеки, мапінг мережевих дисків, розгортання ПЗ через MSI.</span><span class="eng"><strong>Group Policies (GPO):</strong> Security policies, network drive mapping, software deployment.</span></li>
-                                <li><span class="ukr"><strong>PowerShell Scripting:</strong> Автоматизація створення користувачів, модулі ActiveDirectory, віддалене виконання (Invoke-Command).</span><span class="eng"><strong>PowerShell:</strong> Automating user creation, AD modules, remote execution (Invoke-Command).</span></li>
+                                <li><span class="ukr"><strong>AD DS:</strong> Домени, OU, делегування прав.</span><span class="eng"><strong>AD DS:</strong> Domains, OU, rights delegation.</span></li>
+                                <li><span class="ukr"><strong>GPO & PS:</strong> Політики безпеки, автоматизація скриптами.</span><span class="eng"><strong>GPO & PS:</strong> Security policies, automation scripts.</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-image"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80" alt="Windows"></div>
                 </div>
 
-                <!-- STAGE 2: Linux -->
+                <!-- STAGE 2 -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content" onclick="openDoc('doc-stage2')">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 2 | Linux | Server Basics</span>
-                                <span class="eng">Stage 2 | Linux Server Administration</span>
+                                <span class="ukr">L2 | Middle SysAdmin</span>
+                                <span class="eng">L2 | Middle SysAdmin</span>
                             </span>
                             <h3>
-                                <span class="ukr">Linux Адміністрування</span>
-                                <span class="eng">Linux Administration</span>
+                                <span class="ukr">Linux Server Admin</span>
+                                <span class="eng">Linux Server Admin</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Arch / Debian</span><span>Bash</span><span>systemd</span><span>SSH</span><span>LVM</span>
+                                <span>Bash</span><span>systemd</span><span>SSH</span><span>LVM</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Файлова система & Права:</strong> Структура FHS (/etc, /var, /opt), права доступу (chmod, chown, ACL, SUID/SGID).</span><span class="eng"><strong>FS & Permissions:</strong> FHS structure, access rights (chmod, chown, ACL).</span></li>
-                                <li><span class="ukr"><strong>Управління процесами:</strong> Робота з systemd (створення власних сервісів), top/htop, kill, управління пам'яттю.</span><span class="eng"><strong>Process Management:</strong> systemd (creating services), top/htop, kill signals.</span></li>
-                                <li><span class="ukr"><strong>Сховище:</strong> Налаштування LVM (Logical Volume Manager), монтування (fstab), RAID масиви (mdadm).</span><span class="eng"><strong>Storage:</strong> LVM setup, fstab mounting, software RAID (mdadm).</span></li>
-                                <li><span class="ukr"><strong>Мережа & Сервіси:</strong> Налаштування SSH (генерація ключів, заборона root login), підняття Nginx/Apache веб-серверів.</span><span class="eng"><strong>Network & Services:</strong> SSH hardening, Nginx/Apache web servers setup.</span></li>
+                                <li><span class="ukr"><strong>Ядро ОС:</strong> FHS, права доступу (chmod), процеси (systemd).</span><span class="eng"><strong>OS Core:</strong> FHS, permissions, processes.</span></li>
+                                <li><span class="ukr"><strong>Сховище:</strong> LVM, fstab, RAID (mdadm).</span><span class="eng"><strong>Storage:</strong> LVM, fstab, software RAID.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -461,54 +455,97 @@
         </div>
     </div>
 
-    <!-- VIEW 2: SOP DOCUMENTATION -->
-    <div id="docs" class="view-section">
-        <div class="container">
-            <header class="header">
-                <h1>
-                    <span class="ukr">TECHNICAL GUIDES (SOP)</span>
-                    <span class="eng">TECHNICAL GUIDES (SOP)</span>
-                </h1>
-                <p>
-                    <span class="ukr">База знань: покрокові інструкції з налаштування обладнання, мереж та автоматизації.</span>
-                    <span class="eng">Knowledge base: step-by-step instructions for hardware, networks, and automation.</span>
-                </p>
-            </header>
-
-            <div class="doc-grid">
-                <div class="doc-card">
+    <!-- Детальний конспект для L0 -->
+                <div id="doc-stage0" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
-                        <span class="ukr">01. Бездротовий принт-сервер (OpenWrt)</span>
-                        <span class="eng">01. Wireless Print Server (OpenWrt)</span>
+                        <span class="ukr">L0: Апаратна діагностика та Provisioning</span>
+                        <span class="eng">L0: Hardware Diagnostics & Provisioning</span>
                     </h2>
-                    <p>
-                        <span class="ukr">Інструкція з перетворення звичайного USB-принтера на мережевий пристрій за допомогою роутера.</span>
-                        <span class="eng">Instruction for converting a standard USB printer into a network device using a router.</span>
-                    </p>
+                    <p><span class="ukr">Повний алгоритм дій IT Support при надходженні проблемної робочої станції.</span></p>
+                    
                     <div class="doc-step">
-                        <h4><span class="ukr">Крок 1. Підключення та прошивка по SSH</span><span class="eng">Step 1. Connection and Flashing via SSH</span></h4>
-                        <div class="code-block"><span class="code-comment"># SSH connection to stock router</span><br>ssh root@192.168.1.1<br><span class="code-comment"># Perform sysupgrade</span></div>
+                        <h4><span class="ukr">1. Базова перевірка POST (Power-On Self-Test)</span></h4>
+                        <p><span class="ukr">Якщо ПК не стартує (немає зображення), перевіряємо Beep-коди материнської плати або POST-карту. Очищення CMOS (замикання пінів CLRTC) — перший крок при збоях налаштувань BIOS/UEFI.</span></p>
                     </div>
+                    
                     <div class="doc-step">
-                        <h4><span class="ukr">Крок 2. Налаштування мережі та пакетів</span><span class="eng">Step 2. Network and Package Configuration</span></h4>
-                        <div class="code-block">opkg update<br>opkg install kmod-usb-printer p910nd luci-app-p910nd</div>
+                        <h4><span class="ukr">2. Тестування ОЗП (RAM)</span></h4>
+                        <p><span class="ukr">При синіх екранах (BSOD) `MEMORY_MANAGEMENT`: Завантаження з USB у WinPE (Sergei Strelec) → запуск <strong>MemTest86</strong>. Тест повинен пройти мінімум 2 проходи (Passes) без жодної червоної помилки.</span></p>
+                    </div>
+
+                    <div class="doc-step">
+                        <h4><span class="ukr">3. Стрес-тест CPU та живлення</span></h4>
+                        <p><span class="ukr">Використовуємо <strong>OCCT</strong> або <strong>AIDA64 System Stability Test</strong>.</span></p>
+                        <div class="code-block">
+                            <span class="code-comment">Критерії пройденого тесту:</span><br>
+                            1. Температура CPU не перевищує 85°C (залежить від Tjunction).<br>
+                            2. Графік CPU Throttling (тротлінг) суворо 0%.<br>
+                            3. Напруга по лініях 12V, 5V, 3.3V не просідає більше ніж на 5%.
+                        </div>
                     </div>
                 </div>
 
-                <div class="doc-card">
+                <!-- Детальний конспект для L1 -->
+                <div id="doc-stage1" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
-                        <span class="ukr">02. Апаратне розгортання та Діагностика</span>
-                        <span class="eng">02. Hardware Provisioning & Diagnostics</span>
+                        <span class="ukr">L1: Робоче середовище Windows Server</span>
+                        <span class="eng">L1: Windows Server Environment</span>
                     </h2>
-                    <p><span class="ukr">Стандартний алгоритм підготовки робочих станцій (Provisioning).</span></p>
+                    <p><span class="ukr">Конспект з налаштування доменної інфраструктури та базової автоматизації.</span></p>
+                    
                     <div class="doc-step">
-                        <h4><span class="ukr">Стрес-тести та діагностика</span><span class="eng">Stress tests and diagnostics</span></h4>
-                        <p><span class="ukr">Завантажте систему з <strong>WinPE (Sergei Strelec)</strong>. Запустіть <code>MemTest86</code> для ОЗП та <code>AIDA64 / OCCT</code> для стрес-тесту CPU.</span></p>
+                        <h4><span class="ukr">1. Ієрархія Active Directory (OU Design)</span></h4>
+                        <p><span class="ukr">Ніколи не звалюйте всіх користувачів у контейнер `Users`. Створюйте Organizational Units (OU) за відділами (напр. `OU=Sales, DC=enterprise, DC=com`). Це дозволяє делегувати права (Delegation of Control) та прив'язувати різні GPO.</span></p>
+                    </div>
+
+                    <div class="doc-step">
+                        <h4><span class="ukr">2. Права NTFS vs Share Permissions</span></h4>
+                        <p><span class="ukr">Правило: Share Permissions завжди ставимо "Everyone -> Full Control". Увесь реальний захист та обмеження налаштовуються виключно на вкладці <strong>Security (NTFS)</strong>. Забороняюче правило (Deny) завжди має вищий пріоритет.</span></p>
+                    </div>
+
+                    <div class="doc-step">
+                        <h4><span class="ukr">3. PowerShell: Корисні сніпети</span></h4>
+                        <div class="code-block">
+                            <span class="code-comment"># Знайти процеси, які споживають більше 500МБ ОЗП, та вбити їх</span><br>
+                            Get-Process | Where-Object {$_.WorkingSet -gt 500MB} | Stop-Process -Force<br><br>
+                            <span class="code-comment"># Масове створення користувачів AD з CSV файлу</span><br>
+                            Import-Csv -Path "C:\users.csv" | ForEach-Object {<br>
+                            &nbsp;&nbsp;New-ADUser -Name $_.Name -SamAccountName $_.Username -Path "OU=Users,DC=domain,DC=local"<br>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
+                <!-- Детальний конспект для L2 -->
+                <div id="doc-stage2" class="doc-card" style="transition: all 0.5s ease;">
+                    <h2>
+                        <span class="ukr">L2: Архітектура Linux систем</span>
+                        <span class="eng">L2: Linux Systems Architecture</span>
+                    </h2>
+                    <p><span class="ukr">Ключові команди та налаштування безпеки для серверів на базі Debian/Arch.</span></p>
+
+                    <div class="doc-step">
+                        <h4><span class="ukr">1. Безпека SSH (Hardening)</span></h4>
+                        <p><span class="ukr">Файл конфігурації: <code>/etc/ssh/sshd_config</code>. Після зміни завжди <code>systemctl restart sshd</code>.</span></p>
+                        <div class="code-block">
+                            <span class="code-comment"># Базові правила безпеки</span><br>
+                            PermitRootLogin no        <span class="code-comment"># Заборонити прямий вхід під root</span><br>
+                            PasswordAuthentication no <span class="code-comment"># Вхід виключно по RSA/Ed25519 ключах</span><br>
+                            Port 2202                 <span class="code-comment"># Змінити стандартний порт для відсікання базових сканерів</span>
+                        </div>
+                    </div>
+
+                    <div class="doc-step">
+                        <h4><span class="ukr">2. Управління логічними томами (LVM)</span></h4>
+                        <p><span class="ukr">Алгоритм розширення диска без перезавантаження:</span></p>
+                        <div class="code-block">
+                            1. pvcreate /dev/sdb1               <span class="code-comment"># Створити фізичний том</span><br>
+                            2. vgextend vg_main /dev/sdb1       <span class="code-comment"># Додати до групи томів</span><br>
+                            3. lvextend -l +100%FREE /dev/vg_main/lv_root <span class="code-comment"># Розширити логічний том</span><br>
+                            4. resize2fs /dev/vg_main/lv_root   <span class="code-comment"># Розширити файлову систему (ext4)</span>
+                        </div>
+                    </div>
+                </div>
 
     <!-- VIEW 3: ABOUT ME -->
     <div id="about" class="view-section">
@@ -557,6 +594,27 @@
 
     <!-- SCRIPTS -->
     <script>
+        function openDoc(docId) {
+            // Перемикання на вкладку документації
+            const docsTab = document.querySelectorAll('.nav-link')[1];
+            switchTab('docs', docsTab);
+            
+            // Плавний скрол до потрібного конспекту після анімації
+            setTimeout(() => {
+                const element = document.getElementById(docId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Підсвічування обраного блоку
+                    element.style.borderColor = 'var(--accent)';
+                    element.style.boxShadow = '0 0 30px var(--accent-glow)';
+                    setTimeout(() => {
+                        element.style.borderColor = 'var(--box-border)';
+                        element.style.boxShadow = 'none';
+                    }, 2000);
+                }
+            }, 400);
+        }
+
         function switchTab(tabId, element) {
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             element.classList.add('active');
