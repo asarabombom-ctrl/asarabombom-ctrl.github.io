@@ -1,11 +1,9 @@
 {
-  "stage0_title": "Hardware & Diagnostics",
-  "stage0_desc": "Розуміння CPU, RAM...",
-  "stage0_image": "https://images.unsplash.com/...",
-  
+  "stage0_title": "Hardware & Diagnostic",
+  "stage0_desc": "Розуміння CPU, RAM... 6767676767",
+  "stage0_image": "https://picsum.photos/id/48/1920/1280.webp",
   "stage1_title": "Windows OS & PowerShell",
   "stage1_image": "https://images.unsplash.com/...",
-  
   "about_name": "Сергій Балакан",
   "about_bio": "Привіт! Мені 19 років..."
 }
