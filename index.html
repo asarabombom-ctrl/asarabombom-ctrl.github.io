@@ -311,140 +311,130 @@
                     <div class="timeline-image"><img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1000&q=80" alt="Linux"></div>
                 </div>
 
-                <!-- STAGE 3: Networking -->
+                <!-- STAGE 3 -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content" onclick="openDoc('doc-stage3')">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 3 | Мережі | Networking</span>
-                                <span class="eng">Stage 3 | Network Infrastructure</span>
+                                <span class="ukr">L3 | Network Engineer</span>
+                                <span class="eng">L3 | Network Engineer</span>
                             </span>
                             <h3>
                                 <span class="ukr">Мережева Інфраструктура</span>
                                 <span class="eng">Network Infrastructure</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>OSI & TCP/IP</span><span>VLAN (802.1Q)</span><span>Routing</span><span>MikroTik</span><span>Wireshark</span>
+                                <span>OSI & TCP/IP</span><span>VLAN (802.1Q)</span><span>Routing</span><span>MikroTik</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Фундамент:</strong> Модель OSI, стек TCP/IP, розуміння MAC, ARP, IPv4/IPv6, обчислення масок підмереж (CIDR).</span><span class="eng"><strong>Foundation:</strong> OSI model, TCP/IP, ARP, IPv4/IPv6, subnetting (CIDR).</span></li>
-                                <li><span class="ukr"><strong>Комутація & Маршрутизація:</strong> Налаштування VLAN (trunk/access порти), статична маршрутизація, NAT, PAT.</span><span class="eng"><strong>Switching & Routing:</strong> VLAN tagging, static routing, NAT, PAT.</span></li>
-                                <li><span class="ukr"><strong>Базові сервіси:</strong> Розгортання та траблшутинг DHCP (scopes, reservations), DNS (A, CNAME, TXT, MX записи).</span><span class="eng"><strong>Core Services:</strong> Deploying and troubleshooting DHCP and DNS records.</span></li>
-                                <li><span class="ukr"><strong>Обладнання:</strong> Практика роботи з MikroTik (RouterOS, WinBox), Cisco Packet Tracer, налаштування OpenWrt.</span><span class="eng"><strong>Hardware:</strong> MikroTik (RouterOS), Cisco Packet Tracer, OpenWrt configuration.</span></li>
+                                <li><span class="ukr"><strong>Фундамент:</strong> Модель OSI, стек TCP/IP, ARP, маски підмереж (CIDR).</span><span class="eng"><strong>Foundation:</strong> OSI model, TCP/IP, ARP, subnetting (CIDR).</span></li>
+                                <li><span class="ukr"><strong>Комутація & Маршрутизація:</strong> VLAN, статична маршрутизація, NAT, PAT.</span><span class="eng"><strong>Switching & Routing:</strong> VLAN tagging, static routing, NAT, PAT.</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-image"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" alt="Networking"></div>
                 </div>
 
-                <!-- STAGE 4: Virtualization & Docker -->
+                <!-- STAGE 4 -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content" onclick="openDoc('doc-stage4')">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 4 | Віртуалізація | Контейнери</span>
-                                <span class="eng">Stage 4 | Virtualization & Containers</span>
+                                <span class="ukr">L4 | DevOps Foundation</span>
+                                <span class="eng">L4 | DevOps Foundation</span>
                             </span>
                             <h3>
-                                <span class="ukr">Proxmox & Docker</span>
-                                <span class="eng">Proxmox & Docker</span>
+                                <span class="ukr">Віртуалізація & Docker</span>
+                                <span class="eng">Virtualization & Docker</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Proxmox VE</span><span>Hyper-V</span><span>Docker</span><span>Docker Compose</span><span>LXC</span>
+                                <span>Proxmox</span><span>Docker</span><span>Docker Compose</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Гіпервізори (Type 1):</strong> Встановлення та налаштування Proxmox VE / ESXi. Створення кластерів, управління ресурсами (CPU, RAM).</span><span class="eng"><strong>Hypervisors:</strong> Proxmox VE / ESXi setup, cluster creation, resource allocation.</span></li>
-                                <li><span class="ukr"><strong>Сховище та Мережа ВМ:</strong> Налаштування віртуальних комутаторів (vSwitch), прокидання PCI пристроїв (Passthrough), бекапи ВМ.</span><span class="eng"><strong>VM Storage & Network:</strong> vSwitches, PCI Passthrough, VM backups.</span></li>
-                                <li><span class="ukr"><strong>Контейнеризація:</strong> Розуміння різниці між VM та Docker. Написання Dockerfile, робота з образами (pull, build, run).</span><span class="eng"><strong>Containerization:</strong> VM vs Docker, writing Dockerfiles, managing images.</span></li>
-                                <li><span class="ukr"><strong>Docker Compose:</strong> Декларативний запуск мульти-контейнерних додатків, прокидання портів, створення Docker Volumes.</span><span class="eng"><strong>Docker Compose:</strong> Multi-container apps, port mapping, Docker Volumes.</span></li>
+                                <li><span class="ukr"><strong>Гіпервізори:</strong> Proxmox VE, кластери, прокидання PCI.</span><span class="eng"><strong>Hypervisors:</strong> Proxmox VE, cluster creation, PCI passthrough.</span></li>
+                                <li><span class="ukr"><strong>Контейнери:</strong> Dockerfile, Volumes, декларативний запуск через Compose.</span><span class="eng"><strong>Containers:</strong> Dockerfile, Volumes, Docker Compose.</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-image"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80" alt="Server Rack"></div>
                 </div>
 
-                <!-- STAGE 5: Monitoring -->
+                <!-- STAGE 5 -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content" onclick="openDoc('doc-stage5')">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 5 | Моніторинг | Monitoring</span>
-                                <span class="eng">Stage 5 | Monitoring & Logging</span>
+                                <span class="ukr">L5 | NOC Engineer</span>
+                                <span class="eng">L5 | NOC Engineer</span>
                             </span>
                             <h3>
                                 <span class="ukr">Моніторинг Інфраструктури</span>
                                 <span class="eng">Infrastructure Monitoring</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Zabbix</span><span>Prometheus</span><span>Grafana</span><span>SNMP</span><span>Syslog</span>
+                                <span>Zabbix</span><span>Grafana</span><span>SNMP</span><span>Syslog</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Zabbix:</strong> Встановлення сервера, розгортання Zabbix Agents на Linux/Windows, налаштування тригерів та шаблонів.</span><span class="eng"><strong>Zabbix:</strong> Server setup, Agent deployment, configuring triggers and templates.</span></li>
-                                <li><span class="ukr"><strong>Мережевий моніторинг:</strong> Використання протоколу SNMP (v2c/v3) для збору метрик з роутерів та свічів.</span><span class="eng"><strong>Network Monitoring:</strong> Using SNMP (v2c/v3) for router/switch metrics.</span></li>
-                                <li><span class="ukr"><strong>Візуалізація:</strong> Інтеграція джерел даних з Grafana, створення красивих та інформативних дашбордів.</span><span class="eng"><strong>Visualization:</strong> Data source integration with Grafana, building dashboards.</span></li>
-                                <li><span class="ukr"><strong>Логування:</strong> Централізований збір логів (Syslog, Graylog або ELK стек), налаштування сповіщень у Telegram/Email.</span><span class="eng"><strong>Logging:</strong> Centralized log collection (Syslog, Graylog), Telegram alerts.</span></li>
+                                <li><span class="ukr"><strong>Метрики:</strong> Zabbix Agents, SNMP (v2c/v3) для свічів.</span><span class="eng"><strong>Metrics:</strong> Zabbix Agents, SNMP for switches.</span></li>
+                                <li><span class="ukr"><strong>Візуалізація & Логи:</strong> Дашборди Grafana, централізований Syslog.</span><span class="eng"><strong>Visualization:</strong> Grafana dashboards, centralized Syslog.</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-image"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Monitoring Data"></div>
                 </div>
 
-                <!-- STAGE 6: Automation -->
+                <!-- STAGE 6 -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content" onclick="openDoc('doc-stage6')">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 6 | Автоматизація | Scripting</span>
-                                <span class="eng">Stage 6 | Automation & Scripting</span>
+                                <span class="ukr">L6 | Automation Engineer</span>
+                                <span class="eng">L6 | Automation Engineer</span>
                             </span>
                             <h3>
                                 <span class="ukr">Ansible, Bash & Python</span>
                                 <span class="eng">Ansible, Bash & Python</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Ansible</span><span>Python</span><span>aiogram</span><span>Bash</span><span>Git</span>
+                                <span>Ansible</span><span>Python</span><span>Bash</span><span>Git</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Bash Scripting:</strong> Написання скриптів для бекапів (tar, rsync, cron), парсинг логів через grep/awk.</span><span class="eng"><strong>Bash Scripting:</strong> Backup scripts (tar, rsync, cron), log parsing.</span></li>
-                                <li><span class="ukr"><strong>Python для SysAdmin:</strong> Автоматизація рутини, взаємодія з API (requests). Розробка Telegram-ботів (aiogram) для управління сервером.</span><span class="eng"><strong>Python:</strong> Routine automation, API interaction, Telegram bot (aiogram) development.</span></li>
-                                <li><span class="ukr"><strong>Ansible:</strong> Написання Playbooks (YAML), управління інвентарем, масове розгортання конфігурацій на десятки серверів (IaC).</span><span class="eng"><strong>Ansible:</strong> Writing Playbooks, inventory management, mass configuration deployment.</span></li>
-                                <li><span class="ukr"><strong>Системи контролю версій:</strong> Використання Git (commit, push, pull, гілки) для збереження своїх скриптів та конфігів на GitHub/GitLab.</span><span class="eng"><strong>Version Control:</strong> Using Git to store scripts and configs on GitHub.</span></li>
+                                <li><span class="ukr"><strong>Скрипти:</strong> Бекапи (rsync, cron), парсинг логів, Telegram боти.</span><span class="eng"><strong>Scripts:</strong> Backups (rsync, cron), log parsing, Telegram bots.</span></li>
+                                <li><span class="ukr"><strong>IaC & Git:</strong> Написання Playbooks (Ansible) та контроль версій.</span><span class="eng"><strong>IaC & Git:</strong> Ansible Playbooks and version control.</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-image"><img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=1000&q=80" alt="Code Automation"></div>
                 </div>
 
-                <!-- STAGE 7: Security -->
+                <!-- STAGE 7 -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
-                    <div class="timeline-content">
+                    <div class="timeline-content" onclick="openDoc('doc-stage7')">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 7 | Безпека | Cybersecurity</span>
-                                <span class="eng">Stage 7 | Cybersecurity & Hardening</span>
+                                <span class="ukr">L7 | CyberSec Analyst</span>
+                                <span class="eng">L7 | CyberSec Analyst</span>
                             </span>
                             <h3>
-                                <span class="ukr">Інформаційна Безпека (125)</span>
-                                <span class="eng">Cybersecurity (125)</span>
+                                <span class="ukr">Інформаційна Безпека</span>
+                                <span class="eng">Cybersecurity</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Firewall</span><span>VPN</span><span>Fail2ban</span><span>IDS/IPS</span><span>Audits</span>
+                                <span>Firewall</span><span>VPN</span><span>Fail2ban</span><span>Nmap</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Firewalls (Міжмережеві екрани):</strong> Глибоке налаштування iptables/nftables, UFW у Linux. Правила фільтрації в MikroTik.</span><span class="eng"><strong>Firewalls:</strong> iptables/nftables, UFW in Linux, MikroTik filtering rules.</span></li>
-                                <li><span class="ukr"><strong>Захист периметра:</strong> Встановлення та налаштування Fail2ban для захисту від брутфорс-атак, обмеження швидкості запитів (Rate Limiting).</span><span class="eng"><strong>Perimeter Defense:</strong> Fail2ban against bruteforce, rate limiting.</span></li>
-                                <li><span class="ukr"><strong>VPN Тунелі:</strong> Розгортання захищених мереж за допомогою OpenVPN та WireGuard. Site-to-Site та Client-to-Site з'єднання.</span><span class="eng"><strong>VPN Tunnels:</strong> OpenVPN & WireGuard deployment (Site-to-Site, Client-to-Site).</span></li>
-                                <li><span class="ukr"><strong>Аудит та Сканування:</strong> Використання Nmap для сканування портів мережі, пошук вразливостей, принцип найменших привілеїв (PoLP).</span><span class="eng"><strong>Auditing:</strong> Port scanning with Nmap, vulnerability search, Principle of Least Privilege.</span></li>
+                                <li><span class="ukr"><strong>Захист периметра:</strong> iptables/UFW, Fail2ban, Rate Limiting.</span><span class="eng"><strong>Perimeter Defense:</strong> iptables/UFW, Fail2ban, Rate Limiting.</span></li>
+                                <li><span class="ukr"><strong>Тунелі & Аудит:</strong> OpenVPN/WireGuard, Nmap сканування.</span><span class="eng"><strong>Tunnels & Audit:</strong> OpenVPN/WireGuard, Nmap scanning.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -455,24 +445,37 @@
         </div>
     </div>
 
-    <!-- Детальний конспект для L0 -->
+    <!-- VIEW 2: SOP DOCUMENTATION -->
+    <div id="docs" class="view-section">
+        <div class="container">
+            <header class="header">
+                <h1>
+                    <span class="ukr">TECHNICAL GUIDES (SOP)</span>
+                    <span class="eng">TECHNICAL GUIDES (SOP)</span>
+                </h1>
+                <p>
+                    <span class="ukr">База знань: покрокові інструкції з налаштування обладнання, мереж та автоматизації.</span>
+                    <span class="eng">Knowledge base: step-by-step instructions for hardware, networks, and automation.</span>
+                </p>
+            </header>
+
+            <div class="doc-grid">
+                
+                <!-- L0 -->
                 <div id="doc-stage0" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
                         <span class="ukr">L0: Апаратна діагностика та Provisioning</span>
                         <span class="eng">L0: Hardware Diagnostics & Provisioning</span>
                     </h2>
                     <p><span class="ukr">Повний алгоритм дій IT Support при надходженні проблемної робочої станції.</span></p>
-                    
                     <div class="doc-step">
                         <h4><span class="ukr">1. Базова перевірка POST (Power-On Self-Test)</span></h4>
                         <p><span class="ukr">Якщо ПК не стартує (немає зображення), перевіряємо Beep-коди материнської плати або POST-карту. Очищення CMOS (замикання пінів CLRTC) — перший крок при збоях налаштувань BIOS/UEFI.</span></p>
                     </div>
-                    
                     <div class="doc-step">
                         <h4><span class="ukr">2. Тестування ОЗП (RAM)</span></h4>
-                        <p><span class="ukr">При синіх екранах (BSOD) `MEMORY_MANAGEMENT`: Завантаження з USB у WinPE (Sergei Strelec) → запуск <strong>MemTest86</strong>. Тест повинен пройти мінімум 2 проходи (Passes) без жодної червоної помилки.</span></p>
+                        <p><span class="ukr">При синіх екранах (BSOD) `MEMORY_MANAGEMENT`: Завантаження з USB у WinPE → запуск <strong>MemTest86</strong>. Тест повинен пройти мінімум 2 проходи (Passes) без жодної червоної помилки.</span></p>
                     </div>
-
                     <div class="doc-step">
                         <h4><span class="ukr">3. Стрес-тест CPU та живлення</span></h4>
                         <p><span class="ukr">Використовуємо <strong>OCCT</strong> або <strong>AIDA64 System Stability Test</strong>.</span></p>
@@ -485,24 +488,21 @@
                     </div>
                 </div>
 
-                <!-- Детальний конспект для L1 -->
+                <!-- L1 -->
                 <div id="doc-stage1" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
                         <span class="ukr">L1: Робоче середовище Windows Server</span>
                         <span class="eng">L1: Windows Server Environment</span>
                     </h2>
                     <p><span class="ukr">Конспект з налаштування доменної інфраструктури та базової автоматизації.</span></p>
-                    
                     <div class="doc-step">
                         <h4><span class="ukr">1. Ієрархія Active Directory (OU Design)</span></h4>
                         <p><span class="ukr">Ніколи не звалюйте всіх користувачів у контейнер `Users`. Створюйте Organizational Units (OU) за відділами (напр. `OU=Sales, DC=enterprise, DC=com`). Це дозволяє делегувати права (Delegation of Control) та прив'язувати різні GPO.</span></p>
                     </div>
-
                     <div class="doc-step">
                         <h4><span class="ukr">2. Права NTFS vs Share Permissions</span></h4>
                         <p><span class="ukr">Правило: Share Permissions завжди ставимо "Everyone -> Full Control". Увесь реальний захист та обмеження налаштовуються виключно на вкладці <strong>Security (NTFS)</strong>. Забороняюче правило (Deny) завжди має вищий пріоритет.</span></p>
                     </div>
-
                     <div class="doc-step">
                         <h4><span class="ukr">3. PowerShell: Корисні сніпети</span></h4>
                         <div class="code-block">
@@ -516,14 +516,13 @@
                     </div>
                 </div>
 
-                <!-- Детальний конспект для L2 -->
+                <!-- L2 -->
                 <div id="doc-stage2" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
                         <span class="ukr">L2: Архітектура Linux систем</span>
                         <span class="eng">L2: Linux Systems Architecture</span>
                     </h2>
                     <p><span class="ukr">Ключові команди та налаштування безпеки для серверів на базі Debian/Arch.</span></p>
-
                     <div class="doc-step">
                         <h4><span class="ukr">1. Безпека SSH (Hardening)</span></h4>
                         <p><span class="ukr">Файл конфігурації: <code>/etc/ssh/sshd_config</code>. Після зміни завжди <code>systemctl restart sshd</code>.</span></p>
@@ -534,7 +533,6 @@
                             Port 2202                 <span class="code-comment"># Змінити стандартний порт для відсікання базових сканерів</span>
                         </div>
                     </div>
-
                     <div class="doc-step">
                         <h4><span class="ukr">2. Управління логічними томами (LVM)</span></h4>
                         <p><span class="ukr">Алгоритм розширення диска без перезавантаження:</span></p>
@@ -546,6 +544,146 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- L3 -->
+                <div id="doc-stage3" class="doc-card" style="transition: all 0.5s ease;">
+                    <h2>
+                        <span class="ukr">L3: Мережева Інфраструктура (MikroTik)</span>
+                        <span class="eng">L3: Network Infrastructure (MikroTik)</span>
+                    </h2>
+                    <p><span class="ukr">Конспект з налаштування маршрутизації, VLAN та NAT.</span></p>
+                    <div class="doc-step">
+                        <h4><span class="ukr">1. Базовий NAT (Маскарадинг)</span></h4>
+                        <p><span class="ukr">Щоб локальна мережа отримала доступ до інтернету, потрібно налаштувати правило srcnat.</span></p>
+                        <div class="code-block">
+                            <span class="code-comment"># RouterOS CLI: Налаштування NAT для виходу в інтернет через ether1</span><br>
+                            /ip firewall nat add chain=srcnat out-interface=ether1 action=masquerade
+                        </div>
+                    </div>
+                    <div class="doc-step">
+                        <h4><span class="ukr">2. Ізоляція мереж через VLAN (802.1Q)</span></h4>
+                        <p><span class="ukr">Створюємо VLAN для гостьової мережі, щоб відокремити її від корпоративної (Trunk порт на ether2).</span></p>
+                        <div class="code-block">
+                            /interface vlan add name=VLAN20_Guest vlan-id=20 interface=ether2<br>
+                            /ip address add address=192.168.20.1/24 interface=VLAN20_Guest<br>
+                            /ip dhcp-server setup <span class="code-comment"># Далі слідувати майстру налаштування для VLAN20</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L4 -->
+                <div id="doc-stage4" class="doc-card" style="transition: all 0.5s ease;">
+                    <h2>
+                        <span class="ukr">L4: Віртуалізація та Docker</span>
+                        <span class="eng">L4: Virtualization & Docker</span>
+                    </h2>
+                    <p><span class="ukr">Декларативне розгортання сервісів за допомогою Docker Compose.</span></p>
+                    <div class="doc-step">
+                        <h4><span class="ukr">1. Типовий docker-compose.yml (Nginx + PHP)</span></h4>
+                        <p><span class="ukr">Приклад конфігурації для підняття веб-стеку з прокиданням портів та постійним сховищем (Volumes).</span></p>
+                        <div class="code-block">
+                            version: '3.8'<br>
+                            services:<br>
+                            &nbsp;&nbsp;web:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;image: nginx:alpine<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;ports:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "80:80"<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ./html:/usr/share/nginx/html<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;restart: always
+                        </div>
+                    </div>
+                    <div class="doc-step">
+                        <h4><span class="ukr">2. Очищення системи Docker</span></h4>
+                        <p><span class="ukr">Команди для звільнення місця від старих образів та зупинених контейнерів.</span></p>
+                        <div class="code-block">
+                            docker system prune -a --volumes <span class="code-comment"># Видаляє ВСІ невикористані дані</span><br>
+                            docker stop $(docker ps -aq)     <span class="code-comment"># Зупинити всі поточні контейнери</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L5 -->
+                <div id="doc-stage5" class="doc-card" style="transition: all 0.5s ease;">
+                    <h2>
+                        <span class="ukr">L5: Моніторинг (Zabbix)</span>
+                        <span class="eng">L5: Monitoring (Zabbix)</span>
+                    </h2>
+                    <p><span class="ukr">Інструкція з підключення вузлів до системи централізованого моніторингу.</span></p>
+                    <div class="doc-step">
+                        <h4><span class="ukr">1. Налаштування Zabbix Agent (Linux)</span></h4>
+                        <p><span class="ukr">Файл конфігурації <code>/etc/zabbix/zabbix_agentd.conf</code>.</span></p>
+                        <div class="code-block">
+                            <span class="code-comment"># Вказуємо IP адресу нашого Zabbix Сервера</span><br>
+                            Server=192.168.1.100<br>
+                            ServerActive=192.168.1.100<br>
+                            Hostname=Linux-Web-01 <span class="code-comment"># Має точно співпадати з іменем у веб-інтерфейсі</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L6 -->
+                <div id="doc-stage6" class="doc-card" style="transition: all 0.5s ease;">
+                    <h2>
+                        <span class="ukr">L6: Автоматизація (Bash Scripting)</span>
+                        <span class="eng">L6: Automation (Bash Scripting)</span>
+                    </h2>
+                    <p><span class="ukr">Написання скриптів для резервного копіювання за розкладом.</span></p>
+                    <div class="doc-step">
+                        <h4><span class="ukr">1. Скрипт бекапу директорії (rsync)</span></h4>
+                        <div class="code-block">
+                            #!/bin/bash<br>
+                            SOURCE="/var/www/html"<br>
+                            DEST="/mnt/backup/web_$(date +%F)"<br>
+                            <br>
+                            <span class="code-comment"># Синхронізація з видаленням файлів, яких вже немає в джерелі</span><br>
+                            rsync -av --delete $SOURCE $DEST<br>
+                            echo "Backup completed on $(date)" >> /var/log/backup.log
+                        </div>
+                    </div>
+                    <div class="doc-step">
+                        <h4><span class="ukr">2. Додавання в Cron</span></h4>
+                        <p><span class="ukr">Виконуємо <code>crontab -e</code> та додаємо завдання для запуску о 02:00 ночі щодня.</span></p>
+                        <div class="code-block">
+                            0 2 * * * /opt/scripts/backup.sh
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L7 -->
+                <div id="doc-stage7" class="doc-card" style="transition: all 0.5s ease;">
+                    <h2>
+                        <span class="ukr">L7: Кібербезпека (Hardening)</span>
+                        <span class="eng">L7: Cybersecurity (Hardening)</span>
+                    </h2>
+                    <p><span class="ukr">Базовий захист сервера від мережевих атак.</span></p>
+                    <div class="doc-step">
+                        <h4><span class="ukr">1. Налаштування UFW (Uncomplicated Firewall)</span></h4>
+                        <p><span class="ukr">Політика "Заборонити все, дозволити лише потрібне" (Default Deny).</span></p>
+                        <div class="code-block">
+                            ufw default deny incoming<br>
+                            ufw default allow outgoing<br>
+                            ufw allow 2202/tcp <span class="code-comment"># Дозвіл для нестандартного порту SSH</span><br>
+                            ufw allow 80,443/tcp <span class="code-comment"># Дозвіл для веб-трафіку</span><br>
+                            ufw enable
+                        </div>
+                    </div>
+                    <div class="doc-step">
+                        <h4><span class="ukr">2. Захист від Bruteforce (Fail2ban)</span></h4>
+                        <p><span class="ukr">Створюємо локальний конфіг <code>/etc/fail2ban/jail.local</code> для блокування IP після 3 невдалих спроб входу.</span></p>
+                        <div class="code-block">
+                            [sshd]<br>
+                            enabled = true<br>
+                            port = 2202<br>
+                            maxretry = 3<br>
+                            bantime = 3600 <span class="code-comment"># Блокування на 1 годину</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- VIEW 3: ABOUT ME -->
     <div id="about" class="view-section">
