@@ -8,22 +8,16 @@ public_folder: "/images"
 
 collections:
   - name: "content"
-    label: "Контент сайта"
+    label: "Контент сайту"
     files:
-      - label: "Настройки Roadmap"
-        name: "roadmap"
+      - label: "Головні дані"
+        name: "main_data"
         file: "data.json"
         format: json
         fields:
-          # То, что уже есть (Етап 0)
-          - {label: "Заголовок Етапа 0", name: "stage0_title", widget: "string"}
-          - {label: "Текст Етапа 0", name: "stage0_desc", widget: "text"}
-          - {label: "Фото Етапа 0", name: "stage0_image", widget: "image"}
-          
-          # НОВЫЕ ПОЛЯ (Етап 1)
-          - {label: "Заголовок Етапа 1", name: "stage1_title", widget: "string"}
-          - {label: "Фото Етапа 1", name: "stage1_image", widget: "image"}
-          
-          # НОВЫЕ ПОЛЯ (Про меня)
-          - {label: "Имя (Про меня)", name: "about_name", widget: "string"}
-          - {label: "Биография (Про меня)", name: "about_bio", widget: "text"}
+          - {label: "Заголовок Етапу 0", name: "stage0_title", widget: "string"}
+          - {label: "Фото Етапу 0", name: "stage0_image", widget: "image"}
+          - {label: "Заголовок Етапу 1", name: "stage1_title", widget: "string"}
+          - {label: "Фото Етапу 1", name: "stage1_image", widget: "image"}
+          - {label: "Ім'я (Про мене)", name: "about_name", widget: "string"}
+          - {label: "Текст (Про мене)", name: "about_bio", widget: "text"}
