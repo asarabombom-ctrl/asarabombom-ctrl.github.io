@@ -98,7 +98,7 @@
         .timeline-content { 
             width: 42%; background: var(--box-bg); border: 1px solid var(--box-border); border-radius: 16px; 
             transition: var(--transition-smooth); position: relative; backdrop-filter: blur(12px); z-index: 3;
-            overflow: hidden; /* For dynamic inner bg */
+            overflow: hidden; 
         }
         .timeline-step:hover .timeline-content { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px var(--accent-glow); transform: translateY(-10px); }
         
@@ -222,7 +222,7 @@
                                 <span class="ukr">Етап 0 | База ПК та заліза | 1–2 тижні</span>
                                 <span class="eng">Stage 0 | PC & Hardware Base | 1–2 weeks</span>
                             </span>
-                            <h3>
+                            <h3 id="stage0-title">
                                 <span class="ukr">Hardware & Diagnostics</span>
                                 <span class="eng">Hardware & Diagnostics</span>
                             </h3>
@@ -230,23 +230,14 @@
                                 <span>SMART</span><span>UEFI</span><span>RAM</span><span>PCIe</span>
                             </div>
                             <ul>
-                                <li>
-                                    <span class="ukr"><strong>Архітектура ПК:</strong> Розуміння CPU (ядра, кеш), RAM (DDR4/DDR5, dual-channel), та діагностика пам'яті.</span>
-                                    <span class="eng"><strong>PC Architecture:</strong> Understanding CPU (cores, cache), RAM (DDR4/DDR5, dual-channel), and memory diagnostics.</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Системи зберігання:</strong> HDD, SATA SSD, NVMe, перевірка SMART, розділи та файлові системи.</span>
-                                    <span class="eng"><strong>Storage Systems:</strong> HDD, SATA SSD, NVMe, SMART checks, partitions, and file systems.</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Конфігурація:</strong> UEFI/BIOS, налаштування Boot Order, Secure Boot, та базове обладнання.</span>
-                                    <span class="eng"><strong>Configuration:</strong> UEFI/BIOS, Boot Order configuration, Secure Boot, and basic hardware.</span>
-                                </li>
+                                <li><span class="ukr"><strong>Архітектура ПК:</strong> Розуміння CPU (ядра, кеш), RAM (DDR4/DDR5, dual-channel), та діагностика пам'яті.</span><span class="eng"><strong>PC Architecture:</strong> Understanding CPU (cores, cache), RAM (DDR4/DDR5, dual-channel), and memory diagnostics.</span></li>
+                                <li><span class="ukr"><strong>Системи зберігання:</strong> HDD, SATA SSD, NVMe, перевірка SMART, розділи та файлові системи.</span><span class="eng"><strong>Storage Systems:</strong> HDD, SATA SSD, NVMe, SMART checks, partitions, and file systems.</span></li>
+                                <li><span class="ukr"><strong>Конфігурація:</strong> UEFI/BIOS, налаштування Boot Order, Secure Boot, та базове обладнання.</span><span class="eng"><strong>Configuration:</strong> UEFI/BIOS, Boot Order configuration, Secure Boot, and basic hardware.</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-image">
-                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80" alt="Hardware">
+                        <img id="stage0-img" src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80" alt="Hardware">
                     </div>
                 </div>
 
@@ -261,7 +252,7 @@
                                 <span class="ukr">Етап 1 | Windows | 3–4 тижні</span>
                                 <span class="eng">Stage 1 | Windows | 3–4 weeks</span>
                             </span>
-                            <h3>
+                            <h3 id="stage1-title">
                                 <span class="ukr">Windows OS & PowerShell</span>
                                 <span class="eng">Windows OS & PowerShell</span>
                             </h3>
@@ -269,23 +260,14 @@
                                 <span>NTFS</span><span>RDP</span><span>Registry</span><span>PowerShell</span>
                             </div>
                             <ul>
-                                <li>
-                                    <span class="ukr"><strong>Адміністрування ОС:</strong> Device Manager, Event Viewer, Services, Task Manager.</span>
-                                    <span class="eng"><strong>OS Administration:</strong> Device Manager, Event Viewer, Services, Task Manager.</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Управління доступом:</strong> Права NTFS, Share Permissions, локальні користувачі та групи.</span>
-                                    <span class="eng"><strong>Access Management:</strong> NTFS rights, Share Permissions, local users, and groups.</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>PowerShell:</strong> Get-Help, Get-Process, Get-WmiObject, фільтрація, експорт у CSV/JSON.</span>
-                                    <span class="eng"><strong>PowerShell:</strong> Get-Help, Get-Process, Get-WmiObject, filtering, export to CSV/JSON.</span>
-                                </li>
+                                <li><span class="ukr"><strong>Адміністрування ОС:</strong> Device Manager, Event Viewer, Services, Task Manager.</span><span class="eng"><strong>OS Administration:</strong> Device Manager, Event Viewer, Services, Task Manager.</span></li>
+                                <li><span class="ukr"><strong>Управління доступом:</strong> Права NTFS, Share Permissions, локальні користувачі та групи.</span><span class="eng"><strong>Access Management:</strong> NTFS rights, Share Permissions, local users, and groups.</span></li>
+                                <li><span class="ukr"><strong>PowerShell:</strong> Get-Help, Get-Process, Get-WmiObject, фільтрація, експорт у CSV/JSON.</span><span class="eng"><strong>PowerShell:</strong> Get-Help, Get-Process, Get-WmiObject, filtering, export to CSV/JSON.</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-image">
-                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80" alt="Windows">
+                        <img id="stage1-img" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80" alt="Windows">
                     </div>
                 </div>
 
@@ -308,18 +290,9 @@
                                 <span>Debian</span><span>systemd</span><span>SSH</span><span>NetworkManager</span>
                             </div>
                             <ul>
-                                <li>
-                                    <span class="ukr"><strong>Основи:</strong> Файлова система (/etc, /var), команди (ls, grep, awk), права (chmod, chown).</span>
-                                    <span class="eng"><strong>Basics:</strong> File system (/etc, /var), commands (ls, grep, awk), permissions (chmod, chown).</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Системне управління:</strong> Робота з процесами, systemd (systemctl, journalctl), пакети (apt).</span>
-                                    <span class="eng"><strong>System Management:</strong> Process management, systemd (systemctl, journalctl), packages (apt).</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Мережа:</strong> Налаштування через ip addr, ping, tcpdump, NetworkManager, DNS (resolvectl/dig).</span>
-                                    <span class="eng"><strong>Networking:</strong> Configuration via ip addr, ping, tcpdump, NetworkManager, DNS (resolvectl).</span>
-                                </li>
+                                <li><span class="ukr"><strong>Основи:</strong> Файлова система (/etc, /var), команди (ls, grep, awk), права (chmod, chown).</span><span class="eng"><strong>Basics:</strong> File system (/etc, /var), commands (ls, grep, awk), permissions (chmod, chown).</span></li>
+                                <li><span class="ukr"><strong>Системне управління:</strong> Робота з процесами, systemd (systemctl, journalctl), пакети (apt).</span><span class="eng"><strong>System Management:</strong> Process management, systemd (systemctl, journalctl), packages (apt).</span></li>
+                                <li><span class="ukr"><strong>Мережа:</strong> Налаштування через ip addr, ping, tcpdump, NetworkManager, DNS (resolvectl/dig).</span><span class="eng"><strong>Networking:</strong> Configuration via ip addr, ping, tcpdump, NetworkManager, DNS (resolvectl).</span></li>
                             </ul>
                         </div>
                     </div>
@@ -347,18 +320,9 @@
                                 <span>TCP/IP</span><span>VLAN</span><span>NAT</span><span>Wireshark</span>
                             </div>
                             <ul>
-                                <li>
-                                    <span class="ukr"><strong>Теорія мереж:</strong> OSI, TCP/IP, MAC, ARP, IPv4/IPv6, Subnetting/CIDR, Default Gateway.</span>
-                                    <span class="eng"><strong>Network Theory:</strong> OSI, TCP/IP, MAC, ARP, IPv4/IPv6, Subnetting/CIDR, Default Gateway.</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Технології:</strong> DNS, DHCP, NAT, Routing, VLAN, Firewall, VPN (WireGuard).</span>
-                                    <span class="eng"><strong>Technologies:</strong> DNS, DHCP, NAT, Routing, VLAN, Firewall, VPN (WireGuard).</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Діагностика:</strong> traceroute, ip/route, nmap, Wireshark, MikroTik WinBox/CLI.</span>
-                                    <span class="eng"><strong>Diagnostics:</strong> traceroute, ip/route, nmap, Wireshark, MikroTik WinBox/CLI.</span>
-                                </li>
+                                <li><span class="ukr"><strong>Теорія мереж:</strong> OSI, TCP/IP, MAC, ARP, IPv4/IPv6, Subnetting/CIDR, Default Gateway.</span><span class="eng"><strong>Network Theory:</strong> OSI, TCP/IP, MAC, ARP, IPv4/IPv6, Subnetting/CIDR, Default Gateway.</span></li>
+                                <li><span class="ukr"><strong>Технології:</strong> DNS, DHCP, NAT, Routing, VLAN, Firewall, VPN (WireGuard).</span><span class="eng"><strong>Technologies:</strong> DNS, DHCP, NAT, Routing, VLAN, Firewall, VPN (WireGuard).</span></li>
+                                <li><span class="ukr"><strong>Діагностика:</strong> traceroute, ip/route, nmap, Wireshark, MikroTik WinBox/CLI.</span><span class="eng"><strong>Diagnostics:</strong> traceroute, ip/route, nmap, Wireshark, MikroTik WinBox/CLI.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -386,7 +350,6 @@
 
             <div class="doc-grid">
                 
-                <!-- GUIDE 1 -->
                 <div class="doc-card">
                     <h2>
                         <span class="ukr">01. Бездротовий принт-сервер (OpenWrt)</span>
@@ -436,7 +399,6 @@
                     </div>
                 </div>
 
-                <!-- GUIDE 2 -->
                 <div class="doc-card">
                     <h2>
                         <span class="ukr">02. Апаратне розгортання та Діагностика</span>
@@ -459,7 +421,6 @@
                     </div>
                 </div>
 
-                <!-- GUIDE 3 -->
                 <div class="doc-card">
                     <h2>
                         <span class="ukr">03. Головні принципи SysAdmin</span>
@@ -496,7 +457,6 @@
         <div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
             <div class="about-wrapper">
                 <div class="profile-img-container">
-                    <!-- Заміни src на посилання на своє фото -->
                     <div class="profile-img">
                         <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: #4f46e5;">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -504,7 +464,7 @@
                         </svg>
                     </div>
                 </div>
-                <h2>
+                <h2 id="about-name">
                     <span class="ukr">Сергій Балакан</span>
                     <span class="eng">Serhii Balakan</span>
                 </h2>
@@ -513,15 +473,10 @@
                     <span class="eng">IT Support Specialist / Junior SysAdmin</span>
                 </h3>
                 
-                <div class="about-bio">
+                <div class="about-bio" id="about-bio">
                     <p>
-                        <span class="ukr">Привіт! Мені 19 років, я проживаю в місті Одеса та є студентом Львівського державного університету безпеки життєдіяльності (ЛДУБЖД) за спеціальністю <strong>125 Кібербезпека</strong>.</span>
+                        <span class="ukr">Привіт! Мені 19 років, я проживаю в місті Одеса та є студентом Львівського державного університету безпеки життєдіяльності (ЛДУБЖД) за спеціальністю <strong>125 Кібербезпека</strong>. Маю глибокий інтерес до IT-інфраструктури.</span>
                         <span class="eng">Hello! I am 19 years old, living in Odesa, and I am a cybersecurity student at LDUFZhD (Specialty 125).</span>
-                    </p>
-                    <br>
-                    <p>
-                        <span class="ukr">Маю глибокий інтерес до IT-інфраструктури: від компонентного ремонту та діагностики апаратного забезпечення до розгортання Linux-серверів, написання Bash/PowerShell скриптів для автоматизації рутини та налаштування мережевого обладнання. Також захоплююсь розробкою Telegram-ботів на Python (aiogram).</span>
-                        <span class="eng">I have a deep interest in IT infrastructure: from component repair and hardware diagnostics to deploying Linux servers, writing Bash/PowerShell scripts for automation, and configuring network equipment. I am also passionate about developing Telegram bots in Python.</span>
                     </p>
                 </div>
 
@@ -584,18 +539,26 @@
 
             document.querySelectorAll('.scroll-anim').forEach(el => observer.observe(el));
 
-            // ІНТЕГРАЦІЯ DECAP CMS: Завантаження даних із data.json
+            // INTEGRATION: Fetching data from data.json
             fetch('data.json')
               .then(response => {
                   if (!response.ok) throw new Error("Файл data.json не знайдено");
                   return response.json();
               })
               .then(data => {
-                  if (data.stage0_title) {
-                      document.querySelector('.timeline-content h3 .ukr').textContent = data.stage0_title;
-                  }
-                  if (data.stage0_image) {
-                      document.querySelector('.timeline-image img').src = data.stage0_image;
+                  // Stage 0
+                  if (data.stage0_title) document.querySelector('#stage0-title .ukr').textContent = data.stage0_title;
+                  if (data.stage0_image) document.querySelector('#stage0-img').src = data.stage0_image;
+                  
+                  // Stage 1
+                  if (data.stage1_title) document.querySelector('#stage1-title .ukr').textContent = data.stage1_title;
+                  if (data.stage1_image) document.querySelector('#stage1-img').src = data.stage1_image;
+                  
+                  // About Section
+                  if (data.about_name) document.querySelector('#about-name .ukr').textContent = data.about_name;
+                  if (data.about_bio) {
+                      const bioUkr = document.querySelector('#about-bio p .ukr');
+                      if (bioUkr) bioUkr.textContent = data.about_bio;
                   }
               })
               .catch(error => console.error('Помилка завантаження даних CMS:', error));
