@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: asarabombom-ctrl/asarabombom-ctrl.github.io
-  branch: main # Ветка, в которую будут идти коммиты
+  branch: main
 
 media_folder: "images"
 public_folder: "/images"
@@ -13,6 +13,7 @@ collections:
       - label: "Настройки Roadmap"
         name: "roadmap"
         file: "data.json"
+        format: json
         fields:
           - {label: "Заголовок Етапа 0", name: "stage0_title", widget: "string"}
           - {label: "Текст Етапа 0", name: "stage0_desc", widget: "text"}
