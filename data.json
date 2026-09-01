@@ -1,5 +1,11 @@
 {
   "stage0_title": "Hardware & Diagnostics",
-  "stage0_desc": "Розуміння CPU, RAM, та діагностика пам'яті. 67",
-  "stage0_image": "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80"
+  "stage0_desc": "Розуміння CPU, RAM...",
+  "stage0_image": "https://images.unsplash.com/...",
+  
+  "stage1_title": "Windows OS & PowerShell",
+  "stage1_image": "https://images.unsplash.com/...",
+  
+  "about_name": "Сергій Балакан",
+  "about_bio": "Привіт! Мені 19 років..."
 }
