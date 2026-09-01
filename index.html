@@ -75,24 +75,45 @@
         .header p { color: var(--text-muted); font-size: 1.15rem; max-width: 800px; margin: 0 auto; }
         .header .accent { color: var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
 
-        /* ZIGZAG ROADMAP */
-        .roadmap-container { position: relative; padding: 40px 0; }
-        .roadmap-container::before {
-            content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
-            background: linear-gradient(to bottom, var(--accent) 0%, var(--accent) 30%, var(--box-border) 60%);
-            transform: translateX(-50%); z-index: 0;
-        }
+        /* CROOKED WINDING ROADMAP */
+        .roadmap-container { position: relative; padding: 40px 0; overflow: hidden; }
+        .roadmap-container::before { display: none; } 
 
-        .timeline-step { display: flex; justify-content: space-between; align-items: center; margin-bottom: 120px; width: 100%; position: relative; opacity: 0; transform: translateY(60px); transition: var(--transition-smooth); }
+        .timeline-step { 
+            display: flex; justify-content: space-between; align-items: center; 
+            margin-bottom: 90px; width: 100%; position: relative; 
+            opacity: 0; transform: translateY(60px); transition: var(--transition-smooth); 
+        }
         .timeline-step.visible { opacity: 1; transform: translateY(0); }
+        
+        .timeline-step:nth-child(odd) { flex-direction: row; }
         .timeline-step:nth-child(even) { flex-direction: row-reverse; }
 
-        .timeline-marker { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 24px; height: 24px; border-radius: 50%; background: var(--bg-dark); border: 4px solid var(--box-border); z-index: 2; transition: 0.5s ease; }
-        .timeline-step:hover .timeline-marker { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
-        .timeline-connector { position: absolute; top: 50%; width: calc(5% + 20px); height: 2px; background: var(--box-border); z-index: 1; transition: 0.5s ease; }
-        .timeline-step:nth-child(odd) .timeline-connector { left: 45%; }
-        .timeline-step:nth-child(even) .timeline-connector { right: 45%; }
-        .timeline-step:hover .timeline-connector { background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+        /* Змійка */
+        .timeline-step::before {
+            content: ''; position: absolute; top: 50%; height: calc(100% + 90px);
+            width: 45%; border: 3px solid var(--box-border); z-index: 0;
+            transition: border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+        .timeline-step:hover::before { border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
+        
+        .timeline-step:nth-child(odd)::before {
+            left: 50%; border-left: none; border-top: none; 
+            border-bottom-right-radius: 80px; border-top-right-radius: 80px;
+        }
+        .timeline-step:nth-child(even)::before {
+            right: 50%; border-right: none; border-top: none; 
+            border-bottom-left-radius: 80px; border-top-left-radius: 80px;
+        }
+        .timeline-step:last-child::before { display: none; }
+
+        .timeline-marker { 
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); 
+            width: 24px; height: 24px; border-radius: 50%; background: var(--bg-dark); 
+            border: 4px solid var(--box-border); z-index: 2; transition: 0.5s ease; 
+        }
+        .timeline-step:hover .timeline-marker { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 20px var(--accent-glow); transform: translate(-50%, -50%) scale(1.3); }
+        .timeline-connector { display: none; }
 
         /* DYNAMIC CARD CONTENT */
         .timeline-content { 
@@ -100,7 +121,15 @@
             transition: var(--transition-smooth); position: relative; backdrop-filter: blur(12px); z-index: 3;
             overflow: hidden; 
         }
-        .timeline-step:hover .timeline-content { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px var(--accent-glow); transform: translateY(-10px); }
+        
+        /* Асиметрія */
+        .timeline-step:nth-child(odd) .timeline-content { transform: rotate(-2deg) translateY(20px); }
+        .timeline-step:nth-child(even) .timeline-content { transform: rotate(2deg) translateY(-20px); }
+        
+        .timeline-step:hover .timeline-content { 
+            border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px var(--accent-glow); 
+            transform: translateY(-10px) rotate(0deg); 
+        }
         
         .card-dynamic-bg {
             position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; z-index: 0;
@@ -159,11 +188,11 @@
         @media (max-width: 1024px) {
             .navbar { gap: 15px; padding: 0 10px; }
             .nav-link { font-size: 0.75rem; padding: 10px 8px; }
-            .roadmap-container::before { left: 30px; }
-            .timeline-connector { display: none; }
+            .roadmap-container::before { display: none; }
+            .timeline-step::before { display: none; }
             .timeline-step, .timeline-step:nth-child(even) { flex-direction: column; align-items: flex-end; margin-bottom: 80px; }
             .timeline-marker { left: 30px; top: 40px; transform: translateX(-50%); }
-            .timeline-content { width: calc(100% - 80px); margin-bottom: 20px; }
+            .timeline-content { width: calc(100% - 80px); margin-bottom: 20px; transform: none !important; }
             .timeline-image { width: calc(100% - 80px); height: 250px; }
             .doc-card, .about-wrapper { padding: 30px 20px; }
             .lang-btn { top: 75px; right: 20px; position: fixed; }
@@ -213,7 +242,6 @@
             <div class="roadmap-container">
                 <!-- STAGE 0 -->
                 <div class="timeline-step scroll-anim">
-                    <div class="timeline-connector"></div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80');"></div>
@@ -222,7 +250,7 @@
                                 <span class="ukr">Етап 0 | База ПК та заліза | 1–2 тижні</span>
                                 <span class="eng">Stage 0 | PC & Hardware Base | 1–2 weeks</span>
                             </span>
-                            <h3 id="stage0-title">
+                            <h3>
                                 <span class="ukr">Hardware & Diagnostics</span>
                                 <span class="eng">Hardware & Diagnostics</span>
                             </h3>
@@ -230,20 +258,28 @@
                                 <span>SMART</span><span>UEFI</span><span>RAM</span><span>PCIe</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Архітектура ПК:</strong> Розуміння CPU (ядра, кеш), RAM (DDR4/DDR5, dual-channel), та діагностика пам'яті.</span><span class="eng"><strong>PC Architecture:</strong> Understanding CPU (cores, cache), RAM (DDR4/DDR5, dual-channel), and memory diagnostics.</span></li>
-                                <li><span class="ukr"><strong>Системи зберігання:</strong> HDD, SATA SSD, NVMe, перевірка SMART, розділи та файлові системи.</span><span class="eng"><strong>Storage Systems:</strong> HDD, SATA SSD, NVMe, SMART checks, partitions, and file systems.</span></li>
-                                <li><span class="ukr"><strong>Конфігурація:</strong> UEFI/BIOS, налаштування Boot Order, Secure Boot, та базове обладнання.</span><span class="eng"><strong>Configuration:</strong> UEFI/BIOS, Boot Order configuration, Secure Boot, and basic hardware.</span></li>
+                                <li>
+                                    <span class="ukr"><strong>Архітектура ПК:</strong> Розуміння CPU (ядра, кеш), RAM (DDR4/DDR5, dual-channel), та діагностика пам'яті.</span>
+                                    <span class="eng"><strong>PC Architecture:</strong> Understanding CPU (cores, cache), RAM (DDR4/DDR5, dual-channel), and memory diagnostics.</span>
+                                </li>
+                                <li>
+                                    <span class="ukr"><strong>Системи зберігання:</strong> HDD, SATA SSD, NVMe, перевірка SMART, розділи та файлові системи.</span>
+                                    <span class="eng"><strong>Storage Systems:</strong> HDD, SATA SSD, NVMe, SMART checks, partitions, and file systems.</span>
+                                </li>
+                                <li>
+                                    <span class="ukr"><strong>Конфігурація:</strong> UEFI/BIOS, налаштування Boot Order, Secure Boot, та базове обладнання.</span>
+                                    <span class="eng"><strong>Configuration:</strong> UEFI/BIOS, Boot Order configuration, Secure Boot, and basic hardware.</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-image">
-                        <img id="stage0-img" src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80" alt="Hardware">
+                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80" alt="Hardware">
                     </div>
                 </div>
 
                 <!-- STAGE 1 -->
                 <div class="timeline-step scroll-anim">
-                    <div class="timeline-connector"></div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80');"></div>
@@ -252,7 +288,7 @@
                                 <span class="ukr">Етап 1 | Windows | 3–4 тижні</span>
                                 <span class="eng">Stage 1 | Windows | 3–4 weeks</span>
                             </span>
-                            <h3 id="stage1-title">
+                            <h3>
                                 <span class="ukr">Windows OS & PowerShell</span>
                                 <span class="eng">Windows OS & PowerShell</span>
                             </h3>
@@ -260,20 +296,28 @@
                                 <span>NTFS</span><span>RDP</span><span>Registry</span><span>PowerShell</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Адміністрування ОС:</strong> Device Manager, Event Viewer, Services, Task Manager.</span><span class="eng"><strong>OS Administration:</strong> Device Manager, Event Viewer, Services, Task Manager.</span></li>
-                                <li><span class="ukr"><strong>Управління доступом:</strong> Права NTFS, Share Permissions, локальні користувачі та групи.</span><span class="eng"><strong>Access Management:</strong> NTFS rights, Share Permissions, local users, and groups.</span></li>
-                                <li><span class="ukr"><strong>PowerShell:</strong> Get-Help, Get-Process, Get-WmiObject, фільтрація, експорт у CSV/JSON.</span><span class="eng"><strong>PowerShell:</strong> Get-Help, Get-Process, Get-WmiObject, filtering, export to CSV/JSON.</span></li>
+                                <li>
+                                    <span class="ukr"><strong>Адміністрування ОС:</strong> Device Manager, Event Viewer, Services, Task Manager.</span>
+                                    <span class="eng"><strong>OS Administration:</strong> Device Manager, Event Viewer, Services, Task Manager.</span>
+                                </li>
+                                <li>
+                                    <span class="ukr"><strong>Управління доступом:</strong> Права NTFS, Share Permissions, локальні користувачі та групи.</span>
+                                    <span class="eng"><strong>Access Management:</strong> NTFS rights, Share Permissions, local users, and groups.</span>
+                                </li>
+                                <li>
+                                    <span class="ukr"><strong>PowerShell:</strong> Get-Help, Get-Process, Get-WmiObject, фільтрація, експорт у CSV/JSON.</span>
+                                    <span class="eng"><strong>PowerShell:</strong> Get-Help, Get-Process, Get-WmiObject, filtering, export to CSV/JSON.</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-image">
-                        <img id="stage1-img" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80" alt="Windows">
+                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80" alt="Windows">
                     </div>
                 </div>
 
                 <!-- STAGE 2 -->
                 <div class="timeline-step scroll-anim">
-                    <div class="timeline-connector"></div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80');"></div>
@@ -290,9 +334,18 @@
                                 <span>Debian</span><span>systemd</span><span>SSH</span><span>NetworkManager</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Основи:</strong> Файлова система (/etc, /var), команди (ls, grep, awk), права (chmod, chown).</span><span class="eng"><strong>Basics:</strong> File system (/etc, /var), commands (ls, grep, awk), permissions (chmod, chown).</span></li>
-                                <li><span class="ukr"><strong>Системне управління:</strong> Робота з процесами, systemd (systemctl, journalctl), пакети (apt).</span><span class="eng"><strong>System Management:</strong> Process management, systemd (systemctl, journalctl), packages (apt).</span></li>
-                                <li><span class="ukr"><strong>Мережа:</strong> Налаштування через ip addr, ping, tcpdump, NetworkManager, DNS (resolvectl/dig).</span><span class="eng"><strong>Networking:</strong> Configuration via ip addr, ping, tcpdump, NetworkManager, DNS (resolvectl).</span></li>
+                                <li>
+                                    <span class="ukr"><strong>Основи:</strong> Файлова система (/etc, /var), команди (ls, grep, awk), права (chmod, chown).</span>
+                                    <span class="eng"><strong>Basics:</strong> File system (/etc, /var), commands (ls, grep, awk), permissions (chmod, chown).</span>
+                                </li>
+                                <li>
+                                    <span class="ukr"><strong>Системне управління:</strong> Робота з процесами, systemd (systemctl, journalctl), пакети (apt).</span>
+                                    <span class="eng"><strong>System Management:</strong> Process management, systemd (systemctl, journalctl), packages (apt).</span>
+                                </li>
+                                <li>
+                                    <span class="ukr"><strong>Мережа:</strong> Налаштування через ip addr, ping, tcpdump, NetworkManager, DNS (resolvectl/dig).</span>
+                                    <span class="eng"><strong>Networking:</strong> Configuration via ip addr, ping, tcpdump, NetworkManager, DNS (resolvectl).</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -303,7 +356,6 @@
 
                 <!-- STAGE 3 -->
                 <div class="timeline-step scroll-anim">
-                    <div class="timeline-connector"></div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80');"></div>
@@ -320,9 +372,18 @@
                                 <span>TCP/IP</span><span>VLAN</span><span>NAT</span><span>Wireshark</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Теорія мереж:</strong> OSI, TCP/IP, MAC, ARP, IPv4/IPv6, Subnetting/CIDR, Default Gateway.</span><span class="eng"><strong>Network Theory:</strong> OSI, TCP/IP, MAC, ARP, IPv4/IPv6, Subnetting/CIDR, Default Gateway.</span></li>
-                                <li><span class="ukr"><strong>Технології:</strong> DNS, DHCP, NAT, Routing, VLAN, Firewall, VPN (WireGuard).</span><span class="eng"><strong>Technologies:</strong> DNS, DHCP, NAT, Routing, VLAN, Firewall, VPN (WireGuard).</span></li>
-                                <li><span class="ukr"><strong>Діагностика:</strong> traceroute, ip/route, nmap, Wireshark, MikroTik WinBox/CLI.</span><span class="eng"><strong>Diagnostics:</strong> traceroute, ip/route, nmap, Wireshark, MikroTik WinBox/CLI.</span></li>
+                                <li>
+                                    <span class="ukr"><strong>Теорія мереж:</strong> OSI, TCP/IP, MAC, ARP, IPv4/IPv6, Subnetting/CIDR, Default Gateway.</span>
+                                    <span class="eng"><strong>Network Theory:</strong> OSI, TCP/IP, MAC, ARP, IPv4/IPv6, Subnetting/CIDR, Default Gateway.</span>
+                                </li>
+                                <li>
+                                    <span class="ukr"><strong>Технології:</strong> DNS, DHCP, NAT, Routing, VLAN, Firewall, VPN (WireGuard).</span>
+                                    <span class="eng"><strong>Technologies:</strong> DNS, DHCP, NAT, Routing, VLAN, Firewall, VPN (WireGuard).</span>
+                                </li>
+                                <li>
+                                    <span class="ukr"><strong>Діагностика:</strong> traceroute, ip/route, nmap, Wireshark, MikroTik WinBox/CLI.</span>
+                                    <span class="eng"><strong>Diagnostics:</strong> traceroute, ip/route, nmap, Wireshark, MikroTik WinBox/CLI.</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -350,6 +411,7 @@
 
             <div class="doc-grid">
                 
+                <!-- GUIDE 1 -->
                 <div class="doc-card">
                     <h2>
                         <span class="ukr">01. Бездротовий принт-сервер (OpenWrt)</span>
@@ -399,6 +461,7 @@
                     </div>
                 </div>
 
+                <!-- GUIDE 2 -->
                 <div class="doc-card">
                     <h2>
                         <span class="ukr">02. Апаратне розгортання та Діагностика</span>
@@ -421,6 +484,7 @@
                     </div>
                 </div>
 
+                <!-- GUIDE 3 -->
                 <div class="doc-card">
                     <h2>
                         <span class="ukr">03. Головні принципи SysAdmin</span>
@@ -464,7 +528,7 @@
                         </svg>
                     </div>
                 </div>
-                <h2 id="about-name">
+                <h2>
                     <span class="ukr">Сергій Балакан</span>
                     <span class="eng">Serhii Balakan</span>
                 </h2>
@@ -473,10 +537,15 @@
                     <span class="eng">IT Support Specialist / Junior SysAdmin</span>
                 </h3>
                 
-                <div class="about-bio" id="about-bio">
+                <div class="about-bio">
                     <p>
-                        <span class="ukr">Привіт! Мені 19 років, я проживаю в місті Одеса та є студентом Львівського державного університету безпеки життєдіяльності (ЛДУБЖД) за спеціальністю <strong>125 Кібербезпека</strong>. Маю глибокий інтерес до IT-інфраструктури.</span>
+                        <span class="ukr">Привіт! Мені 19 років, я проживаю в місті Одеса та є студентом Львівського державного університету безпеки життєдіяльності (ЛДУБЖД) за спеціальністю <strong>125 Кібербезпека</strong>.</span>
                         <span class="eng">Hello! I am 19 years old, living in Odesa, and I am a cybersecurity student at LDUFZhD (Specialty 125).</span>
+                    </p>
+                    <br>
+                    <p>
+                        <span class="ukr">Маю глибокий інтерес до IT-інфраструктури: від компонентного ремонту та діагностики апаратного забезпечення до розгортання Linux-серверів, написання Bash/PowerShell скриптів для автоматизації рутини та налаштування мережевого обладнання. Також захоплююсь розробкою Telegram-ботів на Python (aiogram).</span>
+                        <span class="eng">I have a deep interest in IT infrastructure: from component repair and hardware diagnostics to deploying Linux servers, writing Bash/PowerShell scripts for automation, and configuring network equipment. I am also passionate about developing Telegram bots in Python.</span>
                     </p>
                 </div>
 
@@ -538,30 +607,6 @@
             });
 
             document.querySelectorAll('.scroll-anim').forEach(el => observer.observe(el));
-
-            // INTEGRATION: Fetching data from data.json
-            fetch('data.json')
-              .then(response => {
-                  if (!response.ok) throw new Error("Файл data.json не знайдено");
-                  return response.json();
-              })
-              .then(data => {
-                  // Stage 0
-                  if (data.stage0_title) document.querySelector('#stage0-title .ukr').textContent = data.stage0_title;
-                  if (data.stage0_image) document.querySelector('#stage0-img').src = data.stage0_image;
-                  
-                  // Stage 1
-                  if (data.stage1_title) document.querySelector('#stage1-title .ukr').textContent = data.stage1_title;
-                  if (data.stage1_image) document.querySelector('#stage1-img').src = data.stage1_image;
-                  
-                  // About Section
-                  if (data.about_name) document.querySelector('#about-name .ukr').textContent = data.about_name;
-                  if (data.about_bio) {
-                      const bioUkr = document.querySelector('#about-bio p .ukr');
-                      if (bioUkr) bioUkr.textContent = data.about_bio;
-                  }
-              })
-              .catch(error => console.error('Помилка завантаження даних CMS:', error));
         });
     </script>
 </body>
