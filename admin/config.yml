@@ -15,6 +15,15 @@ collections:
         file: "data.json"
         format: json
         fields:
+          # То, что уже есть (Етап 0)
           - {label: "Заголовок Етапа 0", name: "stage0_title", widget: "string"}
           - {label: "Текст Етапа 0", name: "stage0_desc", widget: "text"}
           - {label: "Фото Етапа 0", name: "stage0_image", widget: "image"}
+          
+          # НОВЫЕ ПОЛЯ (Етап 1)
+          - {label: "Заголовок Етапа 1", name: "stage1_title", widget: "string"}
+          - {label: "Фото Етапа 1", name: "stage1_image", widget: "image"}
+          
+          # НОВЫЕ ПОЛЯ (Про меня)
+          - {label: "Имя (Про меня)", name: "about_name", widget: "string"}
+          - {label: "Биография (Про меня)", name: "about_bio", widget: "text"}
