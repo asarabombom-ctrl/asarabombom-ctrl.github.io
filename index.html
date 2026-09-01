@@ -167,7 +167,7 @@
         .doc-step::before { content: ''; position: absolute; left: -5px; top: 8px; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent-glow); }
         .doc-step h4 { color: var(--text-main); font-size: 1.1rem; margin-bottom: 10px; }
         .doc-step p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; }
-        .code-block { background: #000; border: 1px solid var(--box-border); border-radius: 8px; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #38bdf8; overflow-x: auto; margin-bottom: 15px; line-height: 1.5; }
+        .code-block { background: #000; border: 1px solid var(--box-border); border-radius: 8px; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #38bdf8; overflow-x: auto; margin-bottom: 15px; line-height: 1.5; white-space: pre-wrap; }
         .code-comment { color: #64748b; }
         .about-wrapper { max-width: 800px; margin: 0 auto; background: var(--box-bg); border: 1px solid var(--box-border); border-radius: 16px; padding: 50px; backdrop-filter: blur(12px); text-align: center; }
         .profile-img-container { width: 160px; height: 160px; margin: 0 auto 30px; border-radius: 50%; padding: 4px; background: linear-gradient(135deg, var(--accent), #4f46e5); position: relative; }
@@ -226,8 +226,8 @@
                     <span class="eng">ENTERPRISE SYSADMIN ROADMAP</span>
                 </h1>
                 <p>
-                    <span class="ukr">Від компонентного ремонту до хмарної інфраструктури та кібербезпеки. Максимальна деталізація процесів.</span>
-                    <span class="eng">From component repair to cloud infrastructure and cybersecurity. Maximum process detailing.</span>
+                    <span class="ukr">Від компонентного ремонту до хмарної інфраструктури та кібербезпеки. Максимальна деталізація процесів. Натисніть на етап для відкриття конспекту.</span>
+                    <span class="eng">From component repair to cloud infrastructure and cybersecurity. Click on a stage to open detailed SOPs.</span>
                 </p>
             </header>
 
@@ -248,11 +248,11 @@
                                 <span class="eng">Hardware & Diagnostics</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>SMART</span><span>UEFI</span><span>RAM</span><span>PCIe</span>
+                                <span>SMART</span><span>UEFI/BIOS</span><span>MemTest86</span><span>PCIe</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Архітектура ПК:</strong> Розуміння CPU, RAM, шин PCIe.</span><span class="eng"><strong>PC Architecture:</strong> CPU, RAM, PCIe lanes.</span></li>
-                                <li><span class="ukr"><strong>Діагностика:</strong> Мультиметр, MemTest86, стрес-тести.</span><span class="eng"><strong>Diagnostics:</strong> Multimeter, MemTest86, stress tests.</span></li>
+                                <li><span class="ukr"><strong>Архітектура ПК:</strong> Розуміння CPU, RAM, виділення VRAM.</span><span class="eng"><strong>PC Architecture:</strong> CPU, RAM, VRAM allocation.</span></li>
+                                <li><span class="ukr"><strong>Діагностика:</strong> Мультиметр, стрес-тести компонентів.</span><span class="eng"><strong>Diagnostics:</strong> Multimeter, component stress tests.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -270,15 +270,15 @@
                                 <span class="eng">L1 | Junior SysAdmin</span>
                             </span>
                             <h3>
-                                <span class="ukr">Windows Server & AD</span>
-                                <span class="eng">Windows Server & AD</span>
+                                <span class="ukr">Windows OS & PowerShell</span>
+                                <span class="eng">Windows OS & PowerShell</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Active Directory</span><span>GPO</span><span>PowerShell</span>
+                                <span>PowerShell</span><span>Active Directory</span><span>GPO</span><span>NTFS</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>AD DS:</strong> Домени, OU, делегування прав.</span><span class="eng"><strong>AD DS:</strong> Domains, OU, rights delegation.</span></li>
-                                <li><span class="ukr"><strong>GPO & PS:</strong> Політики безпеки, автоматизація скриптами.</span><span class="eng"><strong>GPO & PS:</strong> Security policies, automation scripts.</span></li>
+                                <li><span class="ukr"><strong>Адміністрування:</strong> Локальні політики, права NTFS/Share.</span><span class="eng"><strong>Administration:</strong> Local policies, NTFS/Share permissions.</span></li>
+                                <li><span class="ukr"><strong>Скриптинг:</strong> Створення PowerShell Provisioning скриптів.</span><span class="eng"><strong>Scripting:</strong> PowerShell Provisioning scripts.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -300,11 +300,11 @@
                                 <span class="eng">Linux Server Admin</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Bash</span><span>systemd</span><span>SSH</span><span>LVM</span>
+                                <span>Arch/Debian</span><span>systemd</span><span>SSH</span><span>PipeWire</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Ядро ОС:</strong> FHS, права доступу (chmod), процеси (systemd).</span><span class="eng"><strong>OS Core:</strong> FHS, permissions, processes.</span></li>
-                                <li><span class="ukr"><strong>Сховище:</strong> LVM, fstab, RAID (mdadm).</span><span class="eng"><strong>Storage:</strong> LVM, fstab, software RAID.</span></li>
+                                <li><span class="ukr"><strong>Ядро та Сервіси:</strong> systemctl, налаштування Bluetooth/Audio.</span><span class="eng"><strong>Core & Services:</strong> systemctl, Bluetooth/Audio setup.</span></li>
+                                <li><span class="ukr"><strong>Система:</strong> Права доступу, конфігурація мережі та SSH.</span><span class="eng"><strong>System:</strong> Permissions, Network & SSH config.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -326,11 +326,11 @@
                                 <span class="eng">Network Infrastructure</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>OSI & TCP/IP</span><span>VLAN (802.1Q)</span><span>Routing</span><span>MikroTik</span>
+                                <span>OpenWrt</span><span>CUPS</span><span>Routing</span><span>MikroTik</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Фундамент:</strong> Модель OSI, стек TCP/IP, ARP, маски підмереж (CIDR).</span><span class="eng"><strong>Foundation:</strong> OSI model, TCP/IP, ARP, subnetting (CIDR).</span></li>
-                                <li><span class="ukr"><strong>Комутація & Маршрутизація:</strong> VLAN, статична маршрутизація, NAT, PAT.</span><span class="eng"><strong>Switching & Routing:</strong> VLAN tagging, static routing, NAT, PAT.</span></li>
+                                <li><span class="ukr"><strong>Мережеві сервіси:</strong> Перетворення роутерів на принт-сервери (CUPS).</span><span class="eng"><strong>Network Services:</strong> Router to print-server conversion (CUPS).</span></li>
+                                <li><span class="ukr"><strong>Маршрутизація:</strong> Статичні маршрути, діагностика мережі.</span><span class="eng"><strong>Routing:</strong> Static routes, network diagnostics.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -355,8 +355,8 @@
                                 <span>Proxmox</span><span>Docker</span><span>Docker Compose</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Гіпервізори:</strong> Proxmox VE, кластери, прокидання PCI.</span><span class="eng"><strong>Hypervisors:</strong> Proxmox VE, cluster creation, PCI passthrough.</span></li>
-                                <li><span class="ukr"><strong>Контейнери:</strong> Dockerfile, Volumes, декларативний запуск через Compose.</span><span class="eng"><strong>Containers:</strong> Dockerfile, Volumes, Docker Compose.</span></li>
+                                <li><span class="ukr"><strong>Гіпервізори:</strong> Proxmox VE, кластери, прокидання ресурсів.</span><span class="eng"><strong>Hypervisors:</strong> Proxmox VE, cluster creation, resource mapping.</span></li>
+                                <li><span class="ukr"><strong>Контейнери:</strong> Dockerfile, Volumes, декларативний запуск.</span><span class="eng"><strong>Containers:</strong> Dockerfile, Volumes, declarative execution.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -381,8 +381,8 @@
                                 <span>Zabbix</span><span>Grafana</span><span>SNMP</span><span>Syslog</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Метрики:</strong> Zabbix Agents, SNMP (v2c/v3) для свічів.</span><span class="eng"><strong>Metrics:</strong> Zabbix Agents, SNMP for switches.</span></li>
-                                <li><span class="ukr"><strong>Візуалізація & Логи:</strong> Дашборди Grafana, централізований Syslog.</span><span class="eng"><strong>Visualization:</strong> Grafana dashboards, centralized Syslog.</span></li>
+                                <li><span class="ukr"><strong>Метрики:</strong> Збір даних через Zabbix Agents та SNMP.</span><span class="eng"><strong>Metrics:</strong> Data collection via Zabbix Agents and SNMP.</span></li>
+                                <li><span class="ukr"><strong>Візуалізація:</strong> Побудова дашбордів у Grafana.</span><span class="eng"><strong>Visualization:</strong> Building dashboards in Grafana.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -400,15 +400,15 @@
                                 <span class="eng">L6 | Automation Engineer</span>
                             </span>
                             <h3>
-                                <span class="ukr">Ansible, Bash & Python</span>
-                                <span class="eng">Ansible, Bash & Python</span>
+                                <span class="ukr">Python & Automation</span>
+                                <span class="eng">Python & Automation</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Ansible</span><span>Python</span><span>Bash</span><span>Git</span>
+                                <span>Python</span><span>aiogram</span><span>MongoDB</span><span>Bash</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Скрипти:</strong> Бекапи (rsync, cron), парсинг логів, Telegram боти.</span><span class="eng"><strong>Scripts:</strong> Backups (rsync, cron), log parsing, Telegram bots.</span></li>
-                                <li><span class="ukr"><strong>IaC & Git:</strong> Написання Playbooks (Ansible) та контроль версій.</span><span class="eng"><strong>IaC & Git:</strong> Ansible Playbooks and version control.</span></li>
+                                <li><span class="ukr"><strong>Розробка ботів:</strong> Telegram боти на aiogram з БД MongoDB.</span><span class="eng"><strong>Bot Development:</strong> Telegram bots via aiogram with MongoDB.</span></li>
+                                <li><span class="ukr"><strong>Інтеграції:</strong> Робота з API (DuckDuckGo, Groq) для автоматизації.</span><span class="eng"><strong>Integrations:</strong> API usage (DuckDuckGo, Groq) for automation.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -430,11 +430,11 @@
                                 <span class="eng">Cybersecurity</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Firewall</span><span>VPN</span><span>Fail2ban</span><span>Nmap</span>
+                                <span>Nmap</span><span>Fail2ban</span><span>VPN</span><span>Firewall</span>
                             </div>
                             <ul>
-                                <li><span class="ukr"><strong>Захист периметра:</strong> iptables/UFW, Fail2ban, Rate Limiting.</span><span class="eng"><strong>Perimeter Defense:</strong> iptables/UFW, Fail2ban, Rate Limiting.</span></li>
-                                <li><span class="ukr"><strong>Тунелі & Аудит:</strong> OpenVPN/WireGuard, Nmap сканування.</span><span class="eng"><strong>Tunnels & Audit:</strong> OpenVPN/WireGuard, Nmap scanning.</span></li>
+                                <li><span class="ukr"><strong>Захист:</strong> Ізоляція мереж, налаштування Fail2ban, UFW.</span><span class="eng"><strong>Defense:</strong> Network isolation, Fail2ban, UFW configuration.</span></li>
+                                <li><span class="ukr"><strong>Аудит:</strong> Сканування вразливостей через Nmap.</span><span class="eng"><strong>Audit:</strong> Vulnerability scanning via Nmap.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -454,8 +454,8 @@
                     <span class="eng">TECHNICAL GUIDES (SOP)</span>
                 </h1>
                 <p>
-                    <span class="ukr">База знань: покрокові інструкції з налаштування обладнання, мереж та автоматизації.</span>
-                    <span class="eng">Knowledge base: step-by-step instructions for hardware, networks, and automation.</span>
+                    <span class="ukr">База знань: покрокові інструкції, конфігурації та скрипти з власного досвіду.</span>
+                    <span class="eng">Knowledge base: step-by-step instructions, configs, and scripts from personal experience.</span>
                 </p>
             </header>
 
@@ -464,83 +464,77 @@
                 <!-- L0 -->
                 <div id="doc-stage0" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
-                        <span class="ukr">L0: Апаратна діагностика та Provisioning</span>
-                        <span class="eng">L0: Hardware Diagnostics & Provisioning</span>
+                        <span class="ukr">L0: Апаратна діагностика та BIOS</span>
+                        <span class="eng">L0: Hardware Diagnostics & BIOS</span>
                     </h2>
-                    <p><span class="ukr">Повний алгоритм дій IT Support при надходженні проблемної робочої станції.</span></p>
+                    <p><span class="ukr">Алгоритм дій при налаштуванні та діагностиці проблемного заліза.</span></p>
                     <div class="doc-step">
-                        <h4><span class="ukr">1. Базова перевірка POST (Power-On Self-Test)</span></h4>
-                        <p><span class="ukr">Якщо ПК не стартує (немає зображення), перевіряємо Beep-коди материнської плати або POST-карту. Очищення CMOS (замикання пінів CLRTC) — перший крок при збоях налаштувань BIOS/UEFI.</span></p>
-                    </div>
-                    <div class="doc-step">
-                        <h4><span class="ukr">2. Тестування ОЗП (RAM)</span></h4>
-                        <p><span class="ukr">При синіх екранах (BSOD) `MEMORY_MANAGEMENT`: Завантаження з USB у WinPE → запуск <strong>MemTest86</strong>. Тест повинен пройти мінімум 2 проходи (Passes) без жодної червоної помилки.</span></p>
-                    </div>
-                    <div class="doc-step">
-                        <h4><span class="ukr">3. Стрес-тест CPU та живлення</span></h4>
-                        <p><span class="ukr">Використовуємо <strong>OCCT</strong> або <strong>AIDA64 System Stability Test</strong>.</span></p>
+                        <h4><span class="ukr">1. Виділення VRAM для APU (напр. AMD A8-5600K)</span></h4>
+                        <p><span class="ukr">Якщо інтегрована графіка (Radeon HD 7560D) працює повільно, необхідно вручну виділити пам'ять в BIOS, оскільки автоматичне виділення часто дає збої.</span></p>
                         <div class="code-block">
-                            <span class="code-comment">Критерії пройденого тесту:</span><br>
-                            1. Температура CPU не перевищує 85°C (залежить від Tjunction).<br>
-                            2. Графік CPU Throttling (тротлінг) суворо 0%.<br>
-                            3. Напруга по лініях 12V, 5V, 3.3V не просідає більше ніж на 5%.
+                            1. Зайти в BIOS (Del / F2) -> Розділ "Advanced" або "Chipset"<br>
+                            2. Знайти параметр "UMA Frame Buffer Size" або "Share Memory"<br>
+                            3. Змінити значення з Auto на 2G (2048MB) при наявності 16GB RAM.<br>
+                            4. Зберегти налаштування (F10).
                         </div>
+                    </div>
+                    <div class="doc-step">
+                        <h4><span class="ukr">2. Тестування ОЗП (RAM) та CPU</span></h4>
+                        <p><span class="ukr">При BSOD `MEMORY_MANAGEMENT`: завантаження з USB у WinPE → запуск <strong>MemTest86</strong> (мінімум 2 проходи). Для стрес-тесту процесора використовується <strong>OCCT</strong> або AIDA64 System Stability Test (графік Throttling має бути 0%).</span></p>
                     </div>
                 </div>
 
                 <!-- L1 -->
                 <div id="doc-stage1" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
-                        <span class="ukr">L1: Робоче середовище Windows Server</span>
-                        <span class="eng">L1: Windows Server Environment</span>
+                        <span class="ukr">L1: Адміністрування Windows & PowerShell</span>
+                        <span class="eng">L1: Windows Administration & PowerShell</span>
                     </h2>
-                    <p><span class="ukr">Конспект з налаштування доменної інфраструктури та базової автоматизації.</span></p>
+                    <p><span class="ukr">Автоматизація первинного налаштування робочих станцій.</span></p>
                     <div class="doc-step">
-                        <h4><span class="ukr">1. Ієрархія Active Directory (OU Design)</span></h4>
-                        <p><span class="ukr">Ніколи не звалюйте всіх користувачів у контейнер `Users`. Створюйте Organizational Units (OU) за відділами (напр. `OU=Sales, DC=enterprise, DC=com`). Це дозволяє делегувати права (Delegation of Control) та прив'язувати різні GPO.</span></p>
+                        <h4><span class="ukr">1. Скрипт Provisioning.ps1</span></h4>
+                        <p><span class="ukr">Написання власного адміністративного скрипта для швидкої підготовки ПК до роботи.</span></p>
+                        <div class="code-block">
+                            <span class="code-comment"># Обхід політики виконання скриптів</span><br>
+                            Set-ExecutionPolicy Bypass -Scope Process -Force<br><br>
+                            <span class="code-comment"># Вимкнення телеметрії та непотрібних служб</span><br>
+                            Stop-Service -Name "DiagTrack" -Force<br>
+                            Set-Service -Name "DiagTrack" -StartupType Disabled<br><br>
+                            <span class="code-comment"># Налаштування базової мережі (IPv4)</span><br>
+                            New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.1.50 -PrefixLength 24 -DefaultGateway 192.168.1.1
+                        </div>
                     </div>
                     <div class="doc-step">
                         <h4><span class="ukr">2. Права NTFS vs Share Permissions</span></h4>
-                        <p><span class="ukr">Правило: Share Permissions завжди ставимо "Everyone -> Full Control". Увесь реальний захист та обмеження налаштовуються виключно на вкладці <strong>Security (NTFS)</strong>. Забороняюче правило (Deny) завжди має вищий пріоритет.</span></p>
-                    </div>
-                    <div class="doc-step">
-                        <h4><span class="ukr">3. PowerShell: Корисні сніпети</span></h4>
-                        <div class="code-block">
-                            <span class="code-comment"># Знайти процеси, які споживають більше 500МБ ОЗП, та вбити їх</span><br>
-                            Get-Process | Where-Object {$_.WorkingSet -gt 500MB} | Stop-Process -Force<br><br>
-                            <span class="code-comment"># Масове створення користувачів AD з CSV файлу</span><br>
-                            Import-Csv -Path "C:\users.csv" | ForEach-Object {<br>
-                            &nbsp;&nbsp;New-ADUser -Name $_.Name -SamAccountName $_.Username -Path "OU=Users,DC=domain,DC=local"<br>
-                            }
-                        </div>
+                        <p><span class="ukr">Правило: Share Permissions завжди ставимо "Everyone -> Full Control". Увесь реальний захист налаштовується виключно на вкладці <strong>Security (NTFS)</strong>.</span></p>
                     </div>
                 </div>
 
                 <!-- L2 -->
                 <div id="doc-stage2" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
-                        <span class="ukr">L2: Архітектура Linux систем</span>
-                        <span class="eng">L2: Linux Systems Architecture</span>
+                        <span class="ukr">L2: Архітектура Linux (Arch/CachyOS)</span>
+                        <span class="eng">L2: Linux Architecture (Arch/CachyOS)</span>
                     </h2>
-                    <p><span class="ukr">Ключові команди та налаштування безпеки для серверів на базі Debian/Arch.</span></p>
+                    <p><span class="ukr">Траблшутинг системних сервісів у дистрибутивах на базі Arch Linux.</span></p>
                     <div class="doc-step">
-                        <h4><span class="ukr">1. Безпека SSH (Hardening)</span></h4>
-                        <p><span class="ukr">Файл конфігурації: <code>/etc/ssh/sshd_config</code>. Після зміни завжди <code>systemctl restart sshd</code>.</span></p>
+                        <h4><span class="ukr">1. Налаштування аудіо (PipeWire)</span></h4>
+                        <p><span class="ukr">Заміна застарілого PulseAudio на сучасний PipeWire для вирішення проблем зі звуком.</span></p>
                         <div class="code-block">
-                            <span class="code-comment"># Базові правила безпеки</span><br>
-                            PermitRootLogin no        <span class="code-comment"># Заборонити прямий вхід під root</span><br>
-                            PasswordAuthentication no <span class="code-comment"># Вхід виключно по RSA/Ed25519 ключах</span><br>
-                            Port 2202                 <span class="code-comment"># Змінити стандартний порт для відсікання базових сканерів</span>
+                            <span class="code-comment"># Встановлення необхідних пакетів (pacman)</span><br>
+                            sudo pacman -S pipewire pipewire-pulse pipewire-alsa wireplumber<br><br>
+                            <span class="code-comment"># Активація сервісу від імені користувача</span><br>
+                            systemctl --user enable --now pipewire pipewire-pulse wireplumber
                         </div>
                     </div>
                     <div class="doc-step">
-                        <h4><span class="ukr">2. Управління логічними томами (LVM)</span></h4>
-                        <p><span class="ukr">Алгоритм розширення диска без перезавантаження:</span></p>
+                        <h4><span class="ukr">2. Відновлення роботи Bluetooth</span></h4>
                         <div class="code-block">
-                            1. pvcreate /dev/sdb1               <span class="code-comment"># Створити фізичний том</span><br>
-                            2. vgextend vg_main /dev/sdb1       <span class="code-comment"># Додати до групи томів</span><br>
-                            3. lvextend -l +100%FREE /dev/vg_main/lv_root <span class="code-comment"># Розширити логічний том</span><br>
-                            4. resize2fs /dev/vg_main/lv_root   <span class="code-comment"># Розширити файлову систему (ext4)</span>
+                            sudo pacman -S bluez bluez-utils<br>
+                            sudo systemctl enable bluetooth.service<br>
+                            sudo systemctl start bluetooth.service<br>
+                            <span class="code-comment"># Підключення через термінал</span><br>
+                            bluetoothctl -> power on -> scan on -> pair [MAC] -> connect [MAC]
                         </div>
                     </div>
                 </div>
@@ -548,26 +542,23 @@
                 <!-- L3 -->
                 <div id="doc-stage3" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
-                        <span class="ukr">L3: Мережева Інфраструктура (MikroTik)</span>
-                        <span class="eng">L3: Network Infrastructure (MikroTik)</span>
+                        <span class="ukr">L3: Мережева Інфраструктура (OpenWrt & CUPS)</span>
+                        <span class="eng">L3: Network Infrastructure (OpenWrt & CUPS)</span>
                     </h2>
-                    <p><span class="ukr">Конспект з налаштування маршрутизації, VLAN та NAT.</span></p>
+                    <p><span class="ukr">Інструкція з перетворення звичайного USB-принтера на мережевий пристрій за допомогою роутера (напр. TP-Link TL-MR3020) на базі OpenWrt.</span></p>
                     <div class="doc-step">
-                        <h4><span class="ukr">1. Базовий NAT (Маскарадинг)</span></h4>
-                        <p><span class="ukr">Щоб локальна мережа отримала доступ до інтернету, потрібно налаштувати правило srcnat.</span></p>
+                        <h4><span class="ukr">1. Підключення та прошивка по SSH</span></h4>
                         <div class="code-block">
-                            <span class="code-comment"># RouterOS CLI: Налаштування NAT для виходу в інтернет через ether1</span><br>
-                            /ip firewall nat add chain=srcnat out-interface=ether1 action=masquerade
+                            <span class="code-comment"># Підключення до роутера та оновлення пакетів</span><br>
+                            ssh root@192.168.1.1<br>
+                            opkg update<br>
+                            <span class="code-comment"># Встановлення драйверів для USB принтера та CUPS сервера</span><br>
+                            opkg install kmod-usb-printer p910nd luci-app-p910nd cups
                         </div>
                     </div>
                     <div class="doc-step">
-                        <h4><span class="ukr">2. Ізоляція мереж через VLAN (802.1Q)</span></h4>
-                        <p><span class="ukr">Створюємо VLAN для гостьової мережі, щоб відокремити її від корпоративної (Trunk порт на ether2).</span></p>
-                        <div class="code-block">
-                            /interface vlan add name=VLAN20_Guest vlan-id=20 interface=ether2<br>
-                            /ip address add address=192.168.20.1/24 interface=VLAN20_Guest<br>
-                            /ip dhcp-server setup <span class="code-comment"># Далі слідувати майстру налаштування для VLAN20</span>
-                        </div>
+                        <h4><span class="ukr">2. Налаштування клієнтських ПК (Windows)</span></h4>
+                        <p><span class="ukr">В "Пристрої та принтери" додайте принтер через "Standard TCP/IP Port". Вкажіть статичний IP вашого OpenWrt роутера. Протокол: <strong>RAW</strong>, порт <strong>9100</strong>.</span></p>
                     </div>
                 </div>
 
@@ -579,22 +570,7 @@
                     </h2>
                     <p><span class="ukr">Декларативне розгортання сервісів за допомогою Docker Compose.</span></p>
                     <div class="doc-step">
-                        <h4><span class="ukr">1. Типовий docker-compose.yml (Nginx + PHP)</span></h4>
-                        <p><span class="ukr">Приклад конфігурації для підняття веб-стеку з прокиданням портів та постійним сховищем (Volumes).</span></p>
-                        <div class="code-block">
-                            version: '3.8'<br>
-                            services:<br>
-                            &nbsp;&nbsp;web:<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;image: nginx:alpine<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;ports:<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "80:80"<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ./html:/usr/share/nginx/html<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;restart: always
-                        </div>
-                    </div>
-                    <div class="doc-step">
-                        <h4><span class="ukr">2. Очищення системи Docker</span></h4>
+                        <h4><span class="ukr">1. Очищення системи Docker</span></h4>
                         <p><span class="ukr">Команди для звільнення місця від старих образів та зупинених контейнерів.</span></p>
                         <div class="code-block">
                             docker system prune -a --volumes <span class="code-comment"># Видаляє ВСІ невикористані дані</span><br>
@@ -606,12 +582,12 @@
                 <!-- L5 -->
                 <div id="doc-stage5" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
-                        <span class="ukr">L5: Моніторинг (Zabbix)</span>
-                        <span class="eng">L5: Monitoring (Zabbix)</span>
+                        <span class="ukr">L5: Моніторинг Інфраструктури</span>
+                        <span class="eng">L5: Infrastructure Monitoring</span>
                     </h2>
-                    <p><span class="ukr">Інструкція з підключення вузлів до системи централізованого моніторингу.</span></p>
+                    <p><span class="ukr">Інструкція з підключення вузлів до системи централізованого моніторингу Zabbix.</span></p>
                     <div class="doc-step">
-                        <h4><span class="ukr">1. Налаштування Zabbix Agent (Linux)</span></h4>
+                        <h4><span class="ukr">1. Налаштування Zabbix Agent</span></h4>
                         <p><span class="ukr">Файл конфігурації <code>/etc/zabbix/zabbix_agentd.conf</code>.</span></p>
                         <div class="code-block">
                             <span class="code-comment"># Вказуємо IP адресу нашого Zabbix Сервера</span><br>
@@ -625,27 +601,28 @@
                 <!-- L6 -->
                 <div id="doc-stage6" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
-                        <span class="ukr">L6: Автоматизація (Bash Scripting)</span>
-                        <span class="eng">L6: Automation (Bash Scripting)</span>
+                        <span class="ukr">L6: Автоматизація (Python & aiogram)</span>
+                        <span class="eng">L6: Automation (Python & aiogram)</span>
                     </h2>
-                    <p><span class="ukr">Написання скриптів для резервного копіювання за розкладом.</span></p>
+                    <p><span class="ukr">Розробка асинхронних Telegram-ботів на Python для автоматизації взаємодії (на прикладі інтеграції з DuckDuckGo Search та MongoDB).</span></p>
                     <div class="doc-step">
-                        <h4><span class="ukr">1. Скрипт бекапу директорії (rsync)</span></h4>
+                        <h4><span class="ukr">1. Ініціалізація бота та підключення до БД</span></h4>
                         <div class="code-block">
-                            #!/bin/bash<br>
-                            SOURCE="/var/www/html"<br>
-                            DEST="/mnt/backup/web_$(date +%F)"<br>
-                            <br>
-                            <span class="code-comment"># Синхронізація з видаленням файлів, яких вже немає в джерелі</span><br>
-                            rsync -av --delete $SOURCE $DEST<br>
-                            echo "Backup completed on $(date)" >> /var/log/backup.log
-                        </div>
-                    </div>
-                    <div class="doc-step">
-                        <h4><span class="ukr">2. Додавання в Cron</span></h4>
-                        <p><span class="ukr">Виконуємо <code>crontab -e</code> та додаємо завдання для запуску о 02:00 ночі щодня.</span></p>
-                        <div class="code-block">
-                            0 2 * * * /opt/scripts/backup.sh
+                            import asyncio<br>
+                            from aiogram import Bot, Dispatcher, types<br>
+                            from motor.motor_asyncio import AsyncIOMotorClient<br><br>
+                            <span class="code-comment"># Налаштування MongoDB (motor)</span><br>
+                            cluster = AsyncIOMotorClient("mongodb://localhost:27017")<br>
+                            db = cluster["bot_database"]<br>
+                            users_collection = db["users"]<br><br>
+                            <span class="code-comment"># Ініціалізація aiogram бота</span><br>
+                            bot = Bot(token="YOUR_BOT_TOKEN")<br>
+                            dp = Dispatcher(bot)<br><br>
+                            @dp.message_handler(commands=['start'])<br>
+                            async def send_welcome(message: types.Message):<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;await message.reply("Вітаю! Я бот-асистент.")<br><br>
+                            if __name__ == '__main__':<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;asyncio.run(dp.start_polling())
                         </div>
                     </div>
                 </div>
@@ -653,30 +630,19 @@
                 <!-- L7 -->
                 <div id="doc-stage7" class="doc-card" style="transition: all 0.5s ease;">
                     <h2>
-                        <span class="ukr">L7: Кібербезпека (Hardening)</span>
-                        <span class="eng">L7: Cybersecurity (Hardening)</span>
+                        <span class="ukr">L7: Кібербезпека (Nmap & Auditing)</span>
+                        <span class="eng">L7: Cybersecurity (Nmap & Auditing)</span>
                     </h2>
-                    <p><span class="ukr">Базовий захист сервера від мережевих атак.</span></p>
+                    <p><span class="ukr">Сканування мережі для виявлення вразливостей та відкритих портів (спеціальність 125).</span></p>
                     <div class="doc-step">
-                        <h4><span class="ukr">1. Налаштування UFW (Uncomplicated Firewall)</span></h4>
-                        <p><span class="ukr">Політика "Заборонити все, дозволити лише потрібне" (Default Deny).</span></p>
+                        <h4><span class="ukr">1. Команди Nmap для аудиту мережі</span></h4>
                         <div class="code-block">
-                            ufw default deny incoming<br>
-                            ufw default allow outgoing<br>
-                            ufw allow 2202/tcp <span class="code-comment"># Дозвіл для нестандартного порту SSH</span><br>
-                            ufw allow 80,443/tcp <span class="code-comment"># Дозвіл для веб-трафіку</span><br>
-                            ufw enable
-                        </div>
-                    </div>
-                    <div class="doc-step">
-                        <h4><span class="ukr">2. Захист від Bruteforce (Fail2ban)</span></h4>
-                        <p><span class="ukr">Створюємо локальний конфіг <code>/etc/fail2ban/jail.local</code> для блокування IP після 3 невдалих спроб входу.</span></p>
-                        <div class="code-block">
-                            [sshd]<br>
-                            enabled = true<br>
-                            port = 2202<br>
-                            maxretry = 3<br>
-                            bantime = 3600 <span class="code-comment"># Блокування на 1 годину</span>
+                            <span class="code-comment"># Швидке сканування локальної підмережі на наявність активних хостів</span><br>
+                            nmap -sn 192.168.1.0/24<br><br>
+                            <span class="code-comment"># Агресивне сканування цілі (визначення ОС, версій сервісів, трасування)</span><br>
+                            nmap -A -T4 192.168.1.50<br><br>
+                            <span class="code-comment"># Пошук конкретних вразливостей за допомогою Nmap Scripting Engine (NSE)</span><br>
+                            nmap --script vuln 192.168.1.50
                         </div>
                     </div>
                 </div>
@@ -702,19 +668,19 @@
                     <span class="eng">Serhii Balakan</span>
                 </h2>
                 <h3>
-                    <span class="ukr">IT Support Specialist / Junior SysAdmin</span>
-                    <span class="eng">IT Support Specialist / Junior SysAdmin</span>
+                    <span class="ukr">Assistant System Administrator / IT Support</span>
+                    <span class="eng">Assistant System Administrator / IT Support</span>
                 </h3>
                 
                 <div class="about-bio">
                     <p>
-                        <span class="ukr">Привіт! Мені 19 років, я проживаю в місті Одеса та є студентом Львівського державного університету безпеки життєдіяльності (ЛДУБЖД) за спеціальністю <strong>125 Кібербезпека</strong>.</span>
-                        <span class="eng">Hello! I am 19 years old, living in Odesa, and I am a cybersecurity student at LDUFZhD (Specialty 125).</span>
+                        <span class="ukr">Привіт! Мені 19 років, я проживаю в місті Одеса та здобуваю освіту за спеціальністю <strong>125 Кібербезпека</strong> (ЛДУБЖД, дистанційно).</span>
+                        <span class="eng">Hello! I am 19 years old, living in Odesa, and I am a cybersecurity student at LDUFZhD (Specialty 125, distance learning).</span>
                     </p>
                     <br>
                     <p>
-                        <span class="ukr">Маю глибокий інтерес до IT-інфраструктури: від компонентного ремонту та діагностики апаратного забезпечення до розгортання Linux-серверів, написання Bash/PowerShell скриптів для автоматизації рутини та налаштування мережевого обладнання. Також захоплююсь розробкою Telegram-ботів на Python (aiogram).</span>
-                        <span class="eng">I have a deep interest in IT infrastructure: from component repair and hardware diagnostics to deploying Linux servers, writing Bash/PowerShell scripts for automation, and configuring network equipment. I am also passionate about developing Telegram bots in Python.</span>
+                        <span class="ukr">Маю практичний досвід роботи з IT-інфраструктурою: діагностика апаратного забезпечення (зокрема налаштування систем на базі AMD), конфігурація Linux-систем (Arch/CachyOS), налаштування мережевого обладнання та принт-серверів на OpenWrt. Захоплююсь написанням скриптів для автоматизації рутини на PowerShell та розробкою асинхронних Telegram-ботів мовою Python (aiogram, MongoDB).</span>
+                        <span class="eng">I have practical experience with IT infrastructure: hardware diagnostics, configuring Linux systems (Arch/CachyOS), setting up network equipment and print servers on OpenWrt. I am passionate about writing automation scripts in PowerShell and developing async Telegram bots in Python (aiogram, MongoDB).</span>
                     </p>
                 </div>
 
