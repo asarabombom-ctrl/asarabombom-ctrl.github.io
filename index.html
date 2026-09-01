@@ -89,7 +89,7 @@
         .timeline-step:nth-child(odd) { flex-direction: row; }
         .timeline-step:nth-child(even) { flex-direction: row-reverse; }
 
-        /* Змійка */
+        /* Змійка (лінія) */
         .timeline-step::before {
             content: ''; position: absolute; top: 50%; height: calc(100% + 90px);
             width: 45%; border: 3px solid var(--box-border); z-index: 0;
@@ -113,7 +113,6 @@
             border: 4px solid var(--box-border); z-index: 2; transition: 0.5s ease; 
         }
         .timeline-step:hover .timeline-marker { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 20px var(--accent-glow); transform: translate(-50%, -50%) scale(1.3); }
-        .timeline-connector { display: none; }
 
         /* DYNAMIC CARD CONTENT */
         .timeline-content { 
@@ -122,9 +121,9 @@
             overflow: hidden; 
         }
         
-        /* Асиметрія */
-        .timeline-step:nth-child(odd) .timeline-content { transform: rotate(-2deg) translateY(20px); }
-        .timeline-step:nth-child(even) .timeline-content { transform: rotate(2deg) translateY(-20px); }
+        /* Асиметрія карток */
+        .timeline-step:nth-child(odd) .timeline-content { transform: rotate(-1.5deg) translateY(15px); }
+        .timeline-step:nth-child(even) .timeline-content { transform: rotate(1.5deg) translateY(-15px); }
         
         .timeline-step:hover .timeline-content { 
             border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px var(--accent-glow); 
@@ -140,7 +139,7 @@
         
         .card-inner { position: relative; z-index: 2; padding: 40px; }
 
-        .timeline-image { width: 48%; border-radius: 16px; overflow: hidden; border: 1px solid var(--box-border); transition: var(--transition-smooth); position: relative; z-index: 3; height: 350px; }
+        .timeline-image { width: 48%; border-radius: 16px; overflow: hidden; border: 1px solid var(--box-border); transition: var(--transition-smooth); position: relative; z-index: 3; height: auto; min-height: 400px; display: flex; }
         .timeline-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.4); transition: var(--transition-smooth); }
         .timeline-step:hover .timeline-image { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.8); transform: translateY(-10px) scale(1.02); }
         .timeline-step:hover .timeline-image img { filter: grayscale(0%) brightness(1); }
@@ -159,21 +158,17 @@
         .timeline-step:hover li { color: #d0d0d0; }
         .timeline-step:hover li::before { color: var(--accent); transform: translateX(3px); }
 
-        /* SOP DOCUMENTATION */
+        /* SOP DOCUMENTATION & ABOUT ME */
         .doc-grid { display: flex; flex-direction: column; gap: 40px; max-width: 1000px; margin: 0 auto; }
         .doc-card { background: var(--box-bg); border: 1px solid var(--box-border); border-radius: 12px; padding: 40px; backdrop-filter: blur(12px); border-left: 4px solid var(--accent); position: relative; overflow: hidden; }
         .doc-card h2 { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; margin-bottom: 15px; color: var(--text-main); }
         .doc-card > p { color: var(--text-muted); margin-bottom: 30px; font-size: 1rem; line-height: 1.7; }
-        
         .doc-step { margin-bottom: 25px; padding-left: 25px; border-left: 1px solid var(--box-border); position: relative; }
         .doc-step::before { content: ''; position: absolute; left: -5px; top: 8px; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent-glow); }
         .doc-step h4 { color: var(--text-main); font-size: 1.1rem; margin-bottom: 10px; }
         .doc-step p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; }
-        
         .code-block { background: #000; border: 1px solid var(--box-border); border-radius: 8px; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #38bdf8; overflow-x: auto; margin-bottom: 15px; line-height: 1.5; }
         .code-comment { color: #64748b; }
-
-        /* ABOUT ME PAGE */
         .about-wrapper { max-width: 800px; margin: 0 auto; background: var(--box-bg); border: 1px solid var(--box-border); border-radius: 16px; padding: 50px; backdrop-filter: blur(12px); text-align: center; }
         .profile-img-container { width: 160px; height: 160px; margin: 0 auto 30px; border-radius: 50%; padding: 4px; background: linear-gradient(135deg, var(--accent), #4f46e5); position: relative; }
         .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: #555; }
@@ -193,7 +188,7 @@
             .timeline-step, .timeline-step:nth-child(even) { flex-direction: column; align-items: flex-end; margin-bottom: 80px; }
             .timeline-marker { left: 30px; top: 40px; transform: translateX(-50%); }
             .timeline-content { width: calc(100% - 80px); margin-bottom: 20px; transform: none !important; }
-            .timeline-image { width: calc(100% - 80px); height: 250px; }
+            .timeline-image { width: calc(100% - 80px); min-height: 250px; }
             .doc-card, .about-wrapper { padding: 30px 20px; }
             .lang-btn { top: 75px; right: 20px; position: fixed; }
         }
@@ -218,10 +213,7 @@
     <!-- LIVE BACKGROUND -->
     <div class="live-bg">
         <div class="grid-overlay"></div>
-        <div class="particles">
-            <div class="particle p1"></div>
-            <div class="particle p2"></div>
-        </div>
+        <div class="particles"><div class="particle p1"></div><div class="particle p2"></div></div>
         <div class="vignette"></div>
     </div>
 
@@ -230,167 +222,241 @@
         <div class="container">
             <header class="header">
                 <h1>
-                    <span class="ukr">JUNIOR SYSADMIN ROADMAP</span>
-                    <span class="eng">JUNIOR SYSADMIN ROADMAP</span>
+                    <span class="ukr">ENTERPRISE SYSADMIN ROADMAP</span>
+                    <span class="eng">ENTERPRISE SYSADMIN ROADMAP</span>
                 </h1>
                 <p>
-                    <span class="ukr">Практичний план навчання. Головний принцип: 30% теорії + 70% практики.</span>
-                    <span class="eng">Practical training plan. Main principle: 30% theory + 70% practice.</span>
+                    <span class="ukr">Від компонентного ремонту до хмарної інфраструктури та кібербезпеки. Максимальна деталізація процесів.</span>
+                    <span class="eng">From component repair to cloud infrastructure and cybersecurity. Maximum process detailing.</span>
                 </p>
             </header>
 
             <div class="roadmap-container">
-                <!-- STAGE 0 -->
+                
+                <!-- STAGE 0: Hardware -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 0 | База ПК та заліза | 1–2 тижні</span>
-                                <span class="eng">Stage 0 | PC & Hardware Base | 1–2 weeks</span>
+                                <span class="ukr">Етап 0 | Апаратне забезпечення | Hardware</span>
+                                <span class="eng">Stage 0 | Hardware & Diagnostics</span>
                             </span>
                             <h3>
-                                <span class="ukr">Hardware & Diagnostics</span>
-                                <span class="eng">Hardware & Diagnostics</span>
+                                <span class="ukr">Діагностика та Ремонт ПК</span>
+                                <span class="eng">PC Diagnostics & Repair</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>SMART</span><span>UEFI</span><span>RAM</span><span>PCIe</span>
+                                <span>UEFI/BIOS</span><span>MemTest86</span><span>SMART</span><span>Multimeter</span><span>Thermal Paste</span>
                             </div>
                             <ul>
-                                <li>
-                                    <span class="ukr"><strong>Архітектура ПК:</strong> Розуміння CPU (ядра, кеш), RAM (DDR4/DDR5, dual-channel), та діагностика пам'яті.</span>
-                                    <span class="eng"><strong>PC Architecture:</strong> Understanding CPU (cores, cache), RAM (DDR4/DDR5, dual-channel), and memory diagnostics.</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Системи зберігання:</strong> HDD, SATA SSD, NVMe, перевірка SMART, розділи та файлові системи.</span>
-                                    <span class="eng"><strong>Storage Systems:</strong> HDD, SATA SSD, NVMe, SMART checks, partitions, and file systems.</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Конфігурація:</strong> UEFI/BIOS, налаштування Boot Order, Secure Boot, та базове обладнання.</span>
-                                    <span class="eng"><strong>Configuration:</strong> UEFI/BIOS, Boot Order configuration, Secure Boot, and basic hardware.</span>
-                                </li>
+                                <li><span class="ukr"><strong>Архітектура:</strong> Глибоке розуміння CPU (ядра, кеш L1/L2/L3), RAM (таймінги, dual/quad channel), шини PCIe.</span><span class="eng"><strong>Architecture:</strong> Deep understanding of CPU, RAM timings, and PCIe lanes.</span></li>
+                                <li><span class="ukr"><strong>Пам'ять та Сховище:</strong> Відновлення даних, SMART атрибути, відмінності NVMe від SATA, таблиці розділів GPT/MBR.</span><span class="eng"><strong>Storage:</strong> Data recovery, SMART attributes, NVMe vs SATA, GPT/MBR.</span></li>
+                                <li><span class="ukr"><strong>Діагностика:</strong> Робота з мультиметром (продзвінка ланцюгів живлення), стрес-тести (AIDA64, OCCT, FurMark), перевірка ОЗП через MemTest86.</span><span class="eng"><strong>Diagnostics:</strong> Multimeter usage, stress tests (AIDA64, OCCT), RAM checks via MemTest86.</span></li>
+                                <li><span class="ukr"><strong>Обслуговування:</strong> Заміна термоінтерфейсів, прошивка BIOS/UEFI через програматор або флешку, скидання CMOS.</span><span class="eng"><strong>Maintenance:</strong> Thermal interfaces, BIOS/UEFI flashing, CMOS reset.</span></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="timeline-image">
-                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80" alt="Hardware">
-                    </div>
+                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80" alt="Hardware"></div>
                 </div>
 
-                <!-- STAGE 1 -->
+                <!-- STAGE 1: Windows & AD -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 1 | Windows | 3–4 тижні</span>
-                                <span class="eng">Stage 1 | Windows | 3–4 weeks</span>
+                                <span class="ukr">Етап 1 | Windows OS | Enterprise</span>
+                                <span class="eng">Stage 1 | Windows OS & Enterprise</span>
                             </span>
                             <h3>
-                                <span class="ukr">Windows OS & PowerShell</span>
-                                <span class="eng">Windows OS & PowerShell</span>
+                                <span class="ukr">Windows Server & PowerShell</span>
+                                <span class="eng">Windows Server & PowerShell</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>NTFS</span><span>RDP</span><span>Registry</span><span>PowerShell</span>
+                                <span>Active Directory</span><span>GPO</span><span>PowerShell</span><span>NTFS</span><span>WSUS</span>
                             </div>
                             <ul>
-                                <li>
-                                    <span class="ukr"><strong>Адміністрування ОС:</strong> Device Manager, Event Viewer, Services, Task Manager.</span>
-                                    <span class="eng"><strong>OS Administration:</strong> Device Manager, Event Viewer, Services, Task Manager.</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Управління доступом:</strong> Права NTFS, Share Permissions, локальні користувачі та групи.</span>
-                                    <span class="eng"><strong>Access Management:</strong> NTFS rights, Share Permissions, local users, and groups.</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>PowerShell:</strong> Get-Help, Get-Process, Get-WmiObject, фільтрація, експорт у CSV/JSON.</span>
-                                    <span class="eng"><strong>PowerShell:</strong> Get-Help, Get-Process, Get-WmiObject, filtering, export to CSV/JSON.</span>
-                                </li>
+                                <li><span class="ukr"><strong>Основи ОС:</strong> Реєстр (Regedit), Event Viewer (фільтрація логів), Служби (Services.msc), Task Scheduler.</span><span class="eng"><strong>OS Basics:</strong> Registry, Event Viewer, Services, Task Scheduler.</span></li>
+                                <li><span class="ukr"><strong>Active Directory (AD DS):</strong> Створення домену, управління користувачами (Users & Computers), OU, делегування прав.</span><span class="eng"><strong>Active Directory:</strong> Domain creation, Users & Computers, OU, delegation.</span></li>
+                                <li><span class="ukr"><strong>Групові політики (GPO):</strong> Налаштування політик безпеки, мапінг мережевих дисків, розгортання ПЗ через MSI.</span><span class="eng"><strong>Group Policies (GPO):</strong> Security policies, network drive mapping, software deployment.</span></li>
+                                <li><span class="ukr"><strong>PowerShell Scripting:</strong> Автоматизація створення користувачів, модулі ActiveDirectory, віддалене виконання (Invoke-Command).</span><span class="eng"><strong>PowerShell:</strong> Automating user creation, AD modules, remote execution (Invoke-Command).</span></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="timeline-image">
-                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80" alt="Windows">
-                    </div>
+                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80" alt="Windows"></div>
                 </div>
 
-                <!-- STAGE 2 -->
+                <!-- STAGE 2: Linux -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 2 | Linux | 4–5 тижнів</span>
-                                <span class="eng">Stage 2 | Linux | 4–5 weeks</span>
+                                <span class="ukr">Етап 2 | Linux | Server Basics</span>
+                                <span class="eng">Stage 2 | Linux Server Administration</span>
                             </span>
                             <h3>
-                                <span class="ukr">Linux Server Administration</span>
-                                <span class="eng">Linux Server Administration</span>
+                                <span class="ukr">Linux Адміністрування</span>
+                                <span class="eng">Linux Administration</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>Debian</span><span>systemd</span><span>SSH</span><span>NetworkManager</span>
+                                <span>Arch / Debian</span><span>Bash</span><span>systemd</span><span>SSH</span><span>LVM</span>
                             </div>
                             <ul>
-                                <li>
-                                    <span class="ukr"><strong>Основи:</strong> Файлова система (/etc, /var), команди (ls, grep, awk), права (chmod, chown).</span>
-                                    <span class="eng"><strong>Basics:</strong> File system (/etc, /var), commands (ls, grep, awk), permissions (chmod, chown).</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Системне управління:</strong> Робота з процесами, systemd (systemctl, journalctl), пакети (apt).</span>
-                                    <span class="eng"><strong>System Management:</strong> Process management, systemd (systemctl, journalctl), packages (apt).</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Мережа:</strong> Налаштування через ip addr, ping, tcpdump, NetworkManager, DNS (resolvectl/dig).</span>
-                                    <span class="eng"><strong>Networking:</strong> Configuration via ip addr, ping, tcpdump, NetworkManager, DNS (resolvectl).</span>
-                                </li>
+                                <li><span class="ukr"><strong>Файлова система & Права:</strong> Структура FHS (/etc, /var, /opt), права доступу (chmod, chown, ACL, SUID/SGID).</span><span class="eng"><strong>FS & Permissions:</strong> FHS structure, access rights (chmod, chown, ACL).</span></li>
+                                <li><span class="ukr"><strong>Управління процесами:</strong> Робота з systemd (створення власних сервісів), top/htop, kill, управління пам'яттю.</span><span class="eng"><strong>Process Management:</strong> systemd (creating services), top/htop, kill signals.</span></li>
+                                <li><span class="ukr"><strong>Сховище:</strong> Налаштування LVM (Logical Volume Manager), монтування (fstab), RAID масиви (mdadm).</span><span class="eng"><strong>Storage:</strong> LVM setup, fstab mounting, software RAID (mdadm).</span></li>
+                                <li><span class="ukr"><strong>Мережа & Сервіси:</strong> Налаштування SSH (генерація ключів, заборона root login), підняття Nginx/Apache веб-серверів.</span><span class="eng"><strong>Network & Services:</strong> SSH hardening, Nginx/Apache web servers setup.</span></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="timeline-image">
-                        <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1000&q=80" alt="Linux">
-                    </div>
+                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1000&q=80" alt="Linux"></div>
                 </div>
 
-                <!-- STAGE 3 -->
+                <!-- STAGE 3: Networking -->
                 <div class="timeline-step scroll-anim">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="card-inner">
                             <span class="step-meta">
-                                <span class="ukr">Етап 3 | Мережі | 5–6 тижнів</span>
-                                <span class="eng">Stage 3 | Networks | 5–6 weeks</span>
+                                <span class="ukr">Етап 3 | Мережі | Networking</span>
+                                <span class="eng">Stage 3 | Network Infrastructure</span>
                             </span>
                             <h3>
-                                <span class="ukr">Network Infrastructure</span>
+                                <span class="ukr">Мережева Інфраструктура</span>
                                 <span class="eng">Network Infrastructure</span>
                             </h3>
                             <div class="tech-tags">
-                                <span>TCP/IP</span><span>VLAN</span><span>NAT</span><span>Wireshark</span>
+                                <span>OSI & TCP/IP</span><span>VLAN (802.1Q)</span><span>Routing</span><span>MikroTik</span><span>Wireshark</span>
                             </div>
                             <ul>
-                                <li>
-                                    <span class="ukr"><strong>Теорія мереж:</strong> OSI, TCP/IP, MAC, ARP, IPv4/IPv6, Subnetting/CIDR, Default Gateway.</span>
-                                    <span class="eng"><strong>Network Theory:</strong> OSI, TCP/IP, MAC, ARP, IPv4/IPv6, Subnetting/CIDR, Default Gateway.</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Технології:</strong> DNS, DHCP, NAT, Routing, VLAN, Firewall, VPN (WireGuard).</span>
-                                    <span class="eng"><strong>Technologies:</strong> DNS, DHCP, NAT, Routing, VLAN, Firewall, VPN (WireGuard).</span>
-                                </li>
-                                <li>
-                                    <span class="ukr"><strong>Діагностика:</strong> traceroute, ip/route, nmap, Wireshark, MikroTik WinBox/CLI.</span>
-                                    <span class="eng"><strong>Diagnostics:</strong> traceroute, ip/route, nmap, Wireshark, MikroTik WinBox/CLI.</span>
-                                </li>
+                                <li><span class="ukr"><strong>Фундамент:</strong> Модель OSI, стек TCP/IP, розуміння MAC, ARP, IPv4/IPv6, обчислення масок підмереж (CIDR).</span><span class="eng"><strong>Foundation:</strong> OSI model, TCP/IP, ARP, IPv4/IPv6, subnetting (CIDR).</span></li>
+                                <li><span class="ukr"><strong>Комутація & Маршрутизація:</strong> Налаштування VLAN (trunk/access порти), статична маршрутизація, NAT, PAT.</span><span class="eng"><strong>Switching & Routing:</strong> VLAN tagging, static routing, NAT, PAT.</span></li>
+                                <li><span class="ukr"><strong>Базові сервіси:</strong> Розгортання та траблшутинг DHCP (scopes, reservations), DNS (A, CNAME, TXT, MX записи).</span><span class="eng"><strong>Core Services:</strong> Deploying and troubleshooting DHCP and DNS records.</span></li>
+                                <li><span class="ukr"><strong>Обладнання:</strong> Практика роботи з MikroTik (RouterOS, WinBox), Cisco Packet Tracer, налаштування OpenWrt.</span><span class="eng"><strong>Hardware:</strong> MikroTik (RouterOS), Cisco Packet Tracer, OpenWrt configuration.</span></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="timeline-image">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" alt="Networking">
-                    </div>
+                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" alt="Networking"></div>
                 </div>
+
+                <!-- STAGE 4: Virtualization & Docker -->
+                <div class="timeline-step scroll-anim">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="card-inner">
+                            <span class="step-meta">
+                                <span class="ukr">Етап 4 | Віртуалізація | Контейнери</span>
+                                <span class="eng">Stage 4 | Virtualization & Containers</span>
+                            </span>
+                            <h3>
+                                <span class="ukr">Proxmox & Docker</span>
+                                <span class="eng">Proxmox & Docker</span>
+                            </h3>
+                            <div class="tech-tags">
+                                <span>Proxmox VE</span><span>Hyper-V</span><span>Docker</span><span>Docker Compose</span><span>LXC</span>
+                            </div>
+                            <ul>
+                                <li><span class="ukr"><strong>Гіпервізори (Type 1):</strong> Встановлення та налаштування Proxmox VE / ESXi. Створення кластерів, управління ресурсами (CPU, RAM).</span><span class="eng"><strong>Hypervisors:</strong> Proxmox VE / ESXi setup, cluster creation, resource allocation.</span></li>
+                                <li><span class="ukr"><strong>Сховище та Мережа ВМ:</strong> Налаштування віртуальних комутаторів (vSwitch), прокидання PCI пристроїв (Passthrough), бекапи ВМ.</span><span class="eng"><strong>VM Storage & Network:</strong> vSwitches, PCI Passthrough, VM backups.</span></li>
+                                <li><span class="ukr"><strong>Контейнеризація:</strong> Розуміння різниці між VM та Docker. Написання Dockerfile, робота з образами (pull, build, run).</span><span class="eng"><strong>Containerization:</strong> VM vs Docker, writing Dockerfiles, managing images.</span></li>
+                                <li><span class="ukr"><strong>Docker Compose:</strong> Декларативний запуск мульти-контейнерних додатків, прокидання портів, створення Docker Volumes.</span><span class="eng"><strong>Docker Compose:</strong> Multi-container apps, port mapping, Docker Volumes.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80" alt="Server Rack"></div>
+                </div>
+
+                <!-- STAGE 5: Monitoring -->
+                <div class="timeline-step scroll-anim">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="card-inner">
+                            <span class="step-meta">
+                                <span class="ukr">Етап 5 | Моніторинг | Monitoring</span>
+                                <span class="eng">Stage 5 | Monitoring & Logging</span>
+                            </span>
+                            <h3>
+                                <span class="ukr">Моніторинг Інфраструктури</span>
+                                <span class="eng">Infrastructure Monitoring</span>
+                            </h3>
+                            <div class="tech-tags">
+                                <span>Zabbix</span><span>Prometheus</span><span>Grafana</span><span>SNMP</span><span>Syslog</span>
+                            </div>
+                            <ul>
+                                <li><span class="ukr"><strong>Zabbix:</strong> Встановлення сервера, розгортання Zabbix Agents на Linux/Windows, налаштування тригерів та шаблонів.</span><span class="eng"><strong>Zabbix:</strong> Server setup, Agent deployment, configuring triggers and templates.</span></li>
+                                <li><span class="ukr"><strong>Мережевий моніторинг:</strong> Використання протоколу SNMP (v2c/v3) для збору метрик з роутерів та свічів.</span><span class="eng"><strong>Network Monitoring:</strong> Using SNMP (v2c/v3) for router/switch metrics.</span></li>
+                                <li><span class="ukr"><strong>Візуалізація:</strong> Інтеграція джерел даних з Grafana, створення красивих та інформативних дашбордів.</span><span class="eng"><strong>Visualization:</strong> Data source integration with Grafana, building dashboards.</span></li>
+                                <li><span class="ukr"><strong>Логування:</strong> Централізований збір логів (Syslog, Graylog або ELK стек), налаштування сповіщень у Telegram/Email.</span><span class="eng"><strong>Logging:</strong> Centralized log collection (Syslog, Graylog), Telegram alerts.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Monitoring Data"></div>
+                </div>
+
+                <!-- STAGE 6: Automation -->
+                <div class="timeline-step scroll-anim">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="card-inner">
+                            <span class="step-meta">
+                                <span class="ukr">Етап 6 | Автоматизація | Scripting</span>
+                                <span class="eng">Stage 6 | Automation & Scripting</span>
+                            </span>
+                            <h3>
+                                <span class="ukr">Ansible, Bash & Python</span>
+                                <span class="eng">Ansible, Bash & Python</span>
+                            </h3>
+                            <div class="tech-tags">
+                                <span>Ansible</span><span>Python</span><span>aiogram</span><span>Bash</span><span>Git</span>
+                            </div>
+                            <ul>
+                                <li><span class="ukr"><strong>Bash Scripting:</strong> Написання скриптів для бекапів (tar, rsync, cron), парсинг логів через grep/awk.</span><span class="eng"><strong>Bash Scripting:</strong> Backup scripts (tar, rsync, cron), log parsing.</span></li>
+                                <li><span class="ukr"><strong>Python для SysAdmin:</strong> Автоматизація рутини, взаємодія з API (requests). Розробка Telegram-ботів (aiogram) для управління сервером.</span><span class="eng"><strong>Python:</strong> Routine automation, API interaction, Telegram bot (aiogram) development.</span></li>
+                                <li><span class="ukr"><strong>Ansible:</strong> Написання Playbooks (YAML), управління інвентарем, масове розгортання конфігурацій на десятки серверів (IaC).</span><span class="eng"><strong>Ansible:</strong> Writing Playbooks, inventory management, mass configuration deployment.</span></li>
+                                <li><span class="ukr"><strong>Системи контролю версій:</strong> Використання Git (commit, push, pull, гілки) для збереження своїх скриптів та конфігів на GitHub/GitLab.</span><span class="eng"><strong>Version Control:</strong> Using Git to store scripts and configs on GitHub.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=1000&q=80" alt="Code Automation"></div>
+                </div>
+
+                <!-- STAGE 7: Security -->
+                <div class="timeline-step scroll-anim">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="card-inner">
+                            <span class="step-meta">
+                                <span class="ukr">Етап 7 | Безпека | Cybersecurity</span>
+                                <span class="eng">Stage 7 | Cybersecurity & Hardening</span>
+                            </span>
+                            <h3>
+                                <span class="ukr">Інформаційна Безпека (125)</span>
+                                <span class="eng">Cybersecurity (125)</span>
+                            </h3>
+                            <div class="tech-tags">
+                                <span>Firewall</span><span>VPN</span><span>Fail2ban</span><span>IDS/IPS</span><span>Audits</span>
+                            </div>
+                            <ul>
+                                <li><span class="ukr"><strong>Firewalls (Міжмережеві екрани):</strong> Глибоке налаштування iptables/nftables, UFW у Linux. Правила фільтрації в MikroTik.</span><span class="eng"><strong>Firewalls:</strong> iptables/nftables, UFW in Linux, MikroTik filtering rules.</span></li>
+                                <li><span class="ukr"><strong>Захист периметра:</strong> Встановлення та налаштування Fail2ban для захисту від брутфорс-атак, обмеження швидкості запитів (Rate Limiting).</span><span class="eng"><strong>Perimeter Defense:</strong> Fail2ban against bruteforce, rate limiting.</span></li>
+                                <li><span class="ukr"><strong>VPN Тунелі:</strong> Розгортання захищених мереж за допомогою OpenVPN та WireGuard. Site-to-Site та Client-to-Site з'єднання.</span><span class="eng"><strong>VPN Tunnels:</strong> OpenVPN & WireGuard deployment (Site-to-Site, Client-to-Site).</span></li>
+                                <li><span class="ukr"><strong>Аудит та Сканування:</strong> Використання Nmap для сканування портів мережі, пошук вразливостей, принцип найменших привілеїв (PoLP).</span><span class="eng"><strong>Auditing:</strong> Port scanning with Nmap, vulnerability search, Principle of Least Privilege.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80" alt="Cybersecurity"></div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -410,8 +476,6 @@
             </header>
 
             <div class="doc-grid">
-                
-                <!-- GUIDE 1 -->
                 <div class="doc-card">
                     <h2>
                         <span class="ukr">01. Бездротовий принт-сервер (OpenWrt)</span>
@@ -421,97 +485,27 @@
                         <span class="ukr">Інструкція з перетворення звичайного USB-принтера на мережевий пристрій за допомогою роутера.</span>
                         <span class="eng">Instruction for converting a standard USB printer into a network device using a router.</span>
                     </p>
-                    
                     <div class="doc-step">
-                        <h4>
-                            <span class="ukr">Крок 1. Підключення та прошивка по SSH</span>
-                            <span class="eng">Step 1. Connection and Flashing via SSH</span>
-                        </h4>
-                        <p>
-                            <span class="ukr">Скиньте роутер. Підключіться через термінал по SSH та встановіть прошивку OpenWrt.</span>
-                            <span class="eng">Reset the router. Connect via terminal using SSH and install the OpenWrt firmware.</span>
-                        </p>
-                        <div class="code-block">
-                            <span class="code-comment"># SSH connection to stock router</span><br>
-                            ssh root@192.168.1.1<br>
-                            <span class="code-comment"># Perform sysupgrade</span>
-                        </div>
+                        <h4><span class="ukr">Крок 1. Підключення та прошивка по SSH</span><span class="eng">Step 1. Connection and Flashing via SSH</span></h4>
+                        <div class="code-block"><span class="code-comment"># SSH connection to stock router</span><br>ssh root@192.168.1.1<br><span class="code-comment"># Perform sysupgrade</span></div>
                     </div>
-                    
                     <div class="doc-step">
-                        <h4>
-                            <span class="ukr">Крок 2. Налаштування мережі та пакетів</span>
-                            <span class="eng">Step 2. Network and Package Configuration</span>
-                        </h4>
-                        <div class="code-block">
-                            opkg update<br>
-                            opkg install kmod-usb-printer p910nd luci-app-p910nd
-                        </div>
-                    </div>
-
-                    <div class="doc-step">
-                        <h4>
-                            <span class="ukr">Крок 3. Налаштування клієнтських ПК</span>
-                            <span class="eng">Step 3. Client PC Configuration</span>
-                        </h4>
-                        <p>
-                            <span class="ukr">Додайте принтер через "Standard TCP/IP Port". Вкажіть статичний IP роутера. Протокол: <strong>RAW</strong>, порт <strong>9100</strong>.</span>
-                            <span class="eng">Add printer via "Standard TCP/IP Port". Specify the router's static IP. Protocol: <strong>RAW</strong>, port <strong>9100</strong>.</span>
-                        </p>
+                        <h4><span class="ukr">Крок 2. Налаштування мережі та пакетів</span><span class="eng">Step 2. Network and Package Configuration</span></h4>
+                        <div class="code-block">opkg update<br>opkg install kmod-usb-printer p910nd luci-app-p910nd</div>
                     </div>
                 </div>
 
-                <!-- GUIDE 2 -->
                 <div class="doc-card">
                     <h2>
                         <span class="ukr">02. Апаратне розгортання та Діагностика</span>
                         <span class="eng">02. Hardware Provisioning & Diagnostics</span>
                     </h2>
-                    <p>
-                        <span class="ukr">Стандартний алгоритм підготовки робочих станцій (Provisioning).</span>
-                        <span class="eng">Standard algorithm for preparing workstations (Provisioning).</span>
-                    </p>
-                    
+                    <p><span class="ukr">Стандартний алгоритм підготовки робочих станцій (Provisioning).</span></p>
                     <div class="doc-step">
-                        <h4>
-                            <span class="ukr">Стрес-тести та діагностика</span>
-                            <span class="eng">Stress tests and diagnostics</span>
-                        </h4>
-                        <p>
-                            <span class="ukr">Завантажте систему з <strong>WinPE (Sergei Strelec)</strong>. Запустіть <code>MemTest86</code> для ОЗП та <code>AIDA64 / OCCT</code> для стрес-тесту CPU. Графік Throttling має бути 0%.</span>
-                            <span class="eng">Boot with <strong>WinPE (Sergei Strelec)</strong>. Run <code>MemTest86</code> for RAM and <code>AIDA64 / OCCT</code> for CPU stress test. Throttling must be 0%.</span>
-                        </p>
+                        <h4><span class="ukr">Стрес-тести та діагностика</span><span class="eng">Stress tests and diagnostics</span></h4>
+                        <p><span class="ukr">Завантажте систему з <strong>WinPE (Sergei Strelec)</strong>. Запустіть <code>MemTest86</code> для ОЗП та <code>AIDA64 / OCCT</code> для стрес-тесту CPU.</span></p>
                     </div>
                 </div>
-
-                <!-- GUIDE 3 -->
-                <div class="doc-card">
-                    <h2>
-                        <span class="ukr">03. Головні принципи SysAdmin</span>
-                        <span class="eng">03. Main SysAdmin Principles</span>
-                    </h2>
-                    <div class="doc-step">
-                        <h4>
-                            <span class="ukr">Алгоритм вирішення проблем</span>
-                            <span class="eng">Troubleshooting Algorithm</span>
-                        </h4>
-                        <p>
-                            <span class="ukr">Симптоми → факти → локалізація → гіпотеза → зміна → перевірка → документація.</span>
-                            <span class="eng">Symptoms → facts → localization → hypothesis → change → verification → documentation.</span>
-                        </p>
-                    </div>
-                    <div class="doc-step">
-                        <h4>
-                            <span class="ukr">Безпека (Security)</span>
-                            <span class="eng">Security Basics</span>
-                        </h4>
-                        <p>
-                            <span class="ukr">Дотримуватися Principle of Least Privilege. Не давати користувачам права адміністратора без причини. Не відкривати RDP/SSH в інтернет без необхідності.</span>
-                            <span class="eng">Adhere to Principle of Least Privilege. Do not give users admin rights without reason. Do not open RDP/SSH to the internet unnecessarily.</span>
-                        </p>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -551,16 +545,10 @@
 
                 <div class="contact-grid">
                     <a href="https://t.me/your_telegram" class="contact-btn" target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2L15 22L11 13L2 9L22 2Z"></path></svg>
-                        Telegram
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2L15 22L11 13L2 9L22 2Z"></path></svg> Telegram
                     </a>
                     <a href="https://github.com/asarabombom-ctrl" class="contact-btn" target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        GitHub
-                    </a>
-                    <a href="mailto:your.email@gmail.com" class="contact-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        Email
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg> GitHub
                     </a>
                 </div>
             </div>
