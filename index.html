@@ -1,586 +1,199 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise IT Architecture | Serhii Balakan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Roadmap — Этап 1: IT Support / Helpdesk</title>
     <style>
         :root {
-            --bg-dark: #030303;
-            --box-bg: rgba(15, 15, 15, 0.85);
-            --box-border: rgba(255, 255, 255, 0.1);
-            --text-main: #f8f8f8;
-            --text-muted: #999999;
-            --accent: #e11d48;
-            --accent-glow: rgba(225, 29, 72, 0.5);
-            --transition-smooth: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-color: #58a6ff;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --code-bg: #21262d;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; overflow-x: hidden; padding-top: 70px; }
-        
-        .hidden-cite { display: none !important; }
-
-        /* MULTILINGUAL SYSTEM */
-        body.lang-en .ukr { display: none !important; }
-        body:not(.lang-en) .eng { display: none !important; }
-
-        /* NAVBAR */
-        .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
-            background: rgba(3, 3, 3, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--box-border); z-index: 1000;
-            display: flex; justify-content: center; align-items: center; gap: 30px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        .nav-link {
-            color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
-            text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s;
-            padding: 10px 15px; border-radius: 6px; text-align: center;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
         }
-        .nav-link:hover { color: var(--text-main); background: rgba(255, 255, 255, 0.05); }
-        .nav-link.active { color: var(--accent); font-weight: 700; text-shadow: 0 0 15px var(--accent-glow); }
-        .lang-btn {
-            position: absolute; right: 20px; background: transparent; border: 1px solid var(--box-border);
-            color: var(--text-muted); font-family: 'JetBrains Mono', monospace; padding: 6px 12px;
-            border-radius: 4px; cursor: pointer; transition: 0.3s;
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .lang-btn:hover { border-color: var(--accent); color: var(--text-main); }
 
-        /* VIEWS */
-        .view-section { display: none; opacity: 0; transition: opacity 0.5s ease; }
-        .view-section.active { display: block; opacity: 1; animation: fadeInView 0.5s forwards; }
-        @keyframes fadeInView { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* DYNAMIC SMOOTH BACKGROUND */
-        .live-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background-color: var(--bg-dark); overflow: hidden; }
-        .grid-overlay {
-            position: absolute; top: -50px; left: -50px; width: calc(100vw + 100px); height: calc(100vh + 100px);
-            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px; z-index: 2; animation: moveGrid 20s linear infinite;
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
-        @keyframes moveGrid { 0% { transform: translateY(0); } 100% { transform: translateY(50px); } }
 
-        .particles { position: absolute; width: 100%; height: 100%; z-index: 1; }
-        .particle { position: absolute; border-radius: 50%; filter: blur(50px); opacity: 0; animation: floatUp 15s infinite ease-in-out; }
-        .p1 { width: 300px; height: 300px; background: rgba(225, 29, 72, 0.15); left: 10%; bottom: -20%; animation-delay: 0s; animation-duration: 25s; }
-        .p2 { width: 400px; height: 400px; background: rgba(190, 18, 60, 0.1); right: 15%; bottom: -30%; animation-delay: -5s; animation-duration: 30s; }
-        .vignette { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 40%, #000000 120%); z-index: 3; }
-
-        .container { max-width: 1300px; margin: 0 auto; padding: 60px 20px; position: relative; z-index: 10; }
-
-        /* HEADER */
-        .header { text-align: center; margin-bottom: 80px; }
-        .header h1 { font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -2px; text-shadow: 0 0 30px rgba(255,255,255,0.1); }
-        .header p { color: var(--text-muted); font-size: 1.15rem; max-width: 800px; margin: 0 auto; }
-        .header .accent { color: var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
-
-        /* CROOKED WINDING ROADMAP */
-        .roadmap-container { position: relative; padding: 40px 0; overflow: hidden; }
-        .roadmap-container::before { display: none; } 
-
-        .timeline-step { 
-            display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 90px; width: 100%; position: relative; 
-            opacity: 0; transform: translateY(60px); transition: var(--transition-smooth); 
+        h1 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
         }
-        .timeline-step.visible { opacity: 1; transform: translateY(0); }
-        
-        .timeline-step:nth-child(odd) { flex-direction: row; }
-        .timeline-step:nth-child(even) { flex-direction: row-reverse; }
 
-        /* Змійка (лінія) */
-        .timeline-step::before {
-            content: ''; position: absolute; top: 50%; height: calc(100% + 90px);
-            width: 45%; border: 3px solid var(--box-border); z-index: 0;
-            transition: border-color 0.5s ease, box-shadow 0.5s ease;
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
         }
-        .timeline-step:hover::before { border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
-        
-        .timeline-step:nth-child(odd)::before {
-            left: 50%; border-left: none; border-top: none; 
-            border-bottom-right-radius: 80px; border-top-right-radius: 80px;
+
+        .section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
         }
-        .timeline-step:nth-child(even)::before {
-            right: 50%; border-right: none; border-top: none; 
-            border-bottom-left-radius: 80px; border-top-left-radius: 80px;
+
+        h2 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
         }
-        .timeline-step:last-child::before { display: none; }
 
-        .timeline-marker { 
-            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); 
-            width: 24px; height: 24px; border-radius: 50%; background: var(--bg-dark); 
-            border: 4px solid var(--box-border); z-index: 2; transition: 0.5s ease; 
+        p, li {
+            margin-bottom: 0.75rem;
         }
-        .timeline-step:hover .timeline-marker { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 20px var(--accent-glow); transform: translate(-50%, -50%) scale(1.3); }
 
-        /* DYNAMIC CARD CONTENT */
-        .timeline-content { 
-            width: 42%; background: var(--box-bg); border: 1px solid var(--box-border); border-radius: 16px; 
-            transition: var(--transition-smooth); position: relative; backdrop-filter: blur(12px); z-index: 3;
-            overflow: hidden; cursor: pointer;
+        ul, ol {
+            padding-left: 1.5rem;
         }
-        
-        /* Асиметрія карток */
-        .timeline-step:nth-child(odd) .timeline-content { transform: rotate(-1.5deg) translateY(15px); }
-        .timeline-step:nth-child(even) .timeline-content { transform: rotate(1.5deg) translateY(-15px); }
-        
-        .timeline-step:hover .timeline-content { 
-            border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px var(--accent-glow); 
-            transform: translateY(-10px) rotate(0deg); 
+
+        li {
+            color: var(--text-color);
         }
-        
-        .card-dynamic-bg {
-            position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; z-index: 0;
-            opacity: 0.04; background-size: cover; background-position: center;
-            animation: panZoom 25s infinite alternate linear; pointer-events: none;
+
+        strong {
+            color: #ffffff;
         }
-        @keyframes panZoom { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.1) translate(-2%, -2%); } }
-        
-        .card-inner { position: relative; z-index: 2; padding: 40px; }
 
-        .timeline-image { width: 48%; border-radius: 16px; overflow: hidden; border: 1px solid var(--box-border); transition: var(--transition-smooth); position: relative; z-index: 3; height: auto; min-height: 400px; display: flex; }
-        .timeline-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.4); transition: var(--transition-smooth); }
-        .timeline-step:hover .timeline-image { border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.8); transform: translateY(-10px) scale(1.02); }
-        .timeline-step:hover .timeline-image img { filter: grayscale(0%) brightness(1); }
+        code {
+            background-color: var(--code-bg);
+            color: var(--accent-color);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+            font-size: 0.9em;
+        }
 
-        .step-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; }
-        .timeline-step:hover .step-meta { color: var(--accent); font-weight: 700; }
-        .timeline-content h3 { font-size: 1.6rem; margin-bottom: 20px; color: var(--text-main); font-weight: 800; }
-        
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        .tech-tags span { background: rgba(0,0,0,0.8); border: 1px solid var(--box-border); padding: 5px 10px; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; border-radius: 4px; color: var(--text-muted); transition: 0.3s; }
-        .timeline-step:hover .tech-tags span { border-color: var(--accent); color: var(--text-main); background: rgba(225, 29, 72, 0.15); }
+        .note {
+            background-color: rgba(88, 166, 255, 0.1);
+            border-left: 3px solid var(--accent-color);
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.95rem;
+        }
 
-        .timeline-content ul { list-style: none; margin-left: 0; }
-        .timeline-content li { margin-bottom: 12px; position: relative; padding-left: 20px; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; transition: 0.3s; }
-        .timeline-content li::before { content: '>'; position: absolute; left: 0; font-family: 'JetBrains Mono', monospace; font-weight: bold; color: var(--box-border); transition: 0.3s; }
-        .timeline-step:hover li { color: #d0d0d0; }
-        .timeline-step:hover li::before { color: var(--accent); transform: translateX(3px); }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
 
-        /* SOP DOCUMENTATION & ABOUT ME */
-        .doc-grid { display: flex; flex-direction: column; gap: 40px; max-width: 1000px; margin: 0 auto; }
-        .doc-card { background: var(--box-bg); border: 1px solid var(--box-border); border-radius: 12px; padding: 40px; backdrop-filter: blur(12px); border-left: 4px solid var(--accent); position: relative; overflow: hidden; }
-        .doc-card h2 { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; margin-bottom: 15px; color: var(--text-main); }
-        .doc-card > p { color: var(--text-muted); margin-bottom: 30px; font-size: 1rem; line-height: 1.7; }
-        .doc-step { margin-bottom: 25px; padding-left: 25px; border-left: 1px solid var(--box-border); position: relative; }
-        .doc-step::before { content: ''; position: absolute; left: -5px; top: 8px; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent-glow); }
-        .doc-step h4 { color: var(--text-main); font-size: 1.1rem; margin-bottom: 10px; }
-        .doc-step p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; }
-        .code-block { background: #000; border: 1px solid var(--box-border); border-radius: 8px; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #38bdf8; overflow-x: auto; margin-bottom: 15px; line-height: 1.5; white-space: pre-wrap; }
-        .code-comment { color: #64748b; }
-        .about-wrapper { max-width: 800px; margin: 0 auto; background: var(--box-bg); border: 1px solid var(--box-border); border-radius: 16px; padding: 50px; backdrop-filter: blur(12px); text-align: center; }
-        .profile-img-container { width: 160px; height: 160px; margin: 0 auto 30px; border-radius: 50%; padding: 4px; background: linear-gradient(135deg, var(--accent), #4f46e5); position: relative; }
-        .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: #555; }
-        .about-wrapper h2 { font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; }
-        .about-wrapper h3 { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 1.1rem; margin-bottom: 25px; }
-        .about-bio { color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 40px; text-align: left; }
-        .contact-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .contact-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: rgba(255,255,255,0.05); border: 1px solid var(--box-border); border-radius: 8px; color: var(--text-main); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; transition: 0.3s; }
-        .contact-btn:hover { border-color: var(--accent); background: rgba(225, 29, 72, 0.1); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
 
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .navbar { gap: 15px; padding: 0 10px; }
-            .nav-link { font-size: 0.75rem; padding: 10px 8px; }
-            .roadmap-container::before { display: none; }
-            .timeline-step::before { display: none; }
-            .timeline-step, .timeline-step:nth-child(even) { flex-direction: column; align-items: flex-end; margin-bottom: 80px; }
-            .timeline-marker { left: 30px; top: 40px; transform: translateX(-50%); }
-            .timeline-content { width: calc(100% - 80px); margin-bottom: 20px; transform: none !important; }
-            .timeline-image { width: calc(100% - 80px); min-height: 250px; }
-            .doc-card, .about-wrapper { padding: 30px 20px; }
-            .lang-btn { top: 75px; right: 20px; position: fixed; }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <a class="nav-link active" onclick="switchTab('roadmap', this)">
-            <span class="ukr">Шлях (Roadmap)</span><span class="eng">Roadmap</span>
-        </a>
-        <a class="nav-link" onclick="switchTab('docs', this)">
-            <span class="ukr">Документація (SOP)</span><span class="eng">Documentation (SOP)</span>
-        </a>
-        <a class="nav-link" onclick="switchTab('about', this)">
-            <span class="ukr">Про мене</span><span class="eng">About Me</span>
-        </a>
-        <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">ENG</button>
-    </nav>
+    <div class="container">
+        <header>
+            <h1>Доклад: Роудмап — Этап 1</h1>
+            <div class="subtitle">IT Support / Helpdesk &bull; Базовые процессы и техническое обслуживание</div>
+        </header>
 
-    <!-- LIVE BACKGROUND -->
-    <div class="live-bg">
-        <div class="grid-overlay"></div>
-        <div class="particles"><div class="particle p1"></div><div class="particle p2"></div></div>
-        <div class="vignette"></div>
+        <main>
+            <!-- Блок 1 -->
+            <section class="section">
+                <h2>1. Установка Windows / Linux</h2>
+                <p>Первый шаг в работе системного администратора — подготовка универсального инструмента для развертывания операционных систем:</p>
+                <ul>
+                    <li><strong>Подготовка флешки:</strong> Берем накопитель объемом 16/32 Gb и устанавливаем на него <code>Ventoy</code>.</li>
+                    <li><strong>Запись образов:</strong> Закидываем на флешку установочные ISO-образы Windows или подходящие дистрибутивы Linux[cite: 1].</li>
+                    <li><strong>Запуск установки:</strong> Вставляем флешку в ПК/ноутбук, через BIOS / Boot menu выбираем UEFI-диск с Ventoy, после чего в графическом меню выбираем нужный ISO-файл[cite: 1].</li>
+                </ul>
+            </section>
+
+            <!-- Блок 2 -->
+            <section class="section">
+                <h2>2. Настройка ПК, ноутбуков и аппаратное обслуживание</h2>
+                <p>Обслуживание «железа» требует строгой последовательности действий:</p>
+                <ol>
+                    <li><strong>Чистка и профилактика:</strong> Снимаем крышку устройства, тщательно очищаем от пыли и при необходимости меняем термопасту[cite: 1].</li>
+                    <li><strong>Диагностика:</strong> Запускаем тесты комплектующих через <code>MemoryTest</code> и аналогичные утилиты[cite: 1].</li>
+                    <li><strong>Развертывание системы:</strong> Ставим ОС с подготовленного загрузочного диска[cite: 1].</li>
+                    <li><strong>Финальная настройка:</strong> Проверяем и устанавливаем драйверы, добавляем юзера через PowerShell-скрипт, ставим рабочий софт, подключаем учетные записи и принтеры[cite: 1].</li>
+                </ol>
+            </section>
+
+            <!-- Блок 3 -->
+            <section class="section">
+                <h2>3. Обслуживание принтеров, МФУ и сканеров</h2>
+                <p>Работа с печатной оргтехникой и устранение базовых неполадок:</p>
+                <ul>
+                    <li><strong>Замена картриджей:</strong> Открываем крышку, извлекаем картридж и ставим аналогичный заправленный[cite: 1].</li>
+                    <div class="note">
+                        <strong>Важно:</strong> Картриджи разных брендов (например, HP и Canon) не взаимозаменяемы[cite: 1].
+                    </div>
+                    <li><strong>Замятие бумаги:</strong> Выключаем принтер, открываем крышку и аккуратно извлекаем застрявший лист (при необходимости предварительно вынимаем картридж)[cite: 1].</li>
+                    <li><strong>Сетевая настройка:</strong> Скачиваем драйвер с официального сайта, в Windows заходим в <em>«Принтеры и сканеры» &rarr; «Добавить по IP»</em>, указываем IP-адрес принтера (вида <code>192.168.хх.хх</code>) и тестируем печать[cite: 1].</li>
+                </ul>
+            </section>
+
+            <!-- Блок 4 -->
+            <section class="section">
+                <h2>4. Работа с пользователями и удаленная поддержка</h2>
+                <p>Оперативное реагирование и помощь сотрудникам на рабочих местах:</p>
+                <ul>
+                    <li><strong>ПО для удаленного доступа:</strong> Используются программы <code>AnyDesk</code> и <code>TeamViewer</code>[cite: 1].</li>
+                    <li><strong>Алгоритм:</strong> Сначала выслушиваем и фиксируем проблему, после чего подключаемся через выбранную программу и решаем задачу удаленно, не отходя с рабочего места[cite: 1].</li>
+                </ul>
+            </section>
+
+            <!-- Блок 5 -->
+            <section class="section">
+                <h2>5. Инвентаризация оборудования</h2>
+                <p>Контроль парка техники и ведение прозрачного учета:</p>
+                <ul>
+                    <li><strong>Автоматизация сбора:</strong> Написан простой <code>PowerShell</code>-скрипт, запрашивающий Имя и Фамилию сотрудника, после чего генерирующий текстовый файл с полной информацией о железе (модель, серийные номера, комплектующие, мониторы) для внесения в общую базу[cite: 1].</li>
+                    <li><strong>Ревизия фонда:</strong> Неиспользуемые ПК и ноутбуки проверяются, чистятся, обслуживаются (замена термопасты, тесты комплектующих), оснащаются подходящей по мощности ОС и добавляются в учетную базу[cite: 1].</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>Roadmap Project &bull; GitHub Pages: <a href="https://asarabombom-ctrl.github.io/" target="_blank">asarabombom-ctrl.github.io</a>[cite: 1]</p>
+        </footer>
     </div>
 
-    <!-- VIEW 1: ROADMAP -->
-    <div id="roadmap" class="view-section active">
-        <div class="container">
-            <header class="header">
-                <h1>
-                    <span class="ukr">IT SUPPORT & HELPDESK ROADMAP</span>
-                    <span class="eng">IT SUPPORT & HELPDESK ROADMAP</span>
-                </h1>
-                <p>
-                    <span class="ukr">Етап 1: Базові процеси IT Support, обслуговування заліза, оргтехніки, віддалена підтримка та інвентаризація. Натисніть на етап для відкриття інструкції.</span>
-                    <span class="eng">Stage 1: Core IT Support processes, hardware maintenance, peripherals, remote support, and inventory. Click on a stage to open detailed SOPs.</span>
-                </p>
-            </header>
-
-            <div class="roadmap-container">
-                
-                <!-- STAGE 1 -->
-                <div class="timeline-step scroll-anim">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content" onclick="openDoc('doc-stage1')">
-                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="card-inner">
-                            <span class="step-meta">
-                                <span class="ukr">Крок 01 | Установка OS</span>
-                                <span class="eng">Step 01 | OS Installation</span>
-                            </span>
-                            <h3>
-                                <span class="ukr">Установка Windows / Linux</span>
-                                <span class="eng">Windows / Linux Installation</span>
-                            </h3>
-                            <div class="tech-tags">
-                                <span>Ventoy</span><span>UEFI/BIOS</span><span>ISO</span><span>Boot menu</span>
-                            </div>
-                            <ul>
-                                <li><span class="ukr"><strong>Підготовка флешки:</strong> Накопичувач 16/32 Gb з Ventoy та ISO-образами[cite: 1].</span><span class="eng"><strong>USB Prep:</strong> 16/32 Gb drive with Ventoy and ISO images[cite: 1].</span></li>
-                                <li><span class="ukr"><strong>Розгортання:</strong> Вибір UEFI-диска через BIOS та запуск обраної ОС[cite: 1].</span><span class="eng"><strong>Deployment:</strong> Selecting UEFI drive via BIOS and running chosen OS[cite: 1].</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80" alt="OS Install"></div>
-                </div>
-
-                <!-- STAGE 2 -->
-                <div class="timeline-step scroll-anim">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content" onclick="openDoc('doc-stage2')">
-                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1588702547919-26b89e026ea1?auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="card-inner">
-                            <span class="step-meta">
-                                <span class="ukr">Крок 02 | Обслуговування ПК</span>
-                                <span class="eng">Step 02 | PC Maintenance</span>
-                            </span>
-                            <h3>
-                                <span class="ukr">Настройка ПК и замена комплектующих</span>
-                                <span class="eng">PC Setup & Hardware Replacement</span>
-                            </h3>
-                            <div class="tech-tags">
-                                <span>SSD / RAM / PSU</span><span>MemoryTest</span><span>PowerShell</span>
-                            </div>
-                            <ul>
-                                <li><span class="ukr"><strong>Профілактика:</strong> Чистка від пилу, заміна термопасти, перевірка через MemoryTest[cite: 1].</span><span class="eng"><strong>Maintenance:</strong> Dust cleaning, thermal paste replacement, MemoryTest[cite: 1].</span></li>
-                                <li><span class="ukr"><strong>Конфігурація:</strong> Установка драйверів, створення юзера через PowerShell, налаштування софту та принтерів[cite: 1].</span><span class="eng"><strong>Configuration:</strong> Drivers setup, PowerShell user creation, software and printers[cite: 1].</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1588702547919-26b89e026ea1?auto=format&fit=crop&w=1000&q=80" alt="Hardware Maintenance"></div>
-                </div>
-
-                <!-- STAGE 3 -->
-                <div class="timeline-step scroll-anim">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content" onclick="openDoc('doc-stage3')">
-                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="card-inner">
-                            <span class="step-meta">
-                                <span class="ukr">Крок 03 | Оргтехніка</span>
-                                <span class="eng">Step 03 | Peripherals</span>
-                            </span>
-                            <h3>
-                                <span class="ukr">Принтеры, МФУ и сканеры</span>
-                                <span class="eng">Printers, MFPs & Scanners</span>
-                            </h3>
-                            <div class="tech-tags">
-                                <span>Картриджи</span><span>CUPS / IP</span><span>Змяття бумаги</span>
-                            </div>
-                            <ul>
-                                <li><span class="ukr"><strong>Заміна витратників:</strong> Швидка заміна картриджів з урахуванням сумісності брендів[cite: 1].</span><span class="eng"><strong>Consumables:</strong> Quick cartridge replacement considering brand compatibility[cite: 1].</span></li>
-                                <li><span class="ukr"><strong>Мережева печать:</strong> Налаштування по IP (напр. <code>192.168.хх.хх</code>) та усунення замять[cite: 1].</span><span class="eng"><strong>Network printing:</strong> IP configuration (e.g. <code>192.168.xx.xx</code>) and paper jams[cite: 1].</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=1000&q=80" alt="Printers"></div>
-                </div>
-
-                <!-- STAGE 4 -->
-                <div class="timeline-step scroll-anim">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content" onclick="openDoc('doc-stage4')">
-                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="card-inner">
-                            <span class="step-meta">
-                                <span class="ukr">Крок 04 | Підтримка</span>
-                                <span class="eng">Step 04 | Support</span>
-                            </span>
-                            <h3>
-                                <span class="ukr">Работа с пользователями</span>
-                                <span class="eng">User Support</span>
-                            </h3>
-                            <div class="tech-tags">
-                                <span>AnyDesk</span><span>TeamViewer</span><span>Helpdesk</span>
-                            </div>
-                            <ul>
-                                <li><span class="ukr"><strong>Віддалений доступ:</strong> Використання Anydesk та TeamViewer для оперативної допомоги[cite: 1].</span><span class="eng"><strong>Remote Access:</strong> Using Anydesk and TeamViewer for quick assistance[cite: 1].</span></li>
-                                <li><span class="ukr"><strong>Алгоритм:</strong> Аналіз проблеми, підключення до робочої станції та вирішення на місці[cite: 1].</span><span class="eng"><strong>Workflow:</strong> Issue analysis, remote connection, and on-the-fly resolution[cite: 1].</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80" alt="Support"></div>
-                </div>
-
-                <!-- STAGE 5 -->
-                <div class="timeline-step scroll-anim">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content" onclick="openDoc('doc-stage5')">
-                        <div class="card-dynamic-bg" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="card-inner">
-                            <span class="step-meta">
-                                <span class="ukr">Крок 05 | Облік</span>
-                                <span class="eng">Step 05 | Inventory</span>
-                            </span>
-                            <h3>
-                                <span class="ukr">Инвентаризация оборудования</span>
-                                <span class="eng">Equipment Inventory</span>
-                            </h3>
-                            <div class="tech-tags">
-                                <span>PowerShell</span><span>База даних</span><span>Тести заліза</span>
-                            </div>
-                            <ul>
-                                <li><span class="ukr"><strong>Автоматизація:</strong> PowerShell-скрипт збору даних за ім'ям співробітника в TXT[cite: 1].</span><span class="eng"><strong>Automation:</strong> PowerShell script collecting hardware data into TXT by employee name[cite: 1].</span></li>
-                                <li><span class="ukr"><strong>Ревізія резерву:</strong> Перевірка, чистка, тести та підбір ОС для неюзаної техніки[cite: 1].</span><span class="eng"><strong>Reserve audit:</strong> Inspection, cleaning, tests, and OS matching for unused hardware[cite: 1].</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-image"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Inventory"></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- VIEW 2: SOP DOCUMENTATION -->
-    <div id="docs" class="view-section">
-        <div class="container">
-            <header class="header">
-                <h1>
-                    <span class="ukr">TECHNICAL GUIDES (SOP)</span>
-                    <span class="eng">TECHNICAL GUIDES (SOP)</span>
-                </h1>
-                <p>
-                    <span class="ukr">Покрокові інструкції, конспекти та інструменти першого етапу роудмапа.</span>
-                    <span class="eng">Step-by-step instructions, notes, and tools of the first roadmap stage.</span>
-                </p>
-            </header>
-
-            <div class="doc-grid">
-                
-                <!-- STAGE 1 DOC -->
-                <div id="doc-stage1" class="doc-card" style="transition: all 0.5s ease;">
-                    <h2>
-                        <span class="ukr">Установка Windows / Linux (Ventoy)</span>
-                        <span class="eng">Windows / Linux Installation (Ventoy)</span>
-                    </h2>
-                    <p><span class="ukr">Інструкція з підготовки завантажувального носія та розгортання ОС.</span></p>
-                    <div class="doc-step">
-                        <h4><span class="ukr">1. Підготовка флешки</span></h4>
-                        <p><span class="ukr">Встановлюємо Ventoy на флешку 16/32 Gb, закидаємо ISO-образи Windows або відповідний дистрибутив Linux[cite: 1].</span></p>
-                    </div>
-                    <div class="doc-step">
-                        <h4><span class="ukr">2. Процес встановлення</span></h4>
-                        <p><span class="ukr">Вставляємо флешку в ПК/ноутбук, вибираємо UEFI-диск у Boot menu, обираємо потрібний ISO та встановлюємо систему[cite: 1].</span></p>
-                    </div>
-                </div>
-
-                <!-- STAGE 2 DOC -->
-                <div id="doc-stage2" class="doc-card" style="transition: all 0.5s ease;">
-                    <h2>
-                        <span class="ukr">Настройка ПК, замена комплектующих</span>
-                        <span class="eng">PC Setup & Component Replacement</span>
-                    </h2>
-                    <p><span class="ukr">Апаратна профілактика та програмна настройка робочих місць.</span></p>
-                    <div class="doc-step">
-                        <h4><span class="ukr">1. Апаратна ревізія</span></h4>
-                        <p><span class="ukr">Відкриваємо кришку, чистимо від пилу, змінюємо термопасту, тестуємо пам'ять через MemoryTest[cite: 1].</span></p>
-                    </div>
-                    <div class="doc-step">
-                        <h4><span class="ukr">2. Налаштування середовища</span></h4>
-                        <p><span class="ukr">Ставимо OS, перевіряємо драйвери, створюємо користувача через скрипт PowerShell, інсталюємо софт, підключаємо облікові записи та принтери[cite: 1].</span></p>
-                    </div>
-                </div>
-
-                <!-- STAGE 3 DOC -->
-                <div id="doc-stage3" class="doc-card" style="transition: all 0.5s ease;">
-                    <h2>
-                        <span class="ukr">Обслуживание принтеров и МФУ</span>
-                        <span class="eng">Printers & MFPs Maintenance</span>
-                    </h2>
-                    <p><span class="ukr">Робота з картриджами, заминами паперу та мережевою печаткою.</span></p>
-                    <div class="doc-step">
-                        <h4><span class="ukr">1. Заміна картриджів</span></h4>
-                        <p><span class="ukr">Відкриваємо кришку, виймаємо старий картридж, ставимо заправлений аналогічний. Враховуємо несумісність брендів (напр. HP і Canon)[cite: 1].</span></p>
-                    </div>
-                    <div class="doc-step">
-                        <h4><span class="ukr">2. Замять паперу та сетева настройка</span></h4>
-                        <p><span class="ukr">Вимикаємо принтер, акуратно витягуємо папір. Для підключення: ставимо драйвер, в Windows додаємо принтер за IP (<code>192.168.хх.хх</code>)[cite: 1].</span></p>
-                    </div>
-                </div>
-
-                <!-- STAGE 4 DOC -->
-                <div id="doc-stage4" class="doc-card" style="transition: all 0.5s ease;">
-                    <h2>
-                        <span class="ukr">Работа с пользователями и удалёнка</span>
-                        <span class="eng">User Support & Remote Access</span>
-                    </h2>
-                    <p><span class="ukr">Використання засобів віддаленого адміністрування.</span></p>
-                    <div class="doc-step">
-                        <h4><span class="ukr">1. Алгоритм підтримки</span></h4>
-                        <p><span class="ukr">Використовуємо <strong>AnyDesk</strong> або <strong>TeamViewer</strong>[cite: 1]. Спочатку вислуховуємо проблему, після чого підключаємося та вирішуємо її безпосередньо з робочого місця[cite: 1].</span></p>
-                    </div>
-                </div>
-
-                <!-- STAGE 5 DOC -->
-                <div id="doc-stage5" class="doc-card" style="transition: all 0.5s ease;">
-                    <h2>
-                        <span class="ukr">Инвентаризация оборудования</span>
-                        <span class="eng">Equipment Inventory</span>
-                    </h2>
-                    <p><span class="ukr">Автоматизований облік техніки та її ревізія.</span></p>
-                    <div class="doc-step">
-                        <h4><span class="ukr">1. PowerShell скрипт інвентаризації</span></h4>
-                        <p><span class="ukr">Скрипт запитує ПІБ співробітника, генерує текстовий файл з інформацією про залізо (модель, серійні номери, комплектуючі, монітори) для бази[cite: 1].</span></p>
-                        <div class="code-block">
-                            <span class="code-comment"># Принцип роботи скрипта інвентаризації</span><br>
-                            $name = Read-Host "Введіть Ім'я Прізвище"<br>
-                            $info = Get-ComputerInfo ... <span class="code-comment"># збір даних про ПК</span><br>
-                            $info | Out-File "C:\Inventory\$name.txt"
-                        </div>
-                    </div>
-                    <div class="doc-step">
-                        <h4><span class="ukr">2. Ревізія фонду</span></h4>
-                        <p><span class="ukr">Невикористані ПК/ноутбуки чистяться, обслуговуються (термопаста), тестуються, оснащуються відповідною під потужність OS та додаються в базу[cite: 1].</span></p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- VIEW 3: ABOUT ME -->
-    <div id="about" class="view-section">
-        <div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
-            <div class="about-wrapper">
-                <div class="profile-img-container">
-                    <div class="profile-img">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: #4f46e5;">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </div>
-                </div>
-                <h2>
-                    <span class="ukr">Сергій Балакан</span>
-                    <span class="eng">Serhii Balakan</span>
-                </h2>
-                <h3>
-                    <span class="ukr">IT Support / Helpdesk Specialist</span>
-                    <span class="eng">IT Support / Helpdesk Specialist</span>
-                </h3>
-                
-                <div class="about-bio">
-                    <p>
-                        <span class="ukr">Привіт! Мені 19 років, я проживаю в місті Одеса та здобуваю освіту за спеціальністю <strong>125 Кібербезпека</strong> (ЛДУБЖД, дистанційно).</span>
-                        <span class="eng">Hello! I am 19 years old, living in Odesa, and I am a cybersecurity student at LDUFZhD (Specialty 125, distance learning).</span>
-                    </p>
-                    <br>
-                    <p>
-                        <span class="ukr">Спеціалізуюсь на базовій підтримці користувачів, обслуговуванні апаратного забезпечення (ПК, ноутбуки, оргтехніка), розгортанні операційних систем за допомогою Ventoy, віддаленій підтримці (AnyDesk, TeamViewer) та автоматизації обліку техніки за допомогою PowerShell.</span>
-                        <span class="eng">I specialize in user support, hardware maintenance (PCs, laptops, peripherals), OS deployment via Ventoy, remote assistance (AnyDesk, TeamViewer), and hardware inventory automation via PowerShell.</span>
-                    </p>
-                </div>
-
-                <div class="contact-grid">
-                    <a href="https://t.me/your_telegram" class="contact-btn" target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2L15 22L11 13L2 9L22 2Z"></path></svg> Telegram
-                    </a>
-                    <a href="https://github.com/asarabombom-ctrl" class="contact-btn" target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg> GitHub
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCRIPTS -->
-    <script>
-        function openDoc(docId) {
-            // Перемикання на вкладку документації
-            const docsTab = document.querySelectorAll('.nav-link')[1];
-            switchTab('docs', docsTab);
-            
-            // Плавний скрол до потрібного конспекту після анімації
-            setTimeout(() => {
-                const element = document.getElementById(docId);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Підсвічування обраного блоку
-                    element.style.borderColor = 'var(--accent)';
-                    element.style.boxShadow = '0 0 30px var(--accent-glow)';
-                    setTimeout(() => {
-                        element.style.borderColor = 'var(--box-border)';
-                        element.style.boxShadow = 'none';
-                    }, 2000);
-                }
-            }, 400);
-        }
-
-        function switchTab(tabId, element) {
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            element.classList.add('active');
-
-            document.querySelectorAll('.view-section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            document.getElementById(tabId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function toggleLanguage() {
-            const body = document.body;
-            const btn = document.getElementById('langToggle');
-            
-            if (body.classList.contains('lang-en')) {
-                body.classList.remove('lang-en');
-                btn.textContent = 'ENG';
-            } else {
-                body.classList.add('lang-en');
-                btn.textContent = 'UKR';
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { 
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
-            });
-
-            document.querySelectorAll('.scroll-anim').forEach(el => observer.observe(el));
-        });
-    </script>
 </body>
 </html>
