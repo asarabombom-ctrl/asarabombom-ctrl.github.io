@@ -1,9 +1,0 @@
-{
-  "stage0_title": "Hardware & Diagnostics",
-  "stage0_desc": "блаблаблабвлавлывал",
-  "stage0_image": "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1000&q=80",
-  "stage1_title": "Windows OS & PowerShell",
-  "stage1_image": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80",
-  "about_name": "Сергій Балакан",
-  "about_bio": "Привіт! Мені 19 років, я проживаю в місті Одеса та є студентом Львівського державного університету безпеки життєдіяльності (ЛДУБЖД) за спеціальністю 125 Кібербезпека. Маю глибокий інтерес до IT-інфраструктури: від компонентного ремонту та діагностики апаратного забезпечення до розгортання Linux-серверів."
-}
